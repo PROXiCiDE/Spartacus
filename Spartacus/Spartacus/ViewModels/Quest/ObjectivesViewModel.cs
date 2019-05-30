@@ -1,17 +1,16 @@
-﻿using Caliburn.Micro;
+﻿using System.ComponentModel.Composition;
+using Caliburn.Micro;
 using Spartacus.Common;
 
 namespace Spartacus.ViewModels.Quest
 {
+    [Export(typeof(ObjectivesViewModel))]
     public class ObjectivesViewModel : BasicViewModel
     {
-        private readonly IWindowManager _windowManager;
-        private readonly IEventAggregator _eventAggregator;
 
-        public ObjectivesViewModel(IWindowManager windowManager, IEventAggregator eventAggregator)
+        [ImportingConstructor]
+        public ObjectivesViewModel(IWindowManager windowManager, IEventAggregator eventAggregator) : base(windowManager, eventAggregator)
         {
-            _windowManager = windowManager;
-            _eventAggregator = eventAggregator;
         }
     }
 }

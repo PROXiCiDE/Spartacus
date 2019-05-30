@@ -93,6 +93,8 @@
     <Compile Include="Common\DefaultLevelNavigationItem.cs" />
     <Compile Include="Common\BasicViewModel.cs" />
     <Compile Include="IShell.cs" />
+    <Compile Include="ViewModels\AiCharacter\MessageQueue\CharacterMessageQueue.cs" />
+    <Compile Include="ViewModels\Settings\ThemeViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
     <Compile Include="ViewModels\AiCharacter\ProtoUnitViewModel.cs" />
     <Compile Include="ViewModels\Quest\QuestTargetsViewModel.cs" />
@@ -100,7 +102,7 @@
     <Compile Include="ViewModels\Quest\PlayerSettingsViewModel.cs" />
     <Compile Include="ViewModels\Quest\ObjectivesViewModel.cs" />
     <Compile Include="ViewModels\AiCharacter\TraitInformationViewModel.cs" />
-    <Compile Include="ViewModels\AiCharacter\CharacterBasicViewModel.cs" />
+    <Compile Include="ViewModels\AiCharacter\CharacterViewModel.cs" />
     <Compile Include="ViewModels\Music\MusicViewModel.cs" />
     <Compile Include="ViewModels\Quest\MapInformationViewModel.cs" />
     <Compile Include="Views\AiCharacter\CharacterView.xaml.cs">
@@ -233,6 +235,9 @@
   </ItemGroup>
   <ItemGroup>
     <SplashScreen Include="Resources\SpashScreen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Common\SplashScreen\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

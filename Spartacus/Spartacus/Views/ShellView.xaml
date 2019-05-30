@@ -13,13 +13,17 @@
     TextElement.FontWeight="Regular"
     TextElement.Foreground="{DynamicResource MaterialDesignBody}"
     TextOptions.TextFormattingMode="Ideal"
-    TextOptions.TextRenderingMode="Auto">
+    TextOptions.TextRenderingMode="Auto"
+    WindowStartupLocation="CenterScreen">
 
     <Grid>
         <materialDesign:DialogHost Identifier="dialogHost">
             <materialDesign:DrawerHost IsLeftDrawerOpen="{Binding Path=IsNavigationDrawerOpen, ElementName=appBar}" LeftDrawerBackground="{DynamicResource MaterialDesignBackground}">
                 <materialDesign:DrawerHost.LeftDrawerContent>
-                    <ListBox Width="280" ItemsSource="{Binding SpartacusNavItems, Mode=OneTime}" />
+                    <ListBox
+                        Width="280"
+                        cal:Message.Attach="[Event SelectionChanged] = [Action RecentFileNavigationItemSelectedHandler($eventArgs)]"
+                        ItemsSource="{Binding SpartacusNavItems, Mode=OneTime}" />
                 </materialDesign:DrawerHost.LeftDrawerContent>
 
                 <Grid>

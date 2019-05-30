@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Diagnostics;
 using System.Windows;
+using System.Windows.Controls;
 using Caliburn.Micro;
 using MaterialDesignExtensions.Controls;
 using MaterialDesignExtensions.Model;
@@ -17,13 +18,14 @@ namespace Spartacus.ViewModels
     public class ShellViewModel : Conductor<object>, IShell
     {
         public const string DialogHostName = "dialogHost";
-        private readonly IEventAggregator _eventAggregator;
-        private readonly IWindowManager _windowManager;
+        public IEventAggregator EventAggregator { get; set; }
+        public IWindowManager Manager { get; set; }
 
+        [ImportingConstructor]
         public ShellViewModel(IWindowManager windowManager, IEventAggregator eventAggregator)
         {
-            _windowManager = windowManager;
-            _eventAggregator = eventAggregator;
+            Manager = windowManager;
+            EventAggregator = eventAggregator;
 
             SpartacusNavItems = new List<INavigationItem>
             {
@@ -37,18 +39,18 @@ namespace Spartacus.ViewModels
                 new DefaultLevelNavigationItem
                 {
                     Label = "Character",
-                    NavigationItemSelectedCallback = item => new CharacterBasicViewModel(_windowManager, _eventAggregator)
+                    NavigationItemSelectedCallback = item => new CharacterViewModel(Manager, EventAggregator)
                 },
                 new DefaultLevelNavigationItem
                 {
                     Label = "Proto Unit",
-                    NavigationItemSelectedCallback = item => new ProtoUnitViewModel(_windowManager, _eventAggregator)
+                    NavigationItemSelectedCallback = item => new ProtoUnitViewModel(Manager, EventAggregator)
                 },
                 new DefaultLevelNavigationItem
                 {
                     Label = "Trait's",
                     NavigationItemSelectedCallback =
-                        item => new TraitInformationViewModel(_windowManager, _eventAggregator)
+                        item => new TraitInformationViewModel(Manager, EventAggregator)
                 },
                 new DividerNavigationItem(),
 
@@ -56,7 +58,7 @@ namespace Spartacus.ViewModels
                 new DefaultLevelNavigationItem
                 {
                     Label = "Music",
-                    NavigationItemSelectedCallback = item => new MusicViewModel(_windowManager, _eventAggregator)
+                    NavigationItemSelectedCallback = item => new MusicViewModel(Manager, EventAggregator)
                 },
                 new DividerNavigationItem(),
 
@@ -65,35 +67,35 @@ namespace Spartacus.ViewModels
                 {
                     Label = "Quest Information",
                     NavigationItemSelectedCallback =
-                        item => new QuestInformationViewModel(_windowManager, _eventAggregator)
+                        item => new QuestInformationViewModel(Manager, EventAggregator)
                 },
                 new DefaultLevelNavigationItem
                 {
                     Label = "Objectives",
-                    NavigationItemSelectedCallback = item => new ObjectivesViewModel(_windowManager, _eventAggregator)
+                    NavigationItemSelectedCallback = item => new ObjectivesViewModel(Manager, EventAggregator)
                 },
                 new DefaultLevelNavigationItem
                 {
                     Label = "Player Settings",
                     NavigationItemSelectedCallback =
-                        item => new PlayerSettingsViewModel(_windowManager, _eventAggregator)
+                        item => new PlayerSettingsViewModel(Manager, EventAggregator)
                 },
                 new DefaultLevelNavigationItem
                 {
                     Label = "Targets",
-                    NavigationItemSelectedCallback = item => new QuestTargetsViewModel(_windowManager, _eventAggregator)
+                    NavigationItemSelectedCallback = item => new QuestTargetsViewModel(Manager, EventAggregator)
                 },
                 new DefaultLevelNavigationItem
                 {
                     Label = "Map Information",
                     NavigationItemSelectedCallback =
-                        item => new MapInformationViewModel(_windowManager, _eventAggregator)
+                        item => new MapInformationViewModel(Manager, EventAggregator)
                 },
                 new DividerNavigationItem()
             };
 
-            NavigationItems[1].IsSelected = true;
-            SelectNavigationItem(NavigationItems[1]);
+            //NavigationItems[1].IsSelected = true;
+            //SelectNavigationItem(NavigationItems[1]);
         }
 
         public bool IsNavigationDrawerOpen { get; } = false;
@@ -113,9 +115,9 @@ namespace Spartacus.ViewModels
                 Process.Start(wiki.WikiUrl);
         }
 
-        public void RecentFileNavigationItemSelectedHandler(NavigationItemSelectedEventArgs args)
+        public void RecentFileNavigationItemSelectedHandler(RoutedEventArgs args)
         {
-            Debug.WriteLine($"{args.NavigationItem}, {args.OriginalSource}, {args.Source}");
+            EventAggregator.PublishOnUIThread(new CharacterMessageQueue(((args.OriginalSource as ListBox)?.SelectedItem as FirstLevelNavigationItem)?.Label));
         }
 
         public void NavigationItemSelectedHandler(NavigationItemSelectedEventArgs args)

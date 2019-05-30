@@ -1,17 +1,15 @@
-﻿using Caliburn.Micro;
+﻿using System.ComponentModel.Composition;
+using Caliburn.Micro;
 using Spartacus.Common;
 
 namespace Spartacus.ViewModels.Music
 {
+    [Export(typeof(MusicViewModel))]
     public class MusicViewModel : BasicViewModel
     {
-        private readonly IWindowManager _windowManager;
-        private readonly IEventAggregator _eventAggregator;
-
-        public MusicViewModel(IWindowManager windowManager, IEventAggregator eventAggregator)
+        [ImportingConstructor]
+        public MusicViewModel(IWindowManager windowManager, IEventAggregator eventAggregator) : base(windowManager, eventAggregator)
         {
-            _windowManager = windowManager;
-            _eventAggregator = eventAggregator;
         }
     }
 }

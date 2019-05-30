@@ -1,18 +1,22 @@
-﻿using Caliburn.Micro;
+﻿using System.ComponentModel.Composition;
+using System.Diagnostics;
+using Caliburn.Micro;
 using Spartacus.Common;
 
 namespace Spartacus.ViewModels.AiCharacter
 {
-    public class ProtoUnitViewModel : BasicViewModel
+    [Export(typeof(ProtoUnitViewModel))]
+    public class ProtoUnitViewModel : BasicViewModel, IHandle<CharacterMessageQueue>
     {
 
-        private readonly IWindowManager _windowManager;
-        private readonly IEventAggregator _eventAggregator;
-
-        public ProtoUnitViewModel(IWindowManager windowManager, IEventAggregator eventAggregator)
+        [ImportingConstructor]
+        public ProtoUnitViewModel(IWindowManager windowManager, IEventAggregator eventAggregator) : base(windowManager, eventAggregator)
         {
-            _windowManager = windowManager;
-            _eventAggregator = eventAggregator;
+        }
+
+        public void Handle(CharacterMessageQueue message)
+        {
+            Debug.WriteLine($"Handle {message.Filename}");
         }
     }
 }
