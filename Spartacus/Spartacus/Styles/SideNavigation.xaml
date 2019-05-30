@@ -1,0 +1,84 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:common="clr-namespace:Spartacus.Common"
+    xmlns:controls="clr-namespace:MaterialDesignExtensions.Controls;assembly=MaterialDesignExtensions"
+    xmlns:wpfLib="http://materialdesigninxaml.net/winfx/xaml/themes">
+
+
+    <DataTemplate DataType="{x:Type common:DefaultLevelNavigationItem}">
+        <Grid Height="48">
+            <Border Style="{DynamicResource navigationItemBackgroundBorderStyle}" />
+            <Border
+                Padding="16,0,0,0"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch">
+                <Grid Height="24" VerticalAlignment="Center">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="24" />
+                        <ColumnDefinition Width="100*" />
+                    </Grid.ColumnDefinitions>
+                    <ContentControl
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch"
+                        Content="{Binding Path=Icon}"
+                        Focusable="False">
+                        <ContentControl.Resources>
+                            <DataTemplate DataType="{x:Type BitmapImage}">
+                                <Image
+                                    HorizontalAlignment="Stretch"
+                                    VerticalAlignment="Stretch"
+                                    SnapsToDevicePixels="True"
+                                    Source="{Binding}" />
+                            </DataTemplate>
+                            <DataTemplate DataType="{x:Type wpfLib:PackIconKind}">
+                                <wpfLib:PackIcon
+                                    Width="24"
+                                    Height="24"
+                                    Kind="{Binding}" />
+                            </DataTemplate>
+                        </ContentControl.Resources>
+                        <ContentControl.Style>
+                            <Style TargetType="{x:Type ContentControl}">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Path=IsSelected}" Value="False">
+                                        <Setter Property="Foreground" Value="{DynamicResource MaterialDesignNavigationItemIcon}" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding Path=IsSelected}" Value="True">
+                                        <Setter Property="Foreground" Value="{Binding Path=SelectionForeground, RelativeSource={RelativeSource AncestorType={x:Type controls:SideNavigation}}}" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </ContentControl.Style>
+                    </ContentControl>
+                    <TextBlock
+                        Grid.Column="1"
+                        Margin="32,0,0,0"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Center"
+                        Text="{Binding Path=Label}"
+                        TextTrimming="CharacterEllipsis">
+                        <TextBlock.Style>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Path=IsSelected}" Value="False">
+                                        <Setter Property="FontStyle" Value="Normal" />
+                                        <Setter Property="FontSize" Value="14" />
+                                        <Setter Property="Foreground" Value="{DynamicResource MaterialDesignNavigationItemText}" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding Path=IsSelected}" Value="True">
+                                        <Setter Property="FontWeight" Value="Bold" />
+                                        <Setter Property="FontStyle" Value="Italic" />
+                                        <Setter Property="FontSize" Value="16" />
+                                        <Setter Property="Foreground" Value="{Binding Path=SelectionForeground, RelativeSource={RelativeSource AncestorType={x:Type controls:SideNavigation}}}" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
+                </Grid>
+            </Border>
+        </Grid>
+    </DataTemplate>
+
+</ResourceDictionary>

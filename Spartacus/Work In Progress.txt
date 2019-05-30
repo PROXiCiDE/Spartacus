@@ -1,0 +1,18 @@
+Information
+	This is a developed from the ground up due to computer crash before upgrading my computer which was'nt released to the public
+
+ProjectCeleste.GameFiles.Tools
+	https://github.com/ProjectCeleste/ProjectCeleste.GameFiles.Tools
+	Used GitHub instead of NuGet package, limited to updates. This project is not included
+
+
+ConfigCreator - WIP
+	Will be used to generate a Configuration File to be used for Spartacus.
+	Will irretate / parse through Bar File entries to generate a Config File, to keep Civilizations uptodate
+	incase of new updates of Project Celeste
+
+Spartacus - WIP
+	Allow you to Edit / Create Quests / Character Files and modify the music soundtrack and more for the game
+
+Spartacus.Utils - WIP
+	Adding features that aren't avaiable
