@@ -8,8 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using ProjectCeleste.GameFiles.Tools.Bar;
 using ProjectCeleste.GameFiles.Tools.Xmb;
+using ProjectCeleste.GameFiles.XMLParser;
+using ProjectCeleste.GameFiles.XMLParser.Helpers;
 using SpartacusUtils;
 using SpartacusUtils.Bar;
+using SpartacusUtils.Xml.Helpers;
 
 namespace ConfigCreator
 {
@@ -30,7 +33,9 @@ namespace ConfigCreator
                 var array = findEntries.ToArray();
                 var file = barFile.ToBytes(array[0]);
 
-                File.WriteAllBytes("test.xml", XmbFileUtils.XmbToXml(file));
+                var xmlfile = file.EncodeXmlToString();
+                var xml = XmlUtils.DeserializeFromXml<CivilizationXml>(xmlfile);
+                if (xml != null) Debug.WriteLine($"CivID: {xml.Civid} Name: {xml.Name}");
             }
             catch (Exception e)
             {

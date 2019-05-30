@@ -1,8 +1,9 @@
 ﻿using Caliburn.Micro;
+using Spartacus.Common;
 
 namespace Spartacus.ViewModels.Quest
 {
-    public class QuestInformationViewModel : Screen
+    public class QuestInformationViewModel : BasicViewModel
     {
         private readonly IWindowManager _windowManager;
         private readonly IEventAggregator _eventAggregator;

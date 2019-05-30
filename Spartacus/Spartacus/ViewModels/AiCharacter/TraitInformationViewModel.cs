@@ -1,8 +1,9 @@
 ﻿using Caliburn.Micro;
+using Spartacus.Common;
 
 namespace Spartacus.ViewModels.AiCharacter
 {
-    public class TraitInformationViewModel : Screen
+    public class TraitInformationViewModel : BasicViewModel
     {
         private readonly IWindowManager _windowManager;
         private readonly IEventAggregator _eventAggregator;

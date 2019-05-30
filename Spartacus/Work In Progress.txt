@@ -1,10 +1,13 @@
 Information
 	This is a developed from the ground up due to computer crash before upgrading my computer which was'nt released to the public
 
-ProjectCeleste.GameFiles.Tools
-	https://github.com/ProjectCeleste/ProjectCeleste.GameFiles.Tools
-	Used GitHub instead of NuGet package, limited to updates. This project is not included
 
+Not Included:
+	Used GitHub instead of NuGet package, limited to updates. This project is not included
+		ProjectCeleste.GameFiles.XMLParser
+			https://github.com/ProjectCeleste/ProjectCeleste.GameFiles.XMLParser
+		ProjectCeleste.GameFiles.Tools
+			https://github.com/ProjectCeleste/ProjectCeleste.GameFiles.Tools
 
 ConfigCreator - WIP
 	Will be used to generate a Configuration File to be used for Spartacus.

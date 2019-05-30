@@ -329,3 +329,4 @@ ASALocalRun/
 # MFractors (Xamarin productivity tool) working folder 
 .mfractor/
 /Spartacus/ProjectCeleste.GameFiles.Tools
+/Spartacus/ProjectCeleste.GameFiles.XMLParser

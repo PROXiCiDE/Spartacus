@@ -2,10 +2,11 @@
 using System.Collections.ObjectModel;
 using System.Windows.Documents;
 using Caliburn.Micro;
+using Spartacus.Common;
 
 namespace Spartacus.ViewModels.AiCharacter
 {
-    public class CharacterViewModel : Screen
+    public class CharacterBasicViewModel : BasicViewModel
     {
         private readonly IWindowManager _windowManager;
         private readonly IEventAggregator _eventAggregator;
@@ -16,7 +17,7 @@ namespace Spartacus.ViewModels.AiCharacter
             get { return _characterCivs; }
         }
 
-        public CharacterViewModel(IWindowManager windowManager, IEventAggregator eventAggregator)
+        public CharacterBasicViewModel(IWindowManager windowManager, IEventAggregator eventAggregator)
         {
             _windowManager = windowManager;
             _eventAggregator = eventAggregator;

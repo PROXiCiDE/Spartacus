@@ -37,9 +37,6 @@
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="ProjectCeleste.GameFiles.XMLParser, Version=1.1.6.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\ProjectCeleste.GameFiles.XMLParser.1.1.6\lib\Release\ProjectCeleste.GameFiles.XMLParser.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -54,6 +51,7 @@
     <Compile Include="Bar\BarFileReader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegexExtension.cs" />
+    <Compile Include="Xml\Helpers\XmlHelpers.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Ionic.Zip.xml" />
@@ -65,6 +63,10 @@
     <ProjectReference Include="..\ProjectCeleste.GameFiles.Tools\src\ProjectCeleste.GameFiles.Tools.csproj">
       <Project>{b7c29fb2-1af8-48c9-bdcd-c9a4e7dcf75a}</Project>
       <Name>ProjectCeleste.GameFiles.Tools</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ProjectCeleste.GameFiles.XMLParser\src\ProjectCeleste.GameFiles.XMLParser.csproj">
+      <Project>{c909e1b3-217a-49f0-8367-64f57b2ca9e7}</Project>
+      <Name>ProjectCeleste.GameFiles.XMLParser</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

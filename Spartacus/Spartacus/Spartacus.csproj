@@ -7,7 +7,7 @@
     <ProjectGuid>{69F93CF0-BEF6-4A09-995F-81D8BB60DC07}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>Spartacus</RootNamespace>
-    <AssemblyName>Material Design InXaml Starter</AssemblyName>
+    <AssemblyName>Spartacus</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -65,9 +65,6 @@
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="ProjectCeleste.GameFiles.XMLParser, Version=1.1.6.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\ProjectCeleste.GameFiles.XMLParser.1.1.6\lib\Release\ProjectCeleste.GameFiles.XMLParser.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Data" />
@@ -94,6 +91,7 @@
     </ApplicationDefinition>
     <Compile Include="AppBootstrapper.cs" />
     <Compile Include="Common\DefaultLevelNavigationItem.cs" />
+    <Compile Include="Common\BasicViewModel.cs" />
     <Compile Include="IShell.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
     <Compile Include="ViewModels\AiCharacter\ProtoUnitViewModel.cs" />
@@ -102,7 +100,7 @@
     <Compile Include="ViewModels\Quest\PlayerSettingsViewModel.cs" />
     <Compile Include="ViewModels\Quest\ObjectivesViewModel.cs" />
     <Compile Include="ViewModels\AiCharacter\TraitInformationViewModel.cs" />
-    <Compile Include="ViewModels\AiCharacter\CharacterViewModel.cs" />
+    <Compile Include="ViewModels\AiCharacter\CharacterBasicViewModel.cs" />
     <Compile Include="ViewModels\Music\MusicViewModel.cs" />
     <Compile Include="ViewModels\Quest\MapInformationViewModel.cs" />
     <Compile Include="Views\AiCharacter\CharacterView.xaml.cs">
@@ -139,6 +137,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Common\IWikiDocumentation.cs" />
     <Page Include="Styles\SideNavigation.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -223,10 +222,17 @@
       <Project>{b7c29fb2-1af8-48c9-bdcd-c9a4e7dcf75a}</Project>
       <Name>ProjectCeleste.GameFiles.Tools</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ProjectCeleste.GameFiles.XMLParser\src\ProjectCeleste.GameFiles.XMLParser.csproj">
+      <Project>{c909e1b3-217a-49f0-8367-64f57b2ca9e7}</Project>
+      <Name>ProjectCeleste.GameFiles.XMLParser</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SpartacusUtils\Spartacus.Utils.csproj">
       <Project>{da4548c4-cd9b-46a7-bddb-5d5bb7e21b8c}</Project>
       <Name>Spartacus.Utils</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <SplashScreen Include="Resources\SpashScreen.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

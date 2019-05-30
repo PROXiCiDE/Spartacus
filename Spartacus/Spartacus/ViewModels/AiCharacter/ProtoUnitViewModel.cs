@@ -1,8 +1,9 @@
 ﻿using Caliburn.Micro;
+using Spartacus.Common;
 
 namespace Spartacus.ViewModels.AiCharacter
 {
-    public class ProtoUnitViewModel : Screen
+    public class ProtoUnitViewModel : BasicViewModel
     {
 
         private readonly IWindowManager _windowManager;
