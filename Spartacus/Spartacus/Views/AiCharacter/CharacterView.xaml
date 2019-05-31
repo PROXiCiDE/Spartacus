@@ -23,19 +23,41 @@
                 Style="{DynamicResource MaterialDesignGroupBox}">
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="100" />
+                        <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="100*" />
                     </Grid.ColumnDefinitions>
 
                     <StackPanel Grid.Column="0" Margin="8,0,0,0">
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Height="18" Text="Civilization" />
-                            <ComboBox Margin="10,5" ItemsSource="{Binding CharacterCivs}" />
-                        </StackPanel>
+                        <!--  Version  -->
                         <TextBox
                             VerticalAlignment="Bottom"
-                            materialDesign:HintAssist.Hint="Level"
-                            Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                            materialDesign:HintAssist.Hint="Version"
+                            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                            Text="{Binding AiCharacter.Version}" />
+
+                        <!--  Civilization  -->
+                        <StackPanel Orientation="Horizontal">
+                            <ComboBox
+                                materialDesign:HintAssist.Hint="Civilization"
+                                ItemsSource="{Binding Source={StaticResource CivilizationEnum}}"
+                                SelectedValue="{Binding AiCharacter.CivId}"
+                                Style="{StaticResource ComboBoxResizeControlStyle}" />
+                        </StackPanel>
+
+                        <!--  Xp  -->
+                        <TextBox
+                            VerticalAlignment="Bottom"
+                            materialDesign:HintAssist.Hint="Experience Points"
+                            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                            Text="{Binding AiCharacter.Xp}" />
+
+                        <!--  Current Age  -->
+                        <TextBox
+                            VerticalAlignment="Bottom"
+                            materialDesign:HintAssist.Hint="Current Age"
+                            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                            Text="{Binding AiCharacter.CurrentAge}" />
+
                     </StackPanel>
                     <StackPanel Grid.Column="1" />
                 </Grid>

@@ -11,7 +11,6 @@
                     <local:AppBootstrapper x:Key="bootstrapper" />
                 </ResourceDictionary>
 
-                <ResourceDictionary Source="Styles/SideNavigation.xaml" />
 
                 <!--  material design styles  -->
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
@@ -39,6 +38,11 @@
                     <SolidColorBrush x:Key="SecondaryAccentBrush" Color="{StaticResource Accent400}" />
                     <SolidColorBrush x:Key="SecondaryAccentForegroundBrush" Color="{StaticResource Accent400Foreground}" />
                 </ResourceDictionary>
+
+
+                <ResourceDictionary Source="Styles/SideNavigation.xaml" />
+                <ResourceDictionary Source="Styles/ControlMisc.xaml" />
+
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
 

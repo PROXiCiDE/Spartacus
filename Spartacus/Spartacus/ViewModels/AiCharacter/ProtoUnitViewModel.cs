@@ -16,7 +16,6 @@ namespace Spartacus.ViewModels.AiCharacter
 
         public void Handle(CharacterMessageQueue message)
         {
-            Debug.WriteLine($"Handle {message.Filename}");
         }
     }
 }

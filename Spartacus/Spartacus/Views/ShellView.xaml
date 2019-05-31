@@ -17,78 +17,117 @@
     WindowStartupLocation="CenterScreen">
 
     <Grid>
-        <materialDesign:DialogHost Identifier="dialogHost">
-            <materialDesign:DrawerHost IsLeftDrawerOpen="{Binding Path=IsNavigationDrawerOpen, ElementName=appBar}" LeftDrawerBackground="{DynamicResource MaterialDesignBackground}">
-                <materialDesign:DrawerHost.LeftDrawerContent>
-                    <ListBox
-                        Width="280"
-                        cal:Message.Attach="[Event SelectionChanged] = [Action RecentFileNavigationItemSelectedHandler($eventArgs)]"
-                        ItemsSource="{Binding SpartacusNavItems, Mode=OneTime}" />
-                </materialDesign:DrawerHost.LeftDrawerContent>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid Row="0">
+            <materialDesign:DialogHost Identifier="dialogHost">
+                <materialDesign:DrawerHost IsLeftDrawerOpen="{Binding Path=IsNavigationDrawerOpen, ElementName=appBar}" LeftDrawerBackground="{DynamicResource MaterialDesignBackground}">
+                    <materialDesign:DrawerHost.LeftDrawerContent>
+                        <ListBox
+                            Width="280"
+                            cal:Message.Attach="[Event SelectionChanged] = [Action RecentFileNavigationItemSelectedHandler($eventArgs)]"
+                            ItemsSource="{Binding SpartacusNavItems, Mode=OneTime}" />
+                    </materialDesign:DrawerHost.LeftDrawerContent>
 
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="280" />
-                        <ColumnDefinition Width="100*" />
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="*" />
-                    </Grid.RowDefinitions>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="280" />
+                            <ColumnDefinition Width="100*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="50" />
+                        </Grid.RowDefinitions>
 
-                    <!--  AppBar  -->
-                    <controls:AppBar
-                        x:Name="appBar"
-                        Title="Spartacus"
-                        Grid.ColumnSpan="2"
-                        IsNavigationDrawerOpen="{Binding IsNavigationDrawerOpen}"
-                        ShowNavigationDrawerButton="True">
-                        <Button
-                            Margin="8,0"
-                            cal:Message.Attach="[Event Click] = [Action GoToGitHubButtonClickHandler($eventArgs)]"
-                            Style="{StaticResource MaterialDesignToolForegroundButton}"
-                            ToolTip="GitHub Repository">
-                            <materialDesign:PackIcon
-                                Width="24"
-                                Height="24"
-                                Kind="GithubCircle" />
-                        </Button>
-                        <Button
-                            Margin="8,0"
-                            cal:Message.Attach="[Event Click] = [Action GoToDocumentation($eventArgs)]"
-                            Style="{StaticResource MaterialDesignToolForegroundButton}"
-                            ToolTip="Documentation">
-                            <materialDesign:PackIcon
-                                Width="24"
-                                Height="24"
-                                Kind="HelpCircle" />
-                        </Button>
-                    </controls:AppBar>
+                        <!--  AppBar  -->
+                        <controls:AppBar
+                            x:Name="appBar"
+                            Title="Spartacus"
+                            Grid.ColumnSpan="2"
+                            IsNavigationDrawerOpen="{Binding IsNavigationDrawerOpen}"
+                            ShowNavigationDrawerButton="True">
+                            <Button
+                                Margin="8,0"
+                                cal:Message.Attach="[Event Click] = [Action GoToGitHubButtonClickHandler($eventArgs)]"
+                                Style="{StaticResource MaterialDesignToolForegroundButton}"
+                                ToolTip="GitHub Repository">
+                                <materialDesign:PackIcon
+                                    Width="24"
+                                    Height="24"
+                                    Kind="GithubCircle" />
+                            </Button>
+                            <Button
+                                Margin="8,0"
+                                cal:Message.Attach="[Event Click] = [Action GoToDocumentation($eventArgs)]"
+                                Style="{StaticResource MaterialDesignToolForegroundButton}"
+                                ToolTip="Documentation">
+                                <materialDesign:PackIcon
+                                    Width="24"
+                                    Height="24"
+                                    Kind="HelpCircle" />
+                            </Button>
+                        </controls:AppBar>
 
-                    <!--  Side Navigation  -->
-                    <Border
-                        Grid.Row="1"
-                        BorderBrush="{DynamicResource MaterialDesignDivider}"
-                        BorderThickness="0,0,1,0">
-                        <controls:SideNavigation
-                            x:Name="sideNav"
-                            cal:Message.Attach="[Event NavigationItemSelected] = [Action NavigationItemSelectedHandler($eventArgs)]"
-                            Items="{Binding Path=NavigationItems, Mode=OneTime}" />
-                    </Border>
+                        <!--  Side Navigation  -->
+                        <Border
+                            Grid.Row="1"
+                            BorderBrush="{DynamicResource MaterialDesignDivider}"
+                            BorderThickness="0,0,1,0">
+                            <controls:SideNavigation
+                                x:Name="sideNav"
+                                cal:Message.Attach="[Event NavigationItemSelected] = [Action NavigationItemSelectedHandler($eventArgs)]"
+                                Items="{Binding Path=NavigationItems, Mode=OneTime}" />
+                        </Border>
 
-                    <!--  Caliburn View Model  -->
-                    <ContentControl
-                        x:Name="ActiveItem"
-                        Grid.Row="1"
-                        Grid.Column="1"
-                        HorizontalAlignment="Stretch"
-                        VerticalAlignment="Stretch" />
+                        <!--  Caliburn View Model  -->
+                        <ScrollViewer
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            Margin="0,0,0,32"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            HorizontalScrollBarVisibility="Auto"
+                            VerticalScrollBarVisibility="Auto">
 
-                    <!--  Snack Bar  -->
-                    <materialDesign:Snackbar Grid.Row="1" MessageQueue="{materialDesign:MessageQueue}" />
-                </Grid>
-            </materialDesign:DrawerHost>
-        </materialDesign:DialogHost>
+                            <ContentControl
+                                x:Name="ActiveItem"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch" />
+                        </ScrollViewer>
+
+                    </Grid>
+                </materialDesign:DrawerHost>
+            </materialDesign:DialogHost>
+        </Grid>
+
+        <Grid Row="1">
+            <!--  ProgressBar Panel  -->
+            <materialDesign:Card
+                Grid.Row="2"
+                Grid.Column="1"
+                Padding="4"
+                UniformCornerRadius="14">
+                <StackPanel Orientation="Horizontal">
+                    <ProgressBar
+                        x:Name="BarStatus_CurrentValue"
+                        Padding="16"
+                        IsIndeterminate="True"
+                        Maximum="{Binding BarStatus.MaximumValue}"
+                        Style="{StaticResource MaterialDesignCircularProgressBar}"
+                        Value="20" />
+                    <TextBlock Margin="16,4" Text="{Binding BarStatus.StatusText}" />
+                </StackPanel>
+            </materialDesign:Card>
+
+            <!--  Snack Bar  -->
+            <materialDesign:Snackbar
+                Grid.Row="1"
+                Grid.Column="1"
+                MessageQueue="{Binding MyMessageQueue}" />
+        </Grid>
     </Grid>
 
 </Window>

@@ -1,0 +1,40 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:System="clr-namespace:System;assembly=mscorlib"
+    xmlns:converter="clr-namespace:Spartacus.Converter"
+    xmlns:enum="clr-namespace:ProjectCeleste.GameFiles.XMLParser.Enum;assembly=ProjectCeleste.GameFiles.XMLParser">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary>
+
+            <!--  Resize Control  -->
+            <converter:ResizeControlConverter x:Key="ResizeControlConverter" />
+
+            <!--  Enum Converter  -->
+            <ObjectDataProvider
+                x:Key="CivilizationEnum"
+                MethodName="GetValues"
+                ObjectType="{x:Type System:Enum}">
+                <ObjectDataProvider.MethodParameters>
+                    <x:Type TypeName="enum:CivilizationEnum" />
+                </ObjectDataProvider.MethodParameters>
+            </ObjectDataProvider>
+
+            <!--  Keep Controls at a 0,8,0,8 Margin  -->
+            <!--  Resize ComboBox  -->
+            <Style
+                x:Key="ComboBoxResizeControlStyle"
+                BasedOn="{StaticResource MaterialDesignFloatingHintComboBox}"
+                TargetType="ComboBox">
+                <Setter Property="Margin" Value="0,8,0,8" />
+                <Setter Property="MinWidth" Value="{Binding ActualWidth, RelativeSource={RelativeSource Self}, Converter={StaticResource ResizeControlConverter}}" />
+            </Style>
+
+            <Style BasedOn="{StaticResource MaterialDesignTextBox}" TargetType="{x:Type TextBox}">
+                <Setter Property="Margin" Value="0,8,0,8" />
+            </Style>
+        </ResourceDictionary>
+
+
+    </ResourceDictionary.MergedDictionaries>
+</ResourceDictionary>

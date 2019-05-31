@@ -67,6 +67,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Caliburn.Micro.3.2.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
@@ -90,10 +91,15 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="AppBootstrapper.cs" />
+    <Compile Include="Common\ConfigManager\CivilizationData.cs" />
+    <Compile Include="Common\ConfigManager\ConfigInfo.cs" />
     <Compile Include="Common\DefaultLevelNavigationItem.cs" />
     <Compile Include="Common\BasicViewModel.cs" />
+    <Compile Include="Common\MessageQueue\MessageQueue.cs" />
+    <Compile Include="Common\ProgressBarStatus.cs" />
+    <Compile Include="Converter\ResizeControlConverter.cs" />
     <Compile Include="IShell.cs" />
-    <Compile Include="ViewModels\AiCharacter\MessageQueue\CharacterMessageQueue.cs" />
+    <Compile Include="Common\MessageQueue\CharacterMessageQueue.cs" />
     <Compile Include="ViewModels\Settings\ThemeViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
     <Compile Include="ViewModels\AiCharacter\ProtoUnitViewModel.cs" />
@@ -140,6 +146,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Common\IWikiDocumentation.cs" />
+    <Page Include="Styles\ControlMisc.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Styles\SideNavigation.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

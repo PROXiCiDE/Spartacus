@@ -1,4 +1,7 @@
-﻿using System.Windows;
+﻿using System.Configuration;
+using System.Diagnostics;
+using System.Windows;
+using Spartacus.Common.ConfigManager;
 
 namespace Spartacus
 {
@@ -7,5 +10,10 @@ namespace Spartacus
     /// </summary>
     public partial class App : Application
     {
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            ConfigInfo.LoadConfig();
+            base.OnStartup(e);
+        }
     }
 }
