@@ -28,17 +28,12 @@
                     </Grid.ColumnDefinitions>
 
                     <StackPanel Grid.Column="0" Margin="8,0,0,0">
-                        <!--  Version  -->
-                        <TextBox
-                            VerticalAlignment="Bottom"
-                            materialDesign:HintAssist.Hint="Version"
-                            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                            Text="{Binding AiCharacter.Version}" />
 
                         <!--  Civilization  -->
                         <StackPanel Orientation="Horizontal">
                             <ComboBox
                                 materialDesign:HintAssist.Hint="Civilization"
+                                IsEditable="True"
                                 ItemsSource="{Binding Source={StaticResource CivilizationEnum}}"
                                 SelectedValue="{Binding AiCharacter.CivId}"
                                 Style="{StaticResource ComboBoxResizeControlStyle}" />

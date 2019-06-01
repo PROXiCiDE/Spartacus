@@ -12,9 +12,5 @@ namespace Spartacus.ViewModels.Settings
     [Export(typeof(ThemeViewModel))]
     public class ThemeViewModel : BasicViewModel
     {
-        [ImportingConstructor]
-        public ThemeViewModel(IWindowManager windowManager, IEventAggregator eventAggregator) : base(windowManager, eventAggregator)
-        {
-        }
     }
 }

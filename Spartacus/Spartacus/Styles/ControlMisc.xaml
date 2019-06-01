@@ -3,7 +3,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:System="clr-namespace:System;assembly=mscorlib"
     xmlns:converter="clr-namespace:Spartacus.Converter"
-    xmlns:enum="clr-namespace:ProjectCeleste.GameFiles.XMLParser.Enum;assembly=ProjectCeleste.GameFiles.XMLParser">
+    xmlns:enum="clr-namespace:ProjectCeleste.GameFiles.XMLParser.Enum;assembly=ProjectCeleste.GameFiles.XMLParser"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes">
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary>
 
@@ -28,6 +29,10 @@
                 TargetType="ComboBox">
                 <Setter Property="Margin" Value="0,8,0,8" />
                 <Setter Property="MinWidth" Value="{Binding ActualWidth, RelativeSource={RelativeSource Self}, Converter={StaticResource ResizeControlConverter}}" />
+            </Style>
+
+            <Style TargetType="{x:Type materialDesign:Card}">
+                <Setter Property="Margin" Value="0,8,0,8" />
             </Style>
 
             <Style BasedOn="{StaticResource MaterialDesignTextBox}" TargetType="{x:Type TextBox}">

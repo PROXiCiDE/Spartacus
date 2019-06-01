@@ -8,9 +8,5 @@ namespace Spartacus.ViewModels.Quest
     public class QuestInformationViewModel : BasicViewModel
     {
 
-        [ImportingConstructor]
-        public QuestInformationViewModel(IWindowManager windowManager, IEventAggregator eventAggregator) : base(windowManager, eventAggregator)
-        {
-        }
     }
 }

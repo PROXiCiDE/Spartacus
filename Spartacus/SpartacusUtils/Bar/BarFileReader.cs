@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using ProjectCeleste.GameFiles.Tools.Bar;
+using SpartacusUtils.Helpers;
 
 namespace SpartacusUtils.Bar
 {
@@ -43,6 +44,11 @@ namespace SpartacusUtils.Bar
                 throw new ArgumentException("Value cannot be null or empty.", nameof(pattern));
 
             return _barFilesInfo.BarFileEntrys.Where(x => Regex.IsMatch(x.FileName, pattern.ToWildCard()));
+        }
+
+        public BarEntry GetEntry(string sourceFile)
+        {
+            return _barFilesInfo.BarFileEntrys.FirstOrDefault(x => x.FileName.Equals(sourceFile, StringComparison.OrdinalIgnoreCase));
         }
     }
 }

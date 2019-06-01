@@ -1,11 +1,7 @@
-﻿         using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-         using ProjectCeleste.GameFiles.XMLParser.Enum;
+﻿using System;
+using ProjectCeleste.GameFiles.XMLParser.Enum;
 
-         namespace Spartacus.Common.ConfigManager
+namespace SpartacusUtils.Models
 {
     public class CivilizationData
     {

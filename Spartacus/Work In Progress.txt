@@ -1,6 +1,23 @@
 Information
 	This is a developed from the ground up due to computer crash before upgrading my computer which was'nt released to the public
 
+App.config
+	You'll have to alter these settings to get them to work.
+	Location of your *.Bar Files
+
+	<appSettings>
+	  <!--Installed Directory for Age of Empires Online-->
+	  <add key="GameInstallPath" value="G:\MS Age Of Empires Online"/>
+	</appSettings>
+
+	If you want to use custom paths for certian Bar files, you can use these.
+	If they are not defined it will use the GameInstallPath *.Bar
+
+		<!--Data.bar for Age of Empires Online-->
+		<add key="Data_Bar" value=""/>
+		
+		<!--Data.bar for Age of Empires Online-->
+		<add key="ArtUI_Bar" value=""/>
 
 Not Included:
 	Used GitHub instead of NuGet package, limited to updates. This project is not included
@@ -9,13 +26,13 @@ Not Included:
 		ProjectCeleste.GameFiles.Tools
 			https://github.com/ProjectCeleste/ProjectCeleste.GameFiles.Tools
 
-ConfigCreator - WIP
-	Will be used to generate a Configuration File to be used for Spartacus.
-	Will irretate / parse through Bar File entries to generate a Config File, to keep Civilizations uptodate
-	incase of new updates of Project Celeste
+ConfigCreator - Removed / Obsolete
 
 Spartacus - WIP
 	Allow you to Edit / Create Quests / Character Files and modify the music soundtrack and more for the game
 
 Spartacus.Utils - WIP
 	Adding features that aren't avaiable
+
+TestUnit - NUnit Test Module
+	Self explanitory, playground project

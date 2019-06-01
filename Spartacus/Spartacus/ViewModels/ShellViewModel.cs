@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Configuration;
 using System.Diagnostics;
+using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using Caliburn.Micro;
@@ -19,13 +20,15 @@ using Spartacus.ViewModels.Quest;
 namespace Spartacus.ViewModels
 {
     [Export(typeof(IShell))]
-    public class ShellViewModel : Conductor<object>, IShell, IHandle<MessageQueue>
+    public class ShellViewModel : Conductor<IScreen>.Collection.OneActive, IShell, IHandle<MessageQueue>
     {
         public const string DialogHostName = "dialogHost";
         private ProgressBarStatus _barStatus;
         private SnackbarMessageQueue _myMessageQueue;
 
+        //This will allow us to share AiCharacter in the SDI Ai Character Models
         public AiCharacterXml AiCharacter { get; set; }
+        
         [ImportingConstructor]
         public ShellViewModel(IWindowManager windowManager, IEventAggregator eventAggregator)
         {
@@ -56,18 +59,27 @@ namespace Spartacus.ViewModels
                 new DefaultLevelNavigationItem
                 {
                     Label = "Character",
-                    NavigationItemSelectedCallback = item => new CharacterViewModel(Manager, EventAggregator)
+                    NavigationItemSelectedCallback = item => new CharacterViewModel()
                 },
                 new DefaultLevelNavigationItem
                 {
-                    Label = "Proto Unit",
-                    NavigationItemSelectedCallback = item => new ProtoUnitViewModel(Manager, EventAggregator)
+                    Label = "Milestone Rewards",
+                    NavigationItemSelectedCallback = item => new MilestoneRewardsViewModel()
                 },
                 new DefaultLevelNavigationItem
                 {
-                    Label = "Trait's",
-                    NavigationItemSelectedCallback =
-                        item => new TraitInformationViewModel(Manager, EventAggregator)
+                    Label = "Proto Units",
+                    NavigationItemSelectedCallback = item => new ProtoUnitViewModel()
+                },
+                new DefaultLevelNavigationItem
+                {
+                    Label = "Trait",
+                    NavigationItemSelectedCallback = item => new TraitInformationViewModel()
+                },
+                new DefaultLevelNavigationItem
+                {
+                    Label = "Developer Tool",
+                    NavigationItemSelectedCallback = item => new DeveloperToolViewModel()
                 },
                 new DividerNavigationItem(),
 
@@ -75,7 +87,7 @@ namespace Spartacus.ViewModels
                 new DefaultLevelNavigationItem
                 {
                     Label = "Music",
-                    NavigationItemSelectedCallback = item => new MusicViewModel(Manager, EventAggregator)
+                    NavigationItemSelectedCallback = item => new MusicViewModel()
                 },
                 new DividerNavigationItem(),
 
@@ -84,29 +96,29 @@ namespace Spartacus.ViewModels
                 {
                     Label = "Quest Information",
                     NavigationItemSelectedCallback =
-                        item => new QuestInformationViewModel(Manager, EventAggregator)
+                        item => new QuestInformationViewModel()
                 },
                 new DefaultLevelNavigationItem
                 {
                     Label = "Objectives",
-                    NavigationItemSelectedCallback = item => new ObjectivesViewModel(Manager, EventAggregator)
+                    NavigationItemSelectedCallback = item => new ObjectivesViewModel()
                 },
                 new DefaultLevelNavigationItem
                 {
                     Label = "Player Settings",
                     NavigationItemSelectedCallback =
-                        item => new PlayerSettingsViewModel(Manager, EventAggregator)
+                        item => new PlayerSettingsViewModel()
                 },
                 new DefaultLevelNavigationItem
                 {
                     Label = "Targets",
-                    NavigationItemSelectedCallback = item => new QuestTargetsViewModel(Manager, EventAggregator)
+                    NavigationItemSelectedCallback = item => new QuestTargetsViewModel()
                 },
                 new DefaultLevelNavigationItem
                 {
                     Label = "Map Information",
                     NavigationItemSelectedCallback =
-                        item => new MapInformationViewModel(Manager, EventAggregator)
+                        item => new MapInformationViewModel()
                 },
                 new DividerNavigationItem()
             };
@@ -118,7 +130,7 @@ namespace Spartacus.ViewModels
             set
             {
                 _barStatus = value;
-                NotifyOfPropertyChange(() => BarStatus);
+                NotifyOfPropertyChange(nameof(BarStatus));
             }
         }
 
@@ -131,7 +143,7 @@ namespace Spartacus.ViewModels
             set
             {
                 _myMessageQueue = value;
-                NotifyOfPropertyChange(() => MyMessageQueue);
+                NotifyOfPropertyChange(nameof(MyMessageQueue));
             }
         }
 
@@ -180,8 +192,8 @@ namespace Spartacus.ViewModels
         {
             if (navigationItem != null)
             {
-                var modelItem = navigationItem.NavigationItemSelectedCallback(navigationItem);
-                ActivateItem(modelItem);
+                if (navigationItem.NavigationItemSelectedCallback(navigationItem) is IScreen modelItem)
+                    ActivateItem(modelItem);
             }
         }
 

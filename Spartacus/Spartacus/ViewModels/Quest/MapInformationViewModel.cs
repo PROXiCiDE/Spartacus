@@ -8,9 +8,5 @@ namespace Spartacus.ViewModels.Quest
     public class MapInformationViewModel : BasicViewModel
     {
 
-        [ImportingConstructor]
-        public MapInformationViewModel(IWindowManager windowManager, IEventAggregator eventAggregator) : base(windowManager, eventAggregator)
-        {
-        }
     }
 }

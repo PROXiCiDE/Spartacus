@@ -9,11 +9,6 @@ namespace Spartacus.ViewModels.AiCharacter
     public class ProtoUnitViewModel : BasicViewModel, IHandle<CharacterMessageQueue>
     {
 
-        [ImportingConstructor]
-        public ProtoUnitViewModel(IWindowManager windowManager, IEventAggregator eventAggregator) : base(windowManager, eventAggregator)
-        {
-        }
-
         public void Handle(CharacterMessageQueue message)
         {
         }

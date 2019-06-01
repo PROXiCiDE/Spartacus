@@ -35,14 +35,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Autofac, Version=4.9.2.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
-      <HintPath>..\packages\Autofac.4.9.2\lib\net45\Autofac.dll</HintPath>
-    </Reference>
     <Reference Include="Caliburn.Micro, Version=3.2.0.0, Culture=neutral, PublicKeyToken=8e5891231f2ed21f, processorArchitecture=MSIL">
       <HintPath>..\packages\Caliburn.Micro.Core.3.2.0\lib\net45\Caliburn.Micro.dll</HintPath>
-    </Reference>
-    <Reference Include="Caliburn.Micro.Autofac, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Caliburn.Micro.AutofacBootstrap.3.0.1.17\lib\net40\Caliburn.Micro.Autofac.dll</HintPath>
     </Reference>
     <Reference Include="Caliburn.Micro.Platform, Version=3.2.0.0, Culture=neutral, PublicKeyToken=8e5891231f2ed21f, processorArchitecture=MSIL">
       <HintPath>..\packages\Caliburn.Micro.3.2.0\lib\net45\Caliburn.Micro.Platform.dll</HintPath>
@@ -69,6 +63,7 @@
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Caliburn.Micro.3.2.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
     </Reference>
@@ -91,8 +86,6 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="AppBootstrapper.cs" />
-    <Compile Include="Common\ConfigManager\CivilizationData.cs" />
-    <Compile Include="Common\ConfigManager\ConfigInfo.cs" />
     <Compile Include="Common\DefaultLevelNavigationItem.cs" />
     <Compile Include="Common\BasicViewModel.cs" />
     <Compile Include="Common\MessageQueue\MessageQueue.cs" />
@@ -100,6 +93,8 @@
     <Compile Include="Converter\ResizeControlConverter.cs" />
     <Compile Include="IShell.cs" />
     <Compile Include="Common\MessageQueue\CharacterMessageQueue.cs" />
+    <Compile Include="ViewModels\AiCharacter\DeveloperToolViewModel.cs" />
+    <Compile Include="ViewModels\AiCharacter\MilestoneRewardsViewModel.cs" />
     <Compile Include="ViewModels\Settings\ThemeViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
     <Compile Include="ViewModels\AiCharacter\ProtoUnitViewModel.cs" />
@@ -113,6 +108,12 @@
     <Compile Include="ViewModels\Quest\MapInformationViewModel.cs" />
     <Compile Include="Views\AiCharacter\CharacterView.xaml.cs">
       <DependentUpon>CharacterView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AiCharacter\DeveloperToolView.xaml.cs">
+      <DependentUpon>DeveloperToolView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AiCharacter\MilestoneRewardsView.xaml.cs">
+      <DependentUpon>MilestoneRewardsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\AiCharacter\ProtoUnitView.xaml.cs">
       <DependentUpon>ProtoUnitView.xaml</DependentUpon>
@@ -151,6 +152,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Styles\SideNavigation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AiCharacter\DeveloperToolView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AiCharacter\MilestoneRewardsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
