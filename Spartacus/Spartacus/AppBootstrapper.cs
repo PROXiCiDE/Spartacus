@@ -9,7 +9,6 @@ namespace Spartacus
     public class AppBootstrapper : BootstrapperBase
     {
         SimpleContainer container;
-
         public AppBootstrapper()
         {
             Initialize();
@@ -19,7 +18,8 @@ namespace Spartacus
         {
             container = new SimpleContainer();
 
-            container.Singleton<IConfigInfo, ConfigInfo>();
+            container.RegisterInstance(typeof(IConfigInfo), "IConfigInfo", new ConfigInfo());
+            //container.Singleton<IConfigInfo, ConfigInfo>();
             container.Singleton<IWindowManager, WindowManager>();
             container.Singleton<IEventAggregator, EventAggregator>();
             container.PerRequest<IShell, ShellViewModel>();

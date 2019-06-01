@@ -11,6 +11,7 @@ namespace SpartacusUtils.Models.Civilization
         public string ShieldTexture { get; }
         public string ShieldDisabledTexture { get; }
 
+        //TODO: Build Shield data for different level's 2,3,4
         public CivilizationShieldData(string shieldTexture, string shieldDisabledTexture)
         {
             ShieldTexture = shieldTexture;

@@ -48,11 +48,11 @@ namespace Spartacus.ViewModels.AiCharacter
         [ImportingConstructor]
         public MilestoneRewardsViewModel()
         {
-            BarFileReader barFileReader = new BarFileReader(_configInfo.ArtUiPath);
-            var entry = barFileReader.GetEntry(@"UserInterface\CapitalTech\Milestones\MilestoneTechBackground.ddt");
+            var dataBar = _configInfo.BarFileReaders[BarFileEnum.ArtUI];
+            var entry = dataBar.GetEntry(@"UserInterface\CapitalTech\Milestones\MilestoneTechBackground.ddt");
             if (entry != null)
             {
-                _ddtimage = new DdtImageBrush(barFileReader, entry);
+                _ddtimage = new DdtImageBrush(dataBar, entry);
                 BackgroundDimensions = new Size(_ddtimage.ImageSize.Width, _ddtimage.ImageSize.Height);
                 BackgroundImage = _ddtimage.Brush;
             }

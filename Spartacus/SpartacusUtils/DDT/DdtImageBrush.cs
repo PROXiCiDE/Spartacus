@@ -27,7 +27,7 @@ namespace SpartacusUtils.DDT
 
         public DdtImageBrush(BarFileReader barFileReader, BarEntry barEntry)
         {
-            var bitmap = new DdtFile(barFileReader.ToBytes(barEntry)).Bitmap;
+            var bitmap = new DdtFile(barFileReader.EntryToBytes(barEntry)).Bitmap;
             
             using (var intPtr = new SafeHBitmapHandle(bitmap.GetHbitmap(), true))
             {

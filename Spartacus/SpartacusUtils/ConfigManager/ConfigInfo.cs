@@ -3,17 +3,22 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Diagnostics;
 using System.IO;
+using ProjectCeleste.GameFiles.Tools.Bar;
 using ProjectCeleste.GameFiles.XMLParser;
+using ProjectCeleste.GameFiles.XMLParser.Enum;
 using ProjectCeleste.GameFiles.XMLParser.Helpers;
 using SpartacusUtils.Bar;
 using SpartacusUtils.Models;
 using SpartacusUtils.Models.Civilization;
+using SpartacusUtils.Models.Milestone;
 using SpartacusUtils.Xml.Helpers;
 
 namespace SpartacusUtils.ConfigManager
 {
     public class ConfigInfo : IConfigInfo
     {
+        public Dictionary<BarFileEnum, BarFileReader> BarFileReaders { get; set; } = new Dictionary<BarFileEnum, BarFileReader>();
+
         public ConfigInfo()
         {
             LoadConfig();
@@ -23,8 +28,13 @@ namespace SpartacusUtils.ConfigManager
         {
             try
             {
+
                 ConfigVariables();
-                LoadBarItems(DataBarPath);
+
+                BarFileReaders.Add(BarFileEnum.Data, new BarFileReader(Path.Combine(Paths.Data, "Data.bar")));
+                BarFileReaders.Add(BarFileEnum.ArtUI, new BarFileReader(Path.Combine(Paths.Art, "ArtUI.bar")));
+
+                LoadBarItems();
             }
             catch (Exception e)
             {
@@ -54,12 +64,12 @@ namespace SpartacusUtils.ConfigManager
                 SnackBarMessageDurationSeconds = 3;
         }
 
-        public void LoadBarItems(string dataBar)
+        public void LoadBarItems()
         {
             try
             {
                 TechTree = TechTreeXml.FromXmlFile(Path.Combine(Paths.Data, "TechTreeX.xml"));
-                LoadCivilization(dataBar);
+                LoadCivilization();
             }
             catch (Exception e)
             {
@@ -68,32 +78,42 @@ namespace SpartacusUtils.ConfigManager
             }
         }
 
-        private void LoadCivilization(string dataBar)
+        private void LoadCivilization()
         {
-            BarFileReader barFileReader = new BarFileReader(dataBar);
-            var findEntries = barFileReader.FindEntries(@"civilizations\*.xmb");
+            var dataBar = BarFileReaders[BarFileEnum.Data];
+            var findEntries = dataBar.FindEntries(@"civilizations\*.xmb");
 
-            CivilizationDatas = new List<CivilizationData>();
+            CivilizationDatas = new Dictionary<CivilizationEnum, CivilizationData>();
+
             foreach (var findEntry in findEntries)
             {
-                var fileContents = barFileReader.ToBytes(findEntry);
+                var fileContents = dataBar.EntryToBytes(findEntry);
                 var xmlFile = fileContents.EncodeXmlToString();
                 if (xmlFile != null)
                 {
                     var xmlClass = XmlUtils.DeserializeFromXml<CivilizationXml>(xmlFile);
-                    CivilizationDatas.Add(
-                        new CivilizationData(xmlClass.Civid,
-                            xmlClass.Name,
-                            xmlClass.Civmatchingid,
-                            xmlClass.Displaynameid,
-                            new CivilizationShieldData(xmlClass.Ui.Shieldtexture,
-                                xmlClass.Ui.Shieldgreytexture),
-                            new StartingResourcesData(xmlClass.Startingresources)));
+
+                    if (int.TryParse(xmlClass.Displaynameid, out var displayNameId))
+                        CivilizationDatas.Add(
+                            xmlClass.Civid,
+                            new CivilizationData(
+                                xmlClass.Name,
+                                xmlClass.Civmatchingid,
+                                displayNameId,
+                                new CivilizationShieldData(xmlClass.Ui.Shieldtexture,
+                                    xmlClass.Ui.Shieldgreytexture),
+                                new StartingResourcesData(xmlClass.Startingresources),
+                                new MilestoneRewardsModel(this, xmlClass.Civid)));
+                    else
+                    {
+                        throw new Exception("CivilizationXml : Element 'DisplayName' in-explicit conversion of Integer");
+                    }
                 }
             }
         }
 
-        public List<CivilizationData> CivilizationDatas { get; set; }
+
+        public Dictionary<CivilizationEnum, CivilizationData> CivilizationDatas { get; set; }
         public double SnackBarMessageDurationSeconds { get; set; }
         public MilestoneRewardsModel MilestoneRewardsModel { get; set; }
         public string DataBarPath { get; set; }

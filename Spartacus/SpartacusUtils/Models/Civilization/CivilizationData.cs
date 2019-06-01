@@ -1,19 +1,23 @@
-﻿using System;
-using ProjectCeleste.GameFiles.XMLParser.Enum;
-using SpartacusUtils.Models.Civilization;
+﻿using ProjectCeleste.GameFiles.XMLParser.Enum;
+using SpartacusUtils.Models.Milestone;
 
-namespace SpartacusUtils.Models
+namespace SpartacusUtils.Models.Civilization
 {
     public class CivilizationData
     {
-        public CivilizationData(CivilizationEnum civId, string name, ECivilizationEnum civMatchingId, string displayName, CivilizationShieldData shieldData, StartingResourcesData startingResourcesData)
+        public CivilizationData(
+            string name,
+            ECivilizationEnum civMatchingId,
+            int displayNameId,
+            CivilizationShieldData shieldData,
+            StartingResourcesData startingResourcesData, MilestoneRewardsModel milestoneRewardsModel)
         {
-            CivId = civId;
             Name = name;
             CivMatchingId = civMatchingId;
-            DisplayName = displayName;
+            DisplayNameId = displayNameId;
             ShieldData = shieldData;
             StartingResourcesData = startingResourcesData;
+            MilestoneRewardsModel = milestoneRewardsModel;
         }
 
         public override string ToString()
@@ -21,11 +25,11 @@ namespace SpartacusUtils.Models
             return Name;
         }
 
-        public CivilizationEnum CivId { get; private set; }
         public string Name { get; private set; }
         public ECivilizationEnum CivMatchingId { get; private set; }
-        public string DisplayName { get; private set; }
+        public int DisplayNameId { get; private set; }
         public CivilizationShieldData ShieldData { get; private set; }
         public StartingResourcesData StartingResourcesData { get; private set; }
+        public MilestoneRewardsModel MilestoneRewardsModel { get; }
     }
 }
