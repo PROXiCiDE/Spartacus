@@ -7,6 +7,7 @@ using ProjectCeleste.GameFiles.XMLParser;
 using ProjectCeleste.GameFiles.XMLParser.Helpers;
 using SpartacusUtils.Bar;
 using SpartacusUtils.Models;
+using SpartacusUtils.Models.Civilization;
 using SpartacusUtils.Xml.Helpers;
 
 namespace SpartacusUtils.ConfigManager
@@ -18,30 +19,11 @@ namespace SpartacusUtils.ConfigManager
             LoadConfig();
         }
 
-        public  void LoadConfig()
+        public void LoadConfig()
         {
             try
             {
-                //Setup paths, check for custom paths we might be working with
-                var gamepath = ConfigurationManager.AppSettings["GameInstallPath"];
-                Paths = new ConfigInfoPaths(gamepath);
-
-                DataBarPath = ConfigurationManager.AppSettings["Data_Bar"];
-                if (string.IsNullOrEmpty(DataBarPath))
-                    DataBarPath = Path.Combine(gamepath, @"Data\Data.bar");
-
-                ArtUiPath = ConfigurationManager.AppSettings["ArtUI_Bar"];
-                if (string.IsNullOrEmpty(ArtUiPath))
-                    ArtUiPath = Path.Combine(gamepath, @"Art\ArtUi.bar");
-
-                var timespan = ConfigurationManager.AppSettings["SnackBarMessageDurationSeconds"];
-                if (double.TryParse(timespan, out var timespanResults))
-                    SnackBarMessageDurationSeconds = timespanResults;
-                else
-                {
-                    SnackBarMessageDurationSeconds = 3;
-                }
-
+                ConfigVariables();
                 LoadBarItems(DataBarPath);
             }
             catch (Exception e)
@@ -51,7 +33,28 @@ namespace SpartacusUtils.ConfigManager
             }
         }
 
-        public  void LoadBarItems(string dataBar)
+        private void ConfigVariables()
+        {
+            //Setup paths, check for custom paths we might be working with
+            var gamepath = ConfigurationManager.AppSettings["GameInstallPath"];
+            Paths = new ConfigInfoPaths(gamepath);
+
+            DataBarPath = ConfigurationManager.AppSettings["Data_Bar"];
+            if (string.IsNullOrEmpty(DataBarPath))
+                DataBarPath = Path.Combine(gamepath, @"Data\Data.bar");
+
+            ArtUiPath = ConfigurationManager.AppSettings["ArtUI_Bar"];
+            if (string.IsNullOrEmpty(ArtUiPath))
+                ArtUiPath = Path.Combine(gamepath, @"Art\ArtUi.bar");
+
+            var timespan = ConfigurationManager.AppSettings["SnackBarMessageDurationSeconds"];
+            if (double.TryParse(timespan, out var timespanResults))
+                SnackBarMessageDurationSeconds = timespanResults;
+            else
+                SnackBarMessageDurationSeconds = 3;
+        }
+
+        public void LoadBarItems(string dataBar)
         {
             try
             {
@@ -65,7 +68,7 @@ namespace SpartacusUtils.ConfigManager
             }
         }
 
-        private  void LoadCivilization(string dataBar)
+        private void LoadCivilization(string dataBar)
         {
             BarFileReader barFileReader = new BarFileReader(dataBar);
             var findEntries = barFileReader.FindEntries(@"civilizations\*.xmb");
@@ -78,7 +81,14 @@ namespace SpartacusUtils.ConfigManager
                 if (xmlFile != null)
                 {
                     var xmlClass = XmlUtils.DeserializeFromXml<CivilizationXml>(xmlFile);
-                    CivilizationDatas.Add(new CivilizationData(xmlClass.Civid, xmlClass.Name));
+                    CivilizationDatas.Add(
+                        new CivilizationData(xmlClass.Civid,
+                            xmlClass.Name,
+                            xmlClass.Civmatchingid,
+                            xmlClass.Displaynameid,
+                            new CivilizationShieldData(xmlClass.Ui.Shieldtexture,
+                                xmlClass.Ui.Shieldgreytexture),
+                            new StartingResourcesData(xmlClass.Startingresources)));
                 }
             }
         }

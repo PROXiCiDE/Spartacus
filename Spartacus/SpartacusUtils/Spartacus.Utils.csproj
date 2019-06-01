@@ -58,10 +58,12 @@
     <Compile Include="ConfigManager\IConfigInfo.cs" />
     <Compile Include="DDT\DdtImageBrush.cs" />
     <Compile Include="Helpers\SafeHBitmapHandle.cs" />
-    <Compile Include="Models\CivilizationData.cs" />
-    <Compile Include="Models\MilestoneRewardsData.cs" />
-    <Compile Include="Models\MilestoneRewardsModel.cs" />
-    <Compile Include="Models\MilestoneRewardsTier.cs" />
+    <Compile Include="Models\Civilization\CivilizationData.cs" />
+    <Compile Include="Models\Civilization\CivilizationShieldData.cs" />
+    <Compile Include="Models\Civilization\StartingResourcesData.cs" />
+    <Compile Include="Models\Milestone\MilestoneRewardsData.cs" />
+    <Compile Include="Models\Milestone\MilestoneRewardsModel.cs" />
+    <Compile Include="Models\Milestone\MilestoneRewardsTier.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Helpers\RegexExtension.cs" />
     <Compile Include="Xml\Helpers\XmlHelpers.cs" />

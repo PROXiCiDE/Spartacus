@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Configuration;
 using System.Diagnostics;
-using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using Caliburn.Micro;
@@ -20,15 +19,14 @@ using Spartacus.ViewModels.Quest;
 namespace Spartacus.ViewModels
 {
     [Export(typeof(IShell))]
-    public class ShellViewModel : Conductor<IScreen>.Collection.OneActive, IShell, IHandle<MessageQueue>
+    public class ShellViewModel : Conductor<IScreen>.Collection.OneActive, IHaveDisplayName, IShell, IHandle<MessageQueue>
     {
         public const string DialogHostName = "dialogHost";
         private ProgressBarStatus _barStatus;
         private SnackbarMessageQueue _myMessageQueue;
 
-        //This will allow us to share AiCharacter in the SDI Ai Character Models
-        public AiCharacterXml AiCharacter { get; set; }
-        
+        public override string DisplayName { get; set; } = "Spartacus";
+
         [ImportingConstructor]
         public ShellViewModel(IWindowManager windowManager, IEventAggregator eventAggregator)
         {
@@ -49,8 +47,10 @@ namespace Spartacus.ViewModels
                     {Label = "C01_Ramp_T4_L40.character", NavigationItemSelectedCallback = item => null},
                 new FirstLevelNavigationItem
                     {Label = "C01_CyprusRamp_T3_L28.character", NavigationItemSelectedCallback = item => null},
-                new FirstLevelNavigationItem   {Label = "C04_Ramp_T2_L09.character", NavigationItemSelectedCallback = item => null},
-                new FirstLevelNavigationItem   {Label = "C06_Ramp_T2_L07.character", NavigationItemSelectedCallback = item => null}
+                new FirstLevelNavigationItem
+                    {Label = "C04_Ramp_T2_L09.character", NavigationItemSelectedCallback = item => null},
+                new FirstLevelNavigationItem
+                    {Label = "C06_Ramp_T2_L07.character", NavigationItemSelectedCallback = item => null}
             };
 
             NavigationItems = new List<INavigationItem>
@@ -124,6 +124,9 @@ namespace Spartacus.ViewModels
             };
         }
 
+        //This will allow us to share AiCharacter in the SDI Ai Character Models
+        public AiCharacterXml AiCharacter { get; set; }
+
         public ProgressBarStatus BarStatus
         {
             get => _barStatus;
@@ -191,10 +194,8 @@ namespace Spartacus.ViewModels
         public void SelectNavigationItem(INavigationItem navigationItem)
         {
             if (navigationItem != null)
-            {
                 if (navigationItem.NavigationItemSelectedCallback(navigationItem) is IScreen modelItem)
                     ActivateItem(modelItem);
-            }
         }
 
         #endregion

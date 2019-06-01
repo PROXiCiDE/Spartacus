@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SpartacusUtils.ConfigManager;
 
 namespace SpartacusUtils.Models
 {
@@ -9,7 +10,6 @@ namespace SpartacusUtils.Models
     {
         public MilestoneRewardsModel()
         {
-            
         }
     }
 }
