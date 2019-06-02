@@ -11,12 +11,26 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProjectCeleste.GameFiles.To
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Information", "Information", "{D2568074-2723-4615-AA2B-A0EB3A99A30E}"
 	ProjectSection(SolutionItems) = preProject
+		..\README.md = ..\README.md
+		SpartacusSchema.sql = SpartacusSchema.sql
 		Work In Progress.txt = Work In Progress.txt
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProjectCeleste.GameFiles.XMLParser", "ProjectCeleste.GameFiles.XMLParser\src\ProjectCeleste.GameFiles.XMLParser.csproj", "{C909E1B3-217A-49F0-8367-64F57B2CA9E7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestUnit", "TestUnit\TestUnit.csproj", "{35D25366-DF77-4A07-98FD-DCD6D3A84F43}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestUnit", "TestUnit\TestUnit.csproj", "{35D25366-DF77-4A07-98FD-DCD6D3A84F43}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DapperCrud", "DapperCrud\DapperCrud.csproj", "{610AEB69-27D3-4A49-B783-3256523601EC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spartacus.Database", "Spartacus.Database\Spartacus.Database.csproj", "{164B9FF4-D17D-48B6-BD23-F9151A792394}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spartacus.Logic", "Spartacus.Logic\Spartacus.Logic.csproj", "{A9EAC116-CB5F-42F3-9627-1B9F063A6F76}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libraries", "Libraries", "{71B0BB3B-21DB-412F-98AB-951AA31DD9AD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TestUnits", "TestUnits", "{970495B5-A1ED-4894-852C-24EBCD6C1E4A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ThirdPartyLibraries", "ThirdPartyLibraries", "{D4402D06-E6B6-4A78-A6B3-ABBD809C828B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -44,9 +58,29 @@ Global
 		{35D25366-DF77-4A07-98FD-DCD6D3A84F43}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{35D25366-DF77-4A07-98FD-DCD6D3A84F43}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{35D25366-DF77-4A07-98FD-DCD6D3A84F43}.Release|Any CPU.Build.0 = Release|Any CPU
+		{610AEB69-27D3-4A49-B783-3256523601EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{610AEB69-27D3-4A49-B783-3256523601EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{610AEB69-27D3-4A49-B783-3256523601EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{610AEB69-27D3-4A49-B783-3256523601EC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{164B9FF4-D17D-48B6-BD23-F9151A792394}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{164B9FF4-D17D-48B6-BD23-F9151A792394}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{164B9FF4-D17D-48B6-BD23-F9151A792394}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{164B9FF4-D17D-48B6-BD23-F9151A792394}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A9EAC116-CB5F-42F3-9627-1B9F063A6F76}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A9EAC116-CB5F-42F3-9627-1B9F063A6F76}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A9EAC116-CB5F-42F3-9627-1B9F063A6F76}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A9EAC116-CB5F-42F3-9627-1B9F063A6F76}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{DA4548C4-CD9B-46A7-BDDB-5D5BB7E21B8C} = {71B0BB3B-21DB-412F-98AB-951AA31DD9AD}
+		{B7C29FB2-1AF8-48C9-BDCD-C9A4E7DCF75A} = {D4402D06-E6B6-4A78-A6B3-ABBD809C828B}
+		{C909E1B3-217A-49F0-8367-64F57B2CA9E7} = {D4402D06-E6B6-4A78-A6B3-ABBD809C828B}
+		{35D25366-DF77-4A07-98FD-DCD6D3A84F43} = {970495B5-A1ED-4894-852C-24EBCD6C1E4A}
+		{164B9FF4-D17D-48B6-BD23-F9151A792394} = {71B0BB3B-21DB-412F-98AB-951AA31DD9AD}
+		{A9EAC116-CB5F-42F3-9627-1B9F063A6F76} = {71B0BB3B-21DB-412F-98AB-951AA31DD9AD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {218981CB-8644-40A8-A631-1506F39FF55D}

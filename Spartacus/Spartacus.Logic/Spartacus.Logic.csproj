@@ -4,17 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{D61EAED6-E990-4BA0-979C-CB6DD1A076DE}</ProjectGuid>
-    <OutputType>Exe</OutputType>
-    <RootNamespace>ConfigCreator</RootNamespace>
-    <AssemblyName>ConfigCreator</AssemblyName>
+    <ProjectGuid>{A9EAC116-CB5F-42F3-9627-1B9F063A6F76}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Spartacus.Logic</RootNamespace>
+    <AssemblyName>Spartacus.Logic</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -24,7 +23,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -33,12 +31,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Ionic.Zip, Version=1.9.1.8, Culture=neutral, PublicKeyToken=edbe51ad942a3f5c, processorArchitecture=MSIL">
-      <HintPath>..\packages\Unofficial.Ionic.Zip.1.9.1.8\lib\Ionic.Zip.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -49,13 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Creator\Civilization.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="Builder\Civilization\CivilizationModelBuilder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
-    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ProjectCeleste.GameFiles.Tools\src\ProjectCeleste.GameFiles.Tools.csproj">
@@ -66,13 +53,14 @@
       <Project>{c909e1b3-217a-49f0-8367-64f57b2ca9e7}</Project>
       <Name>ProjectCeleste.GameFiles.XMLParser</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Spartacus.Database\Spartacus.Database.csproj">
+      <Project>{164b9ff4-d17d-48b6-bd23-f9151a792394}</Project>
+      <Name>Spartacus.Database</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SpartacusUtils\Spartacus.Utils.csproj">
       <Project>{da4548c4-cd9b-46a7-bddb-5d5bb7e21b8c}</Project>
       <Name>Spartacus.Utils</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Ionic.Zip.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -3,6 +3,7 @@ using System.Diagnostics;
 using Caliburn.Micro;
 using ProjectCeleste.GameFiles.XMLParser;
 using Spartacus.Common;
+using Spartacus.Common.MessageQueue;
 
 namespace Spartacus.ViewModels.AiCharacter
 {

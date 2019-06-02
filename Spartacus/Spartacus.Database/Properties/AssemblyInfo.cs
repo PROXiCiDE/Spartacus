@@ -4,11 +4,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("SpartacusUtils")]
+[assembly: AssemblyTitle("Spartacus.Database")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("SpartacusUtils")]
+[assembly: AssemblyProduct("Spartacus.Database")]
 [assembly: AssemblyCopyright("Copyright ©  2019")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -19,7 +19,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("da4548c4-cd9b-46a7-bddb-5d5bb7e21b8c")]
+[assembly: Guid("164b9ff4-d17d-48b6-bd23-f9151a792394")]
 
 // Version information for an assembly consists of the following four values:
 //

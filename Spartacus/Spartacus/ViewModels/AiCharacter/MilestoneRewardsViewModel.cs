@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using Caliburn.Micro;
 using ProjectCeleste.GameFiles.Tools.Ddt;
 using Spartacus.Common;
+using Spartacus.Common.MessageQueue;
 using SpartacusUtils.Bar;
 using SpartacusUtils.DDT;
 

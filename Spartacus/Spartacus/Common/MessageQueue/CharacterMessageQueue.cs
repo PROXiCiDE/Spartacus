@@ -1,6 +1,6 @@
 ﻿using ProjectCeleste.GameFiles.XMLParser;
 
-namespace Spartacus.ViewModels.AiCharacter
+namespace Spartacus.Common.MessageQueue
 {
     public class CharacterMessageQueue
     {

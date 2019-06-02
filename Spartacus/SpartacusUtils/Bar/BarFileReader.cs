@@ -48,7 +48,8 @@ namespace SpartacusUtils.Bar
 
         public BarEntry GetEntry(string sourceFile)
         {
-            return _barFilesInfo.BarFileEntrys.FirstOrDefault(x => x.FileName.Equals(sourceFile, StringComparison.OrdinalIgnoreCase));
+            return _barFilesInfo.BarFileEntrys.FirstOrDefault(x =>
+                x.FileName.Equals(sourceFile, StringComparison.OrdinalIgnoreCase));
         }
     }
 }

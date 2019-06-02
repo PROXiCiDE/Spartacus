@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
@@ -7,15 +7,26 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Dapper" Version="1.60.6" />
     <PackageReference Include="nunit" Version="3.10.1" />
     <PackageReference Include="NUnit3TestAdapter" Version="3.10.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.8.0" />
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.5.0" />
+    <PackageReference Include="System.Data.SQLite.Core" Version="1.0.110" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\ProjectCeleste.GameFiles.Tools\src\ProjectCeleste.GameFiles.Tools.csproj" />
     <ProjectReference Include="..\ProjectCeleste.GameFiles.XMLParser\src\ProjectCeleste.GameFiles.XMLParser.csproj" />
+    <ProjectReference Include="..\Spartacus.Database\Spartacus.Database.csproj" />
+    <ProjectReference Include="..\Spartacus.Logic\Spartacus.Logic.csproj" />
     <ProjectReference Include="..\SpartacusUtils\Spartacus.Utils.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="App.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

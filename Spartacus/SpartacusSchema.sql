@@ -1,0 +1,22 @@
+BEGIN TRANSACTION;
+CREATE TABLE IF NOT EXISTS "StringTableLocations" (
+	"TableName"	TEXT,
+	"LocStart"	INTEGER,
+	"LocEnd"	INTEGER,
+	PRIMARY KEY("TableName")
+);
+CREATE TABLE IF NOT EXISTS "FileChecksum" (
+	"Filename"	TEXT NOT NULL,
+	"Checksum"	TEXT NOT NULL,
+	"Location"	TEXT,
+	"LastWriteTime"	INTEGER NOT NULL
+);
+CREATE TABLE IF NOT EXISTS "Languages" (
+	"Id"	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+	"Locale"	INTEGER NOT NULL,
+	"Filename"	TEXT NOT NULL,
+	"LocId"	INT NOT NULL,
+	"Symbol"	TEXT,
+	"Text"	TEXT
+);
+COMMIT;

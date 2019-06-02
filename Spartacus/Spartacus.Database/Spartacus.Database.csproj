@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{DA4548C4-CD9B-46A7-BDDB-5D5BB7E21B8C}</ProjectGuid>
+    <ProjectGuid>{164B9FF4-D17D-48B6-BD23-F9151A792394}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SpartacusUtils</RootNamespace>
-    <AssemblyName>SpartacusUtils</AssemblyName>
+    <RootNamespace>Spartacus.Database</RootNamespace>
+    <AssemblyName>Spartacus.Database</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -36,63 +36,38 @@
     <Reference Include="Dapper, Version=1.60.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Dapper.1.60.6\lib\net451\Dapper.dll</HintPath>
     </Reference>
-    <Reference Include="Ionic.Zip, Version=1.9.1.8, Culture=neutral, PublicKeyToken=edbe51ad942a3f5c, processorArchitecture=MSIL">
-      <HintPath>..\packages\Unofficial.Ionic.Zip.1.9.1.8\lib\Ionic.Zip.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="PresentationCore" />
     <Reference Include="System" />
-    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.SQLite, Version=1.0.110.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Data.SQLite.Core.1.0.110.0\lib\net46\System.Data.SQLite.dll</HintPath>
     </Reference>
-    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
-    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Bar\BarEntryExtension.cs" />
-    <Compile Include="Bar\BarFileEnum.cs" />
-    <Compile Include="Bar\BarFileReader.cs" />
-    <Compile Include="ConfigManager\ConfigInfo.cs" />
-    <Compile Include="ConfigManager\ConfigInfoPaths.cs" />
-    <Compile Include="ConfigManager\IConfigInfo.cs" />
-    <Compile Include="DDT\DdtImageBrush.cs" />
-    <Compile Include="ErrorReporting\ErrorReport.cs" />
-    <Compile Include="ErrorReporting\IErrorReport.cs" />
-    <Compile Include="Helpers\SafeHBitmapHandle.cs" />
+    <Compile Include="DBModels\Civilizations\Civilizations.cs" />
+    <Compile Include="DBModels\Civilizations\CivilizationsRepository.cs" />
+    <Compile Include="DBModels\Civilizations\ICivilizationsRepository.cs" />
+    <Compile Include="DBModels\FileChecksum\FileChecksum.cs" />
+    <Compile Include="DBModels\FileChecksum\FileChecksumRepository.cs" />
+    <Compile Include="DBModels\FileChecksum\IFileChecksumRepository.cs" />
+    <Compile Include="DBModels\Language\ILanguagesRepository.cs" />
+    <Compile Include="DBModels\Language\Languages.cs" />
+    <Compile Include="DBModels\Language\LanguagesRepository.cs" />
+    <Compile Include="DBModels\StringTableLocations\IStringTableLocationsRepository.cs" />
+    <Compile Include="DBModels\StringTableLocations\StringTableLocations.cs" />
+    <Compile Include="DBModels\StringTableLocations\StringTableLocationsRepository.cs" />
+    <Compile Include="Models\Milestone\MilestoneRewardsModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Helpers\RegexExtension.cs" />
-    <Compile Include="Xml\Helpers\XmlHelpers.cs" />
-    <Compile Include="Xml\Language\LanguagesEnum.cs" />
-    <Compile Include="Xml\Language\LanguagesReader.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Ionic.Zip.xml" />
+    <Folder Include="DBModels\Milestone\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\ProjectCeleste.GameFiles.Tools\src\ProjectCeleste.GameFiles.Tools.csproj">
-      <Project>{b7c29fb2-1af8-48c9-bdcd-c9a4e7dcf75a}</Project>
-      <Name>ProjectCeleste.GameFiles.Tools</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ProjectCeleste.GameFiles.XMLParser\src\ProjectCeleste.GameFiles.XMLParser.csproj">
-      <Project>{c909e1b3-217a-49f0-8367-64f57b2ca9e7}</Project>
-      <Name>ProjectCeleste.GameFiles.XMLParser</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Xml\Quest\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\System.Data.SQLite.Core.1.0.110.0\build\net46\System.Data.SQLite.Core.targets" Condition="Exists('..\packages\System.Data.SQLite.Core.1.0.110.0\build\net46\System.Data.SQLite.Core.targets')" />

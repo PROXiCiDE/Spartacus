@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using Caliburn.Micro;
 using Spartacus.Common;
+using Spartacus.Common.MessageQueue;
 
 namespace Spartacus.ViewModels.AiCharacter
 {
