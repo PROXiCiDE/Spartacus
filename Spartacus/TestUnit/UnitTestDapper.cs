@@ -33,7 +33,7 @@ namespace TestUnit
             FileChecksumRepository fileChecksum = new FileChecksumRepository(ConnString);
             var time = DateTime.Now;
 
-            var newChecksum = new FileChecksum("TestFile2.xml", @"\Data\TestFile2.xml", "ABC", time.AddMinutes(-15).ToFileTimeUtc());
+            var newChecksum = new FileChecksumModel("TestFile2.xml", @"\Data\TestFile2.xml", "ABC", time.AddMinutes(-15).ToFileTimeUtc());
             fileChecksum.InsertFileChecksum(newChecksum);
         }
 

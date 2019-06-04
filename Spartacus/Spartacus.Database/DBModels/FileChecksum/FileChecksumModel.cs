@@ -2,9 +2,9 @@
 
 namespace Spartacus.Database.DBModels.FileChecksum
 {
-    public class FileChecksum
+    public class FileChecksumModel
     {
-        public FileChecksum(string fullname, string filename, string checksum, long lastWriteTime)
+        public FileChecksumModel(string fullname, string filename, string checksum, long lastWriteTime)
         {
             Fullname = fullname;
             Filename = filename;

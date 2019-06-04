@@ -5,19 +5,20 @@ using ProjectCeleste.GameFiles.XMLParser;
 using ProjectCeleste.GameFiles.XMLParser.Helpers;
 using Spartacus.Database.DBModels.Civilizations;
 using SpartacusUtils.Bar;
+using SpartacusUtils.Utilities;
 using SpartacusUtils.Xml.Helpers;
 
 namespace Spartacus.Logic.Builder.Civilization
 {
     public class CivilizationModelBuilder
     {
-        public List<Civilizations> BuildFromBar(BarFileReader barFileReader)
+        public List<CivilizationsModel> BuildFromBar(BarFileReader barFileReader)
         {
             var findEntries = barFileReader.FindEntries(@"civilizations\*.xmb");
 
-            var civilizationDatas = new List<Civilizations>();
+            var models = new List<CivilizationsModel>();
 
-            foreach (var findEntry in findEntries)
+            findEntries.ForEach(findEntry =>
             {
                 var fileContents = barFileReader.EntryToBytes(findEntry);
                 var xmlFile = fileContents.EncodeXmlToString();
@@ -42,9 +43,9 @@ namespace Spartacus.Logic.Builder.Civilization
                                                string.Equals(x.Age, "age3", StringComparison.OrdinalIgnoreCase))
                                            ?.Tech ?? "";
 
-                            civilizationDatas.Add(
-                                new Civilizations(
-                                    (long) xmlClass.Civid,
+                            models.Add(
+                                new CivilizationsModel(
+                                    (long)xmlClass.Civid,
                                     displayNameId,
                                     rollOverId,
                                     xmlClass.Ui.Shieldtexture,
@@ -57,9 +58,9 @@ namespace Spartacus.Logic.Builder.Civilization
                                 "CivilizationXml : Element 'DisplayName' in-explicit conversion of Integer");
                         }
                 }
-            }
+            });
 
-            return civilizationDatas;
+            return models;
         }
     }
 }

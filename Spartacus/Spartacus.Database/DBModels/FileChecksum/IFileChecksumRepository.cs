@@ -4,9 +4,9 @@ namespace Spartacus.Database.DBModels.FileChecksum
 {
     public interface IFileChecksumRepository
     {
-        List<FileChecksum> SelectFileChecksum();
-        void InsertFileChecksum(FileChecksum filechecksum);
-        void UpdateFileChecksum(FileChecksum filechecksum);
-        void DeleteFileChecksum(FileChecksum filechecksum);
+        List<FileChecksumModel> SelectFileChecksum();
+        void InsertFileChecksum(FileChecksumModel filechecksum);
+        void UpdateFileChecksum(FileChecksumModel filechecksum);
+        void DeleteFileChecksum(FileChecksumModel filechecksum);
     }
 }

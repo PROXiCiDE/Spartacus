@@ -1,8 +1,8 @@
 ﻿namespace Spartacus.Database.DBModels.Civilizations
 {
-    public class Civilizations
+    public class CivilizationsModel
     {
-        public Civilizations(long civilizationId, long displayNameId, long rolloverNameId, string shieldTexture,
+        public CivilizationsModel(long civilizationId, long displayNameId, long rolloverNameId, string shieldTexture,
             string shieldGreyTexture, string age0, string age1, string age2, string age3, long storehouseTechId)
         {
             CivilizationId = civilizationId;

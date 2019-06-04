@@ -4,9 +4,9 @@ namespace Spartacus.Database.DBModels.Advisors
 {
     public interface IAdvisorsRepository
     {
-        List<Advisors> SelectAdvisors();
-        void InsertAdvisors(Advisors advisors);
-        void UpdateAdvisors(Advisors advisors);
-        void DeleteAdvisors(Advisors advisors);
+        List<AdvisorsModel> SelectAdvisors();
+        void InsertAdvisors(AdvisorsModel advisors);
+        void UpdateAdvisors(AdvisorsModel advisors);
+        void DeleteAdvisors(AdvisorsModel advisors);
     }
 }

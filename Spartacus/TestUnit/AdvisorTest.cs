@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using NUnit.Framework;
 using ProjectCeleste.GameFiles.XMLParser;
+using ProjectCeleste.GameFiles.XMLParser.Enum;
+using Spartacus.Logic.Builder.Advisors;
 using SpartacusUtils.Bar;
 
 namespace TestUnit
@@ -21,12 +23,12 @@ namespace TestUnit
         public void LoadAdvisor()
         {
             var dataBar = new BarFileReader(@"G:\Age of Empires Online\Data2\data.bar");
-            var entry = dataBar.GetEntry("advisors.xml");
-            var advisors = dataBar.ReadEntry<EconAdvisorsXml>(entry);
-            foreach (var advisor in advisors.AdvisorArray)
+
+            AdvisorModelBuilder modelBuilder = new AdvisorModelBuilder();
+            var models = modelBuilder.BuildFromBar(dataBar);
+            foreach (var advisor in models.Where(x=>x.Civid == (long) CivilizationEnum.Norse))
             {
-                if(advisor.Age > 0)
-                    Debug.WriteLine(advisor.Name);
+                Debug.WriteLine(advisor);
             }
         }
     }

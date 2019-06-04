@@ -15,22 +15,22 @@ namespace Spartacus.Database.DBModels.FileChecksum
             _connstring = connectionString;
         }
 
-        public List<FileChecksum> SelectFileChecksum()
+        public List<FileChecksumModel> SelectFileChecksum()
         {
             // Select
-            List<FileChecksum> ret;
+            List<FileChecksumModel> ret;
             using (var db = new SQLiteConnection(_connstring))
             {
                 const string sql =
                     @"SELECT Fullname, Filename, Checksum, LastWriteTime FROM [FileChecksum]";
 
-                ret = db.Query<FileChecksum>(sql, commandType: CommandType.Text).ToList();
+                ret = db.Query<FileChecksumModel>(sql, commandType: CommandType.Text).ToList();
             }
 
             return ret;
         }
 
-        public void InsertFileChecksum(FileChecksum filechecksum)
+        public void InsertFileChecksum(FileChecksumModel filechecksum)
         {
             // Insert
             using (var db = new SQLiteConnection(_connstring))
@@ -47,7 +47,7 @@ namespace Spartacus.Database.DBModels.FileChecksum
             }
         }
 
-        public void UpdateFileChecksum(FileChecksum filechecksum)
+        public void UpdateFileChecksum(FileChecksumModel filechecksum)
         {
             // Update
             using (var db = new SQLiteConnection(_connstring))
@@ -63,7 +63,7 @@ namespace Spartacus.Database.DBModels.FileChecksum
             }
         }
 
-        public void DeleteFileChecksum(FileChecksum filechecksum)
+        public void DeleteFileChecksum(FileChecksumModel filechecksum)
         {
             // Delete
             using (var db = new SQLiteConnection(_connstring))

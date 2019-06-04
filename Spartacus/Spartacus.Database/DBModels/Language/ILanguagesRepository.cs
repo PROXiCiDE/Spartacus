@@ -4,9 +4,9 @@ namespace Spartacus.Database.DBModels.Language
 {
     public interface ILanguagesRepository
     {
-        List<Languages> SelectLanguages();
-        void InsertLanguages(Languages languages);
-        void UpdateLanguages(Languages languages);
-        void DeleteLanguages(Languages languages);
+        List<LanguagesModel> SelectLanguages();
+        void InsertLanguages(LanguagesModel languages);
+        void UpdateLanguages(LanguagesModel languages);
+        void DeleteLanguages(LanguagesModel languages);
     }
 }

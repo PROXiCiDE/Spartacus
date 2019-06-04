@@ -48,17 +48,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DBModels\Advisors\Advisors.cs" />
+    <Compile Include="DBModels\Advisors\AdvisorsModel.cs" />
     <Compile Include="DBModels\Advisors\AdvisorsRepository.cs" />
     <Compile Include="DBModels\Advisors\IAdvisorsRepository.cs" />
-    <Compile Include="DBModels\Civilizations\Civilizations.cs" />
+    <Compile Include="DBModels\Civilizations\CivilizationsModel.cs" />
     <Compile Include="DBModels\Civilizations\CivilizationsRepository.cs" />
     <Compile Include="DBModels\Civilizations\ICivilizationsRepository.cs" />
-    <Compile Include="DBModels\FileChecksum\FileChecksum.cs" />
+    <Compile Include="DBModels\FileChecksum\FileChecksumModel.cs" />
     <Compile Include="DBModels\FileChecksum\FileChecksumRepository.cs" />
     <Compile Include="DBModels\FileChecksum\IFileChecksumRepository.cs" />
     <Compile Include="DBModels\Language\ILanguagesRepository.cs" />
-    <Compile Include="DBModels\Language\Languages.cs" />
+    <Compile Include="DBModels\Language\LanguagesModel.cs" />
     <Compile Include="DBModels\Language\LanguagesRepository.cs" />
     <Compile Include="DBModels\StringTableLocations\IStringTableLocationsRepository.cs" />
     <Compile Include="DBModels\StringTableLocations\StringTableLocations.cs" />

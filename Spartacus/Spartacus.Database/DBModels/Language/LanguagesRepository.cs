@@ -15,21 +15,21 @@ namespace Spartacus.Database.DBModels.Language
 
         private string _connectionString { get; }
 
-        public List<Languages> SelectLanguages()
+        public List<LanguagesModel> SelectLanguages()
         {
             // Select
-            List<Languages> ret;
+            List<LanguagesModel> ret;
             using (var db = new SQLiteConnection(_connectionString))
             {
                 const string sql = @"SELECT Id, Locale, Filename, LocId, Symbol, Text FROM [Languages]";
 
-                ret = db.Query<Languages>(sql, commandType: CommandType.Text).ToList();
+                ret = db.Query<LanguagesModel>(sql, commandType: CommandType.Text).ToList();
             }
 
             return ret;
         }
 
-        public void InsertLanguages(Languages languages)
+        public void InsertLanguages(LanguagesModel languages)
         {
             // Insert
             using (var db = new SQLiteConnection(_connectionString))
@@ -45,7 +45,7 @@ namespace Spartacus.Database.DBModels.Language
             }
         }
 
-        public void UpdateLanguages(Languages languages)
+        public void UpdateLanguages(LanguagesModel languages)
         {
             // Update
             using (var db = new SQLiteConnection(_connectionString))
@@ -62,7 +62,7 @@ namespace Spartacus.Database.DBModels.Language
             }
         }
 
-        public void DeleteLanguages(Languages languages)
+        public void DeleteLanguages(LanguagesModel languages)
         {
             // Delete
             using (var db = new SQLiteConnection(_connectionString))

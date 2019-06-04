@@ -15,22 +15,22 @@ namespace Spartacus.Database.DBModels.Civilizations
             _connstring = connectionString;
         }
 
-        public List<Civilizations> SelectCivilizations()
+        public List<CivilizationsModel> SelectCivilizations()
         {
             // Select
-            List<Civilizations> ret;
+            List<CivilizationsModel> ret;
             using (var db = new SqlConnection(_connstring))
             {
                 const string sql =
                     @"SELECT CivilizationId, DisplayNameId, RolloverNameId, ShieldTexture, ShieldGreyTexture, Age0, Age1, Age2, Age3, StorehouseTechId FROM [Civilizations]";
 
-                ret = db.Query<Civilizations>(sql, commandType: CommandType.Text).ToList();
+                ret = db.Query<CivilizationsModel>(sql, commandType: CommandType.Text).ToList();
             }
 
             return ret;
         }
 
-        public void InsertCivilizations(Civilizations civilizations)
+        public void InsertCivilizations(CivilizationsModel civilizations)
         {
             // Insert
             using (var db = new SqlConnection(_connstring))
@@ -52,7 +52,7 @@ namespace Spartacus.Database.DBModels.Civilizations
             }
         }
 
-        public void UpdateCivilizations(Civilizations civilizations)
+        public void UpdateCivilizations(CivilizationsModel civilizations)
         {
             // Update
             using (var db = new SqlConnection(_connstring))
@@ -74,7 +74,7 @@ namespace Spartacus.Database.DBModels.Civilizations
             }
         }
 
-        public void DeleteCivilizations(Civilizations civilizations)
+        public void DeleteCivilizations(CivilizationsModel civilizations)
         {
             // Delete
             using (var db = new SqlConnection(_connstring))

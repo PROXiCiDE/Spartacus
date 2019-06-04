@@ -1,6 +1,6 @@
 ﻿namespace Spartacus.Database.DBModels.Language
 {
-    public class Languages
+    public class LanguagesModel
     {
         public int Id { get; set; }
         public string Locale { get; set; }

@@ -18,19 +18,19 @@ namespace Spartacus.Database.DBModels.Advisors
             _connstring = connectionString;
         }
 
-        public List<Advisors> SelectAdvisors()
+        public List<AdvisorsModel> SelectAdvisors()
         {
             // Select
-            List<Advisors> ret;
+            List<AdvisorsModel> ret;
             using (var db = new SqlConnection(_connstring))
             {
                 const string sql = @"SELECT Name, Civid, Age, Icon, Rarirty, RollverTextId, DisplayDescriptionId, DisplayNameId, MinLevel, ItemLevel, TechId FROM [Advisors]";
 
-                ret = db.Query<Advisors>(sql, commandType: CommandType.Text).ToList();
+                ret = db.Query<AdvisorsModel>(sql, commandType: CommandType.Text).ToList();
             }
             return ret;
         }
-        public void InsertAdvisors(Advisors advisors)
+        public void InsertAdvisors(AdvisorsModel advisors)
         {
             // Insert
             using (var db = new SqlConnection(_connstring))
@@ -40,7 +40,7 @@ namespace Spartacus.Database.DBModels.Advisors
                 db.Execute(sql, new { Name = advisors.Name, Civid = advisors.Civid, Age = advisors.Age, Icon = advisors.Icon, Rarirty = advisors.Rarirty, RollverTextId = advisors.RollverTextId, DisplayDescriptionId = advisors.DisplayDescriptionId, DisplayNameId = advisors.DisplayNameId, MinLevel = advisors.MinLevel, ItemLevel = advisors.ItemLevel, TechId = advisors.TechId }, commandType: CommandType.Text);
             }
         }
-        public void UpdateAdvisors(Advisors advisors)
+        public void UpdateAdvisors(AdvisorsModel advisors)
         {
             // Update
             using (var db = new SqlConnection(_connstring))
@@ -50,7 +50,7 @@ namespace Spartacus.Database.DBModels.Advisors
                 db.Execute(sql, new { Name = advisors.Name, Civid = advisors.Civid, Age = advisors.Age, Icon = advisors.Icon, Rarirty = advisors.Rarirty, RollverTextId = advisors.RollverTextId, DisplayDescriptionId = advisors.DisplayDescriptionId, DisplayNameId = advisors.DisplayNameId, MinLevel = advisors.MinLevel, ItemLevel = advisors.ItemLevel, TechId = advisors.TechId }, commandType: CommandType.Text);
             }
         }
-        public void DeleteAdvisors(Advisors advisors)
+        public void DeleteAdvisors(AdvisorsModel advisors)
         {
             // Delete
             using (var db = new SqlConnection(_connstring))
