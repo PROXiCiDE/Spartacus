@@ -11,11 +11,11 @@ namespace Spartacus.Logic.Builder.Civilization
 {
     public class CivilizationModelBuilder
     {
-        public List<Civilizations> Build(CivilizationsRepository civilizationsRepository, BarFileReader barFileReader)
+        public List<Civilizations> BuildFromBar(BarFileReader barFileReader)
         {
             var findEntries = barFileReader.FindEntries(@"civilizations\*.xmb");
 
-            var CivilizationDatas = new List<Civilizations>();
+            var civilizationDatas = new List<Civilizations>();
 
             foreach (var findEntry in findEntries)
             {
@@ -42,7 +42,7 @@ namespace Spartacus.Logic.Builder.Civilization
                                                string.Equals(x.Age, "age3", StringComparison.OrdinalIgnoreCase))
                                            ?.Tech ?? "";
 
-                            CivilizationDatas.Add(
+                            civilizationDatas.Add(
                                 new Civilizations(
                                     (long) xmlClass.Civid,
                                     displayNameId,
@@ -59,7 +59,7 @@ namespace Spartacus.Logic.Builder.Civilization
                 }
             }
 
-            return CivilizationDatas;
+            return civilizationDatas;
         }
     }
 }

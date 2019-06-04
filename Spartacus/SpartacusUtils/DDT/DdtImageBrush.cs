@@ -33,8 +33,5 @@ namespace SpartacusUtils.DDT
 
         public Size ImageSize { get; set; }
         public ImageBrush Brush { get; set; }
-
-        [DllImport("gdi32.dll")]
-        public static extern bool DeleteObject(IntPtr hObject);
     }
 }

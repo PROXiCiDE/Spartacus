@@ -6,7 +6,6 @@ using ProjectCeleste.GameFiles.XMLParser;
 using Spartacus.Common;
 using Spartacus.Common.MessageQueue;
 using SpartacusUtils.ConfigManager;
-using SpartacusUtils.Models;
 
 namespace Spartacus.ViewModels.AiCharacter
 {

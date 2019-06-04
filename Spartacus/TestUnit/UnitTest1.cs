@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using NUnit.Framework;
@@ -16,6 +17,31 @@ namespace TestUnit
         public void Setup()
         {
             _configInfo = new ConfigInfo(@"G:\MS Age Of Empires Online");
+        }
+
+        [Test]
+        [TestCase("xml")]
+        [TestCase("shp")]
+        [TestCase("eee")]
+        public void CheckExt(string ext)
+        {
+            var extList = new List<string>()
+            {
+                "region",
+                "xml",
+                "dataset",
+                "character",
+                "tactics",
+                "SpawnerItem",
+                "blueprint",
+                "physics",
+                "shp",
+                "quest",
+                "xsd",
+                "cpn",
+                "dtd",
+            };
+            Debug.WriteLine(extList.Contains(ext));
         }
 
         [Test]

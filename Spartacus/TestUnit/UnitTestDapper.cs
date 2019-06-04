@@ -52,14 +52,12 @@ namespace TestUnit
         public void InsertCivilization()
         {
             CivilizationsRepository civilizations = new CivilizationsRepository(ConnString);
-            var civs = new CivilizationModelBuilder().Build(civilizations, new BarFileReader(_dataFile));
+            var civs = new CivilizationModelBuilder().BuildFromBar(new BarFileReader(_dataFile));
 
             foreach (var civ in civs)
             {
                 Debug.WriteLine(civ);
             }
         }
-
-     
     }
 }

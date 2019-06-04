@@ -8,12 +8,12 @@ namespace SpartacusUtils.Bar
     {
         public static byte[] EntryToBytes(this BarFileReader barFileReader, BarEntry barEntry)
         {
-            if (string.IsNullOrEmpty(barFileReader._filename))
-                throw new ArgumentException("Value cannot be null or empty.", nameof(barFileReader._filename));
+            if (string.IsNullOrEmpty(barFileReader.Filename))
+                throw new ArgumentException("Value cannot be null or empty.", nameof(barFileReader.Filename));
             if (barEntry == null)
                 throw new ArgumentNullException(nameof(barEntry));
 
-            using (var fileStream = File.Open(barFileReader._filename, FileMode.Open, FileAccess.Read, FileShare.Read))
+            using (var fileStream = File.Open(barFileReader.Filename, FileMode.Open, FileAccess.Read, FileShare.Read))
             {
                 using (var binReader = new BinaryReader(fileStream))
                 {
