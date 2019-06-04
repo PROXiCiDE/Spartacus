@@ -6,7 +6,7 @@ namespace SpartacusUtils.Bar
 {
     public static class BarEntryExtension
     {
-        public static byte[] EntryToBytes(this BarFileReader barFileReader, BarEntry barEntry)
+        public static byte[] EntryToBytes(this BarFileReader barFileReader, BarFileEntry barEntry)
         {
             if (string.IsNullOrEmpty(barFileReader.Filename))
                 throw new ArgumentException("Value cannot be null or empty.", nameof(barFileReader.Filename));
@@ -29,7 +29,7 @@ namespace SpartacusUtils.Bar
                             if (read > barEntry.FileSize)
                             {
                                 totalread = barEntry.FileSize;
-                                final.Write(buffer, 0, barEntry.FileSize);
+                                final.Write(buffer, 0, (int) barEntry.FileSize);
                             }
                             else if (totalread + read <= barEntry.FileSize)
                             {

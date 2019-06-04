@@ -32,6 +32,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TestUnits", "TestUnits", "{
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ThirdPartyLibraries", "ThirdPartyLibraries", "{D4402D06-E6B6-4A78-A6B3-ABBD809C828B}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SQLite Assets", "SQLite Assets", "{40FE0F58-A0C3-4A3C-9359-DB2912EE9ED1}"
+	ProjectSection(SolutionItems) = preProject
+		SpartacusSchema.sql = SpartacusSchema.sql
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tables", "Tables", "{DDDF22B1-92CB-4102-85F6-CE46ACC85C8D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BarExplorer", "BarExplorer\BarExplorer.csproj", "{BD518338-175E-4DBE-814C-62EF893E6BE6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -70,6 +79,10 @@ Global
 		{A9EAC116-CB5F-42F3-9627-1B9F063A6F76}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A9EAC116-CB5F-42F3-9627-1B9F063A6F76}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A9EAC116-CB5F-42F3-9627-1B9F063A6F76}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BD518338-175E-4DBE-814C-62EF893E6BE6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD518338-175E-4DBE-814C-62EF893E6BE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD518338-175E-4DBE-814C-62EF893E6BE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD518338-175E-4DBE-814C-62EF893E6BE6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -81,6 +94,7 @@ Global
 		{35D25366-DF77-4A07-98FD-DCD6D3A84F43} = {970495B5-A1ED-4894-852C-24EBCD6C1E4A}
 		{164B9FF4-D17D-48B6-BD23-F9151A792394} = {71B0BB3B-21DB-412F-98AB-951AA31DD9AD}
 		{A9EAC116-CB5F-42F3-9627-1B9F063A6F76} = {71B0BB3B-21DB-412F-98AB-951AA31DD9AD}
+		{DDDF22B1-92CB-4102-85F6-CE46ACC85C8D} = {40FE0F58-A0C3-4A3C-9359-DB2912EE9ED1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {218981CB-8644-40A8-A631-1506F39FF55D}

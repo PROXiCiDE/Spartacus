@@ -60,14 +60,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bar\BarEntryExtension.cs" />
+    <Compile Include="Bar\BarFileEntry.cs" />
     <Compile Include="Bar\BarFileEnum.cs" />
+    <Compile Include="Bar\BarFileLastWriteTime.cs" />
     <Compile Include="Bar\BarFileReader.cs" />
+    <Compile Include="Bar\IBarFileEntry.cs" />
+    <Compile Include="Bar\IBarFileLastWriteTime.cs" />
     <Compile Include="ConfigManager\ConfigInfo.cs" />
     <Compile Include="ConfigManager\ConfigInfoPaths.cs" />
     <Compile Include="ConfigManager\IConfigInfo.cs" />
     <Compile Include="DDT\DdtImageBrush.cs" />
     <Compile Include="ErrorReporting\ErrorReport.cs" />
     <Compile Include="ErrorReporting\IErrorReport.cs" />
+    <Compile Include="Utilities\MiscExtensions.cs" />
     <Compile Include="Utilities\PathUtils.cs" />
     <Compile Include="Helpers\SafeHBitmapHandle.cs" />
     <Compile Include="Utilities\FileUtils.cs" />

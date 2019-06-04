@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -14,9 +13,18 @@ namespace SpartacusUtils.Bar
 {
     public class BarFileReader
     {
-        public readonly BarFile BarFile;
+        private readonly BarFile _barFile;
         public readonly string Filename;
+        private bool _readEntries;
+        private List<BarFileEntry> _barFileEntries;
 
+        public BarFileReader()
+        {
+        }
+
+        /// <summary>
+        /// </summary>
+        /// <param name="sourceFile"></param>
         public BarFileReader(string sourceFile)
         {
             if (string.IsNullOrEmpty(sourceFile))
@@ -28,56 +36,96 @@ namespace SpartacusUtils.Bar
             {
                 using (var reader = new BinaryReader(stream))
                 {
+                    BarFileEntries = new List<BarFileEntry>();
+
                     reader.BaseStream.Seek(0, SeekOrigin.Begin);
                     var barFileHeader = new BarFileHeader(reader);
                     reader.BaseStream.Seek(barFileHeader.FilesTableOffset, SeekOrigin.Begin);
-                    BarFile = new BarFile(reader);
+                    _barFile = new BarFile(reader);
                     Filename = sourceFile;
+
+                    EnsureDirectoryRead();
                 }
             }
         }
 
+        /// <summary>
+        /// </summary>
+        /// <param name="barFile"></param>
         public BarFileReader(BarFile barFile)
         {
-            BarFile = barFile;
+            _barFile = barFile;
+        }
+
+        public List<BarFileEntry> BarFileEntries
+        {
+            get => _barFileEntries;
+            set => _barFileEntries = value;
+        }
+
+        private void EnsureDirectoryRead()
+        {
+            if (_readEntries)
+                return;
+            _barFile.BarFileEntrys.ForEach(x => { BarFileEntries.Add(new BarFileEntry(x)); });
+            _readEntries = true;
         }
 
         /// <summary>
-        /// Find Many entries of a given pattern
+        ///     Get all entries inside a bar file
+        /// </summary>
+        /// <returns>IEnumeration of BarFileEntry</returns>
+        public IEnumerable<BarFileEntry> GetEntries()
+        {
+            return BarFileEntries;
+        }
+
+        /// <summary>
+        ///     Find Many entries of a given pattern
         /// </summary>
         /// <param name="pattern">Wildcard patterns are acceptable ? and *</param>
-        /// <returns>IEnumeration of BarEntry</returns>
-        public IEnumerable<BarEntry> FindEntries(string pattern)
+        /// <returns>IEnumeration of BarFileEntry</returns>
+        public IEnumerable<BarFileEntry> FindEntries(string pattern)
         {
             if (string.IsNullOrEmpty(pattern))
                 throw new ArgumentException("Value cannot be null or empty.", nameof(pattern));
 
-            return BarFile.BarFileEntrys.Where(x => Regex.IsMatch(x.FileName, pattern.ToWildCard()));
+            return GetEntries().Where(x => Regex.IsMatch(x.FileName, pattern.ToWildCard()));
         }
 
         /// <summary>
-        /// Get a entry from the bar file
-        /// Doesn't support Wildcard search
+        ///     Get a entry from the bar file
+        ///     Doesn't support Wildcard search
         /// </summary>
         /// <param name="sourceFile">Full path of the entry, search is case insensitive</param>
-        /// <returns>BarEntry</returns>
-        public BarEntry GetEntry(string sourceFile)
+        /// <returns>BarFileEntry</returns>
+        public BarFileEntry GetEntry(string sourceFile)
         {
-            return BarFile.BarFileEntrys.FirstOrDefault(x =>
+            var entries = GetEntries();
+            var barFileEntries = entries as BarFileEntry[] ?? entries.ToArray();
+
+            var result = barFileEntries.FirstOrDefault(x =>
                 x.FileName.Equals(sourceFile, StringComparison.OrdinalIgnoreCase));
+
+            //User may have checked for a valid XML file, Non XMB Format
+            //Recheck to see if XMB format exists
+            if (IsValidXmlExtension(sourceFile) && result == null)
+                return barFileEntries.FirstOrDefault(x =>
+                    x.FileName.Equals($"{sourceFile}.xmb", StringComparison.OrdinalIgnoreCase));
+
+            return result;
         }
 
         /// <summary>
-        /// Read an bar entry contents into an object of a T
+        ///     Read an bar entry contents into an object of a T
         /// </summary>
         /// <typeparam name="T">Object Type to Create</typeparam>
         /// <param name="entry">BarEntry</param>
         /// <returns>Object Type of T</returns>
-        public T ReadEntry<T>(BarEntry entry) where T : class
+        public T ReadEntry<T>(BarFileEntry entry) where T : class
         {
             if (entry == null) throw new ArgumentNullException(nameof(entry));
 
-            T results = default(T);
             var fileExt = PathUtils.GetExtensionWithoutDot(entry.FileName).ToLower();
             if (string.IsNullOrEmpty(fileExt))
                 return null;
@@ -85,20 +133,18 @@ namespace SpartacusUtils.Bar
             if (IsValidXmlExtension(fileExt))
             {
                 var contents = this.EntryToBytes(entry)?.EncodeXmlToString();
-                if (contents != null)
-                {
-                    return XmlUtils.DeserializeFromXml<T>(contents);
-                }
+                if (contents != null) return XmlUtils.DeserializeFromXml<T>(contents);
             }
             else if (fileExt == "ddt")
             {
             }
-            return null;
+
+            return default;
         }
 
         private bool IsValidXmlExtension(string fileExtension)
         {
-            var extList = new List<string>()
+            var extList = new List<string>
             {
                 "region",
                 "xml",
@@ -106,7 +152,7 @@ namespace SpartacusUtils.Bar
                 "dataset",
                 "character",
                 "tactics",
-                "SpawnerItem",
+                "spawneritem",
                 "blueprint",
                 "physics",
                 "shp",

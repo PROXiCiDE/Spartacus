@@ -62,5 +62,9 @@
       <Name>Spartacus.Utils</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Builder\Advisors\" />
+    <Folder Include="Builder\Milestones\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

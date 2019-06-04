@@ -1,11 +1,14 @@
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using NUnit.Framework;
 using ProjectCeleste.GameFiles.XMLParser;
 using ProjectCeleste.GameFiles.XMLParser.Enum;
 using SpartacusUtils.Bar;
 using SpartacusUtils.ConfigManager;
+using SpartacusUtils.Utilities;
 using SpartacusUtils.Xml.Language;
 
 namespace TestUnit
@@ -44,6 +47,16 @@ namespace TestUnit
             Debug.WriteLine(extList.Contains(ext));
         }
 
+        [Test]
+        public void TestPathSplit()
+        {
+            var path = @"\thisisareallylongname.xml.xmb";
+            //var path = @"d:\data\data2\data3\data5\thisisareallylongname.xml.xmb";
+            //Debug.WriteLine(GetLastParts(path, Path.DirectorySeparatorChar.ToString(), 2));
+            Debug.WriteLine(PathUtils.GetPathOnly(path));
+        }
+
+      
         [Test]
         public void ShowStringXmbs()
         {

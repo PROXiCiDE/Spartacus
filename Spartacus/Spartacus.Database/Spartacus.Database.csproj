@@ -48,6 +48,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DBModels\Advisors\Advisors.cs" />
+    <Compile Include="DBModels\Advisors\AdvisorsRepository.cs" />
+    <Compile Include="DBModels\Advisors\IAdvisorsRepository.cs" />
     <Compile Include="DBModels\Civilizations\Civilizations.cs" />
     <Compile Include="DBModels\Civilizations\CivilizationsRepository.cs" />
     <Compile Include="DBModels\Civilizations\ICivilizationsRepository.cs" />
