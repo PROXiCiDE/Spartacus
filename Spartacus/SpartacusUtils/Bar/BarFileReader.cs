@@ -90,7 +90,7 @@ namespace SpartacusUtils.Bar
             if (string.IsNullOrEmpty(pattern))
                 throw new ArgumentException("Value cannot be null or empty.", nameof(pattern));
 
-            return GetEntries().Where(x => Regex.IsMatch(x.FileName, pattern.ToWildCard()));
+            return GetEntries().Where(x => Regex.IsMatch(x.FullName, pattern.ToWildCard()));
         }
 
         /// <summary>
@@ -105,13 +105,13 @@ namespace SpartacusUtils.Bar
             var barFileEntries = entries as BarFileEntry[] ?? entries.ToArray();
 
             var result = barFileEntries.FirstOrDefault(x =>
-                x.FileName.Equals(sourceFile, StringComparison.OrdinalIgnoreCase));
+                x.FullName.Equals(sourceFile, StringComparison.OrdinalIgnoreCase));
 
             //User may have checked for a valid XML file, Non XMB Format
             //Recheck to see if XMB format exists
             if (IsValidXmlExtension(sourceFile) && result == null)
                 return barFileEntries.FirstOrDefault(x =>
-                    x.FileName.Equals($"{sourceFile}.xmb", StringComparison.OrdinalIgnoreCase));
+                    x.FullName.Equals($"{sourceFile}.xmb", StringComparison.OrdinalIgnoreCase));
 
             return result;
         }
@@ -126,7 +126,7 @@ namespace SpartacusUtils.Bar
         {
             if (entry == null) throw new ArgumentNullException(nameof(entry));
 
-            var fileExt = PathUtils.GetExtensionWithoutDot(entry.FileName).ToLower();
+            var fileExt = PathUtils.GetExtensionWithoutDot(entry.FullName).ToLower();
             if (string.IsNullOrEmpty(fileExt))
                 return null;
 
