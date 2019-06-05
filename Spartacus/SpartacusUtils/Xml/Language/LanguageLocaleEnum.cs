@@ -9,12 +9,4 @@
         Italian = 4,
         Chinese = 5
     }
-
-    public enum LanguageStringTableEnum
-    {
-        StringTableX = 0,
-        Econ = 1,
-        Equipment = 2,
-        Quest = 3
-    }
 }

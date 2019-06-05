@@ -72,15 +72,21 @@
     <Compile Include="DDT\DdtImageBrush.cs" />
     <Compile Include="ErrorReporting\ErrorReport.cs" />
     <Compile Include="ErrorReporting\IErrorReport.cs" />
-    <Compile Include="Utilities\MiscExtensions.cs" />
+    <Compile Include="Helpers\BinaryReaderExtension.cs" />
+    <Compile Include="Helpers\MiscExtensions.cs" />
     <Compile Include="Utilities\PathUtils.cs" />
     <Compile Include="Helpers\SafeHBitmapHandle.cs" />
     <Compile Include="Utilities\FileUtils.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Helpers\RegexExtension.cs" />
+    <Compile Include="AbstractFileSystem\AbstractFileSystem.cs" />
+    <Compile Include="Bar\BarFileSystem.cs" />
+    <Compile Include="AbstractFileSystem\IAbstractFileSystem.cs" />
     <Compile Include="Xml\Helpers\XmlHelpers.cs" />
-    <Compile Include="Xml\Language\LanguagesEnum.cs" />
+    <Compile Include="Xml\Language\LanguageReaderError.cs" />
+    <Compile Include="Xml\Language\LanguageLocaleEnum.cs" />
     <Compile Include="Xml\Language\LanguagesReader.cs" />
+    <Compile Include="Xml\Language\LanguageStringTableEnum.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Ionic.Zip.xml" />

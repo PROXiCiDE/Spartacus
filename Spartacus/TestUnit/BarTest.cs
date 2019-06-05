@@ -28,7 +28,7 @@ namespace TestUnit
         [Test]
         public void TestReadEntry()
         {
-            var barfile = new BarFileReader(Path.Combine(_gamePath, @"data\data.bar"));
+            var barfile = new BarFileSystem(Path.Combine(_gamePath, @"data\data.bar"));
             var entry = barfile.FindEntries(@"ai\C01\Thracian\*.character").First();
             var character = barfile.ReadEntry<AiCharacterXml>(entry);
             Debug.WriteLine(character.CivId);
@@ -40,7 +40,7 @@ namespace TestUnit
             var extsUsed = new List<string>();
             foreach (var bar in Directory.GetFiles(_gamePath, "*.bar", SearchOption.AllDirectories))
             {
-                var barFile = new BarFileReader(bar);
+                var barFile = new BarFileSystem(bar);
                 barFile.FindEntries("*").Any(x =>
                 {
                     extsUsed.Add(Path.GetExtension(x.FileName));

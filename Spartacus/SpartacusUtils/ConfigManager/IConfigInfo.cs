@@ -12,7 +12,7 @@ namespace SpartacusUtils.ConfigManager
         TechTreeXml TechTree { get; set; }
 
         ConfigInfoPaths Paths { get; set; }
-        Dictionary<BarFileEnum, BarFileReader> BarFileReaders { get; set; }
+        Dictionary<BarFileEnum, BarFileSystem> BarFileReaders { get; set; }
 
         LanguagesXml Languages { get; set; }
     }

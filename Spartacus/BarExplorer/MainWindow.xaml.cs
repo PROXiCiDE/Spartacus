@@ -5,10 +5,11 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Data;
-using BarExplorer.Annotations;
+using BarExplorer.Properties;
 using Microsoft.Win32;
 using ProjectCeleste.GameFiles.Tools.Bar;
 using SpartacusUtils.Bar;
+using SpartacusUtils.Helpers;
 using SpartacusUtils.Utilities;
 
 namespace BarExplorer

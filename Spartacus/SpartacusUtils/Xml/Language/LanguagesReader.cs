@@ -9,31 +9,15 @@ using SpartacusUtils.Xml.Helpers;
 
 namespace SpartacusUtils.Xml.Language
 {
-    public class LanguageReaderError
-    {
-        public LanguageReaderError(string fileName, string id, string exception)
-        {
-            FileName = fileName;
-            Id = id;
-            Exception = exception;
-        }
-
-        public string Id { get; set; }
-        public string FileName { get; set; }
-        public string Exception { get; set; }
-    }
-
     public static class LanguagesReader
     {
-        public static StringTableXml FromBarEntry(this BarFileReader barFileReader, string langFile)
+        public static StringTableXml FromBarEntry(this BarFileSystem barFileReader, string langFile)
         {
             var entry = barFileReader.GetEntry($"{langFile}.xmb");
             if (entry != null)
             {
-                var fileContents = barFileReader.EntryToBytes(entry).EncodeXmlToString();
-                if (fileContents == null) return null;
-
-                var languageXml = XmlUtils.DeserializeFromXml<StringTableXml>(fileContents);
+                var languageXml = barFileReader.ReadEntry<StringTableXml>(entry);
+                if (languageXml == null) return null;
 
                 var filename = Path.GetFileNameWithoutExtension(langFile)?.ToLower();
                 if (string.IsNullOrEmpty(filename))
@@ -65,7 +49,7 @@ namespace SpartacusUtils.Xml.Language
             return null;
         }
 
-        public static LanguagesXml FromBarFile(BarFileReader barFileReader,
+        public static LanguagesXml FromBarFile(BarFileSystem barFileReader,
             out List<LanguageReaderError> languageReaderErrors, bool isDebug = false)
         {
             var listFile = new List<string>

@@ -5,12 +5,25 @@ namespace SpartacusUtils.Bar
 {
     public class BarFileEntry : IBarFileEntry
     {
+        public BarFileEntry(bool isLocalFile, string fileName, string fullName, long fileSize,
+            long offset, BarFileLastWriteTime lastWriteTime)
+        {
+            IsLocalFile = isLocalFile;
+            FileName = fileName;
+            FullName = fullName;
+            FileSize = fileSize;
+            FileSize2 = FileSize;
+            Offset = offset;
+            LastWriteTime = lastWriteTime;
+        }
+
         public BarFileEntry()
         {
         }
 
         public BarFileEntry(BarFileEntry entry)
         {
+            IsLocalFile = entry.IsLocalFile;
             FullName = entry.FileName;
             FileName = Path.GetFileName(entry.FileName);
             FileSize = entry.FileSize;
@@ -21,6 +34,7 @@ namespace SpartacusUtils.Bar
 
         public BarFileEntry(BarEntry entry)
         {
+            IsLocalFile = false;
             FileName = Path.GetFileName(entry.FileName);
             FullName = entry.FileName;
             FileSize = entry.FileSize;
@@ -29,16 +43,19 @@ namespace SpartacusUtils.Bar
             LastWriteTime = new BarFileLastWriteTime(entry.LastWriteTime);
         }
 
-        public BarFileEntry(string fileName, long fileSize, long fileSize2, long offset, BarFileLastWriteTime lastWriteTime)
+        public BarFileEntry(string fileName, long fileSize, long offset,
+            BarFileLastWriteTime lastWriteTime)
         {
+            IsLocalFile = false;
             FullName = fileName;
             FileName = Path.GetFileName(fileName);
             FileSize = fileSize;
-            FileSize2 = fileSize2;
+            FileSize2 = fileSize;
             Offset = offset;
             LastWriteTime = lastWriteTime;
         }
 
+        public bool IsLocalFile { get; set; }
         public string FileName { get; set; }
         public string FullName { get; set; }
 

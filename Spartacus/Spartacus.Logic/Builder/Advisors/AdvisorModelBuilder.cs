@@ -6,17 +6,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Spartacus.Database.DBModels.StringTableLocations;
+using SpartacusUtils.Helpers;
 using SpartacusUtils.Utilities;
 
 namespace Spartacus.Logic.Builder.Advisors
 {
-    public class AdvisorModelBuilder
+    public class AdvisorModelBuilder : IModelBuilder<AdvisorsModel, AdvisorsRepository>
     {
-        public List<AdvisorsModel> BuildFromBar(BarFileReader barFileReader)
+        public List<AdvisorsModel> FromBar(BarFileSystem barFileReader)
         {
             var models = new List<AdvisorsModel>();
 
-            var entry = barFileReader.GetEntry(@"advisors.xml");
+            var entry = barFileReader.GetEntry(StringResource.XmlFile_Advisors);
             if(entry != null)
             {
                 var xmlClass = barFileReader.ReadEntry<EconAdvisorsXml>(entry);
@@ -37,6 +39,11 @@ namespace Spartacus.Logic.Builder.Advisors
                 });
             }
             return models;
+        }
+
+        public List<AdvisorsModel> FromRepository(AdvisorsRepository repository)
+        {
+            throw new NotImplementedException();
         }
     }
 }

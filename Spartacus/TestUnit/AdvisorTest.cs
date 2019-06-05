@@ -22,10 +22,10 @@ namespace TestUnit
         [Test]
         public void LoadAdvisor()
         {
-            var dataBar = new BarFileReader(@"G:\Age of Empires Online\Data2\data.bar");
+            var dataBar = new BarFileSystem(@"G:\Age of Empires Online\Data2\data.bar");
 
             AdvisorModelBuilder modelBuilder = new AdvisorModelBuilder();
-            var models = modelBuilder.BuildFromBar(dataBar);
+            var models = modelBuilder.FromBar(dataBar);
             foreach (var advisor in models.Where(x=>x.Civid == (long) CivilizationEnum.Norse))
             {
                 Debug.WriteLine(advisor);

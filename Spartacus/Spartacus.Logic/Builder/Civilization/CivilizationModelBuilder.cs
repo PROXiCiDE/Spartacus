@@ -5,27 +5,25 @@ using ProjectCeleste.GameFiles.XMLParser;
 using ProjectCeleste.GameFiles.XMLParser.Helpers;
 using Spartacus.Database.DBModels.Civilizations;
 using SpartacusUtils.Bar;
+using SpartacusUtils.Helpers;
 using SpartacusUtils.Utilities;
 using SpartacusUtils.Xml.Helpers;
 
 namespace Spartacus.Logic.Builder.Civilization
 {
-    public class CivilizationModelBuilder
+    public class CivilizationModelBuilder : IModelBuilder<CivilizationsModel, CivilizationsRepository>
     {
-        public List<CivilizationsModel> BuildFromBar(BarFileReader barFileReader)
+        public List<CivilizationsModel> FromBar(BarFileSystem barFileReader)
         {
-            var findEntries = barFileReader.FindEntries(@"civilizations\*.xmb");
+            var findEntries = barFileReader.FindEntries(StringResource.XmlFile_CivilizationPattern);
 
             var models = new List<CivilizationsModel>();
 
             findEntries.ForEach(findEntry =>
             {
-                var fileContents = barFileReader.EntryToBytes(findEntry);
-                var xmlFile = fileContents.EncodeXmlToString();
-                if (xmlFile != null)
+                var xmlClass = barFileReader.ReadEntry<CivilizationXml>(findEntry);
+                if (xmlClass != null)
                 {
-                    var xmlClass = XmlUtils.DeserializeFromXml<CivilizationXml>(xmlFile);
-
                     if (int.TryParse(xmlClass.Displaynameid, out var displayNameId) &&
                         int.TryParse(xmlClass.Rollovernameid, out var rollOverId))
                         if (int.TryParse(xmlClass.Ui.Storehousetechid, out var storageTechId))
@@ -61,6 +59,11 @@ namespace Spartacus.Logic.Builder.Civilization
             });
 
             return models;
+        }
+
+        public List<CivilizationsModel> FromRepository(CivilizationsRepository repository)
+        {
+            throw new NotImplementedException();
         }
     }
 }

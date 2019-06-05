@@ -16,8 +16,8 @@ namespace SpartacusUtils.ConfigManager
             LoadConfig(gamePath);
         }
 
-        public Dictionary<BarFileEnum, BarFileReader> BarFileReaders { get; set; } =
-            new Dictionary<BarFileEnum, BarFileReader>();
+        public Dictionary<BarFileEnum, BarFileSystem> BarFileReaders { get; set; } =
+            new Dictionary<BarFileEnum, BarFileSystem>();
 
         public LanguagesXml Languages { get; set; }
 
@@ -45,7 +45,7 @@ namespace SpartacusUtils.ConfigManager
 
         private void LoadLanguage()
         {
-            Languages = LanguagesReader.FromBarFile(BarFileReaders[BarFileEnum.Data], out var errors);
+            //Languages = LanguagesReader.FromBarFile(BarFileReaders[BarFileEnum.Data], out var errors);
         }
 
         private void ConfigVariables(string gamePath = null)
@@ -56,8 +56,8 @@ namespace SpartacusUtils.ConfigManager
             Paths = new ConfigInfoPaths(gamePath);
 
             //BarFileReader Enums
-            BarFileReaders.Add(BarFileEnum.Data, new BarFileReader(Path.Combine(Paths.Data, "Data.bar")));
-            BarFileReaders.Add(BarFileEnum.ArtUI, new BarFileReader(Path.Combine(Paths.Art, "ArtUI.bar")));
+            BarFileReaders.Add(BarFileEnum.Data, new BarFileSystem(Path.Combine(Paths.Data, "Data.bar")));
+            BarFileReaders.Add(BarFileEnum.ArtUI, new BarFileSystem(Path.Combine(Paths.Art, "ArtUI.bar")));
 
             DataBarPath = ConfigurationManager.AppSettings["Data_Bar"];
             if (string.IsNullOrEmpty(DataBarPath))
