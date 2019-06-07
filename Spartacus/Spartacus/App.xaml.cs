@@ -1,7 +1,4 @@
-﻿using System.Configuration;
-using System.Diagnostics;
-using System.Windows;
-using SpartacusUtils.ConfigManager;
+﻿using System.Windows;
 
 namespace Spartacus
 {

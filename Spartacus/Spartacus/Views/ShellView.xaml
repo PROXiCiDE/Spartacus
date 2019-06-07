@@ -23,7 +23,8 @@
         </Grid.RowDefinitions>
         <Grid Row="0">
             <materialDesign:DialogHost Identifier="dialogHost">
-                <materialDesign:DrawerHost IsLeftDrawerOpen="{Binding Path=IsNavigationDrawerOpen, ElementName=appBar}" LeftDrawerBackground="{DynamicResource MaterialDesignBackground}">
+                <materialDesign:DrawerHost IsLeftDrawerOpen="{Binding Path=IsNavigationDrawerOpen, ElementName=appBar}"
+                                           LeftDrawerBackground="{DynamicResource MaterialDesignBackground}">
                     <materialDesign:DrawerHost.LeftDrawerContent>
                         <ListBox
                             Width="280"

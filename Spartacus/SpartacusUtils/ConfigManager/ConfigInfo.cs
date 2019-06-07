@@ -5,7 +5,6 @@ using System.Diagnostics;
 using System.IO;
 using ProjectCeleste.GameFiles.XMLParser;
 using SpartacusUtils.Bar;
-using SpartacusUtils.Xml.Language;
 
 namespace SpartacusUtils.ConfigManager
 {

@@ -19,13 +19,12 @@ using Spartacus.ViewModels.Quest;
 namespace Spartacus.ViewModels
 {
     [Export(typeof(IShell))]
-    public class ShellViewModel : Conductor<IScreen>.Collection.OneActive, IHaveDisplayName, IShell, IHandle<MessageQueue>
+    public class ShellViewModel : Conductor<IScreen>.Collection.OneActive, IHaveDisplayName, IShell,
+        IHandle<MessageQueue>
     {
         public const string DialogHostName = "dialogHost";
         private ProgressBarStatus _barStatus;
         private SnackbarMessageQueue _myMessageQueue;
-
-        public override string DisplayName { get; set; } = "Spartacus";
 
         [ImportingConstructor]
         public ShellViewModel(IWindowManager windowManager, IEventAggregator eventAggregator)
@@ -165,6 +164,8 @@ namespace Spartacus.ViewModels
         }
 
         #endregion
+
+        public override string DisplayName { get; set; } = "Spartacus";
 
         #region Control Events
 

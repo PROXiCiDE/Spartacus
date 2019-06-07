@@ -1,11 +1,8 @@
-﻿using System.Collections.ObjectModel;
-using System.ComponentModel.Composition;
-using System.Diagnostics;
+﻿using System.ComponentModel.Composition;
 using Caliburn.Micro;
 using ProjectCeleste.GameFiles.XMLParser;
 using Spartacus.Common;
 using Spartacus.Common.MessageQueue;
-using SpartacusUtils.ConfigManager;
 
 namespace Spartacus.ViewModels.AiCharacter
 {

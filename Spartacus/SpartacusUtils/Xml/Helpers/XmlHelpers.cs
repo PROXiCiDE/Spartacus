@@ -1,5 +1,4 @@
-﻿using System;
-using System.Text;
+﻿using System.Text;
 using ProjectCeleste.GameFiles.Tools.Xmb;
 
 namespace SpartacusUtils.Xml.Helpers
@@ -12,9 +11,9 @@ namespace SpartacusUtils.Xml.Helpers
             {
                 if (bytes[0] == 0x58 && bytes[1] == 0x31)
                     return Encoding.UTF8.GetString(XmbFileUtils.XmbToXml(bytes));
-                else
-                    return Encoding.UTF8.GetString(bytes);
+                return Encoding.UTF8.GetString(bytes);
             }
+
             return null;
         }
     }

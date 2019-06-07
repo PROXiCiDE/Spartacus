@@ -28,7 +28,7 @@ namespace SpartacusUtils.Bar
             Hour = lastWriteTime.Hour;
             Minute = lastWriteTime.Minute;
             Second = lastWriteTime.Second;
-            Milliseconds = lastWriteTime.Msecond;
+            Milliseconds = lastWriteTime.Milliseconds;
             Year = lastWriteTime.Year;
             Month = lastWriteTime.Month;
             Day = lastWriteTime.Day;
@@ -46,7 +46,7 @@ namespace SpartacusUtils.Bar
             set
             {
                 if (value < 2002)
-                    _year = (short)DateTime.Today.Year;
+                    _year = (short) DateTime.Today.Year;
                 else if (value >= 2100)
                     _year = 2100;
                 else

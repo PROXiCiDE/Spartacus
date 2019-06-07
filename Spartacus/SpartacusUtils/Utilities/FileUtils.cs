@@ -1,7 +1,4 @@
-﻿using System;
-using System.IO;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
+﻿using System.IO;
 using SpartacusUtils.Helpers;
 
 namespace SpartacusUtils.Utilities
@@ -9,7 +6,7 @@ namespace SpartacusUtils.Utilities
     public static class FileUtils
     {
         /// <summary>
-        /// Generic XML File Checker,by default it takes the first 50 bytes
+        ///     Generic XML File Checker,by default it takes the first 50 bytes
         /// </summary>
         /// <param name="filename"></param>
         /// <param name="readCount"></param>
@@ -33,6 +30,7 @@ namespace SpartacusUtils.Utilities
                         return true;
                 }
             }
+
             return false;
         }
     }

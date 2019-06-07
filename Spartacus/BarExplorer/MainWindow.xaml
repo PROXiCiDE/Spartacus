@@ -79,6 +79,10 @@
                         Header="FileName" />
                     <DataGridTextColumn
                         Width="Auto"
+                        Binding="{Binding FullName}"
+                        Header="FullName" />
+                    <DataGridTextColumn
+                        Width="Auto"
                         Binding="{Binding FileSize}"
                         Header="FileSize" />
                     <DataGridTextColumn

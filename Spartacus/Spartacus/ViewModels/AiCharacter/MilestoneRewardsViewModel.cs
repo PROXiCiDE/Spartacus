@@ -1,17 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.Composition;
-using System.Configuration;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.Composition;
 using System.Windows;
-using System.Windows.Interop;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using Caliburn.Micro;
-using ProjectCeleste.GameFiles.Tools.Ddt;
 using Spartacus.Common;
 using Spartacus.Common.MessageQueue;
 using SpartacusUtils.Bar;
@@ -22,9 +12,22 @@ namespace Spartacus.ViewModels.AiCharacter
     [Export(typeof(MilestoneRewardsViewModel))]
     public class MilestoneRewardsViewModel : BasicViewModel, IHandle<CharacterMessageQueue>
     {
-        private ImageBrush _backgroundImage;
         private Size _backgroundDimensions;
-        private DdtImageBrush _ddtimage;
+        private ImageBrush _backgroundImage;
+        private readonly DdtImageBrush _ddtimage;
+
+        [ImportingConstructor]
+        public MilestoneRewardsViewModel()
+        {
+            var dataBar = _configInfo.BarFileReaders[BarFileEnum.ArtUI];
+            var entry = dataBar.GetEntry(@"UserInterface\CapitalTech\Milestones\MilestoneTechBackground.ddt");
+            if (entry != null)
+            {
+                _ddtimage = new DdtImageBrush(dataBar, entry);
+                BackgroundDimensions = new Size(_ddtimage.ImageSize.Width, _ddtimage.ImageSize.Height);
+                BackgroundImage = _ddtimage.Brush;
+            }
+        }
 
         public ImageBrush BackgroundImage
         {
@@ -43,19 +46,6 @@ namespace Spartacus.ViewModels.AiCharacter
             {
                 _backgroundDimensions = value;
                 NotifyOfPropertyChange(nameof(BackgroundDimensions));
-            }
-        }
-
-        [ImportingConstructor]
-        public MilestoneRewardsViewModel()
-        {
-            var dataBar = _configInfo.BarFileReaders[BarFileEnum.ArtUI];
-            var entry = dataBar.GetEntry(@"UserInterface\CapitalTech\Milestones\MilestoneTechBackground.ddt");
-            if (entry != null)
-            {
-                _ddtimage = new DdtImageBrush(dataBar, entry);
-                BackgroundDimensions = new Size(_ddtimage.ImageSize.Width, _ddtimage.ImageSize.Height);
-                BackgroundImage = _ddtimage.Brush;
             }
         }
 

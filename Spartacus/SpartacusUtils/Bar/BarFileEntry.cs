@@ -1,14 +1,16 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using ProjectCeleste.GameFiles.Tools.Bar;
+using SpartacusUtils.AbstractFileSystem;
 
 namespace SpartacusUtils.Bar
 {
-    public class BarFileEntry : IBarFileEntry
+    public sealed class BarFileEntry : AbstractFileEntry, IBarFileEntry
     {
-        public BarFileEntry(bool isLocalFile, string fileName, string fullName, long fileSize,
-            long offset, BarFileLastWriteTime lastWriteTime)
+        public BarFileEntry(bool isArchivedFile, string fileName, string fullName, long fileSize,
+            long offset, DateTime lastWriteTime)
         {
-            IsLocalFile = isLocalFile;
+            IsArchivedFile = isArchivedFile;
             FileName = fileName;
             FullName = fullName;
             FileSize = fileSize;
@@ -23,30 +25,32 @@ namespace SpartacusUtils.Bar
 
         public BarFileEntry(BarFileEntry entry)
         {
-            IsLocalFile = entry.IsLocalFile;
-            FullName = entry.FileName;
-            FileName = Path.GetFileName(entry.FileName);
+            FullName = entry.FullName;
+            FileName = entry.FileName;
             FileSize = entry.FileSize;
             FileSize2 = entry.FileSize2;
             Offset = entry.Offset;
             LastWriteTime = entry.LastWriteTime;
+
+            IsArchivedFile = entry.IsArchivedFile;
         }
 
         public BarFileEntry(BarEntry entry)
         {
-            IsLocalFile = false;
             FileName = Path.GetFileName(entry.FileName);
             FullName = entry.FileName;
             FileSize = entry.FileSize;
             FileSize2 = entry.FileSize2;
             Offset = entry.Offset;
-            LastWriteTime = new BarFileLastWriteTime(entry.LastWriteTime);
+            LastWriteTime = entry.LastWriteTime.GetDateTime();
+
+            //Always Local File
+            IsArchivedFile = true;
         }
 
         public BarFileEntry(string fileName, long fileSize, long offset,
-            BarFileLastWriteTime lastWriteTime)
+            DateTime lastWriteTime)
         {
-            IsLocalFile = false;
             FullName = fileName;
             FileName = Path.GetFileName(fileName);
             FileSize = fileSize;
@@ -55,13 +59,68 @@ namespace SpartacusUtils.Bar
             LastWriteTime = lastWriteTime;
         }
 
-        public bool IsLocalFile { get; set; }
-        public string FileName { get; set; }
-        public string FullName { get; set; }
 
-        public long FileSize { get; set; }
-        public long FileSize2 { get; set; }
+        public bool IsArchivedFile { get; set; }
+        public string FileName { get; set; }
+        public bool IsPhysicalFile { get; set; }
         public long Offset { get; set; }
-        public BarFileLastWriteTime LastWriteTime { get; set; }
+        public long FileSize2 { get; set; }
+
+        public override string FullName { get; set; }
+        public override long FileSize { get; set; }
+
+        public override DateTime? LastWriteTime { get; set; }
+
+        #region Not Implemented
+
+        public override long? CompressedSize
+        {
+            get => null;
+            set => throw new NotImplementedException();
+        }
+
+        public override DateTime? CreationTime
+        {
+            get => null;
+            set => throw new NotImplementedException();
+        }
+
+        public override DateTime? LastAccessedTime
+        {
+            get => null;
+            set => throw new NotImplementedException();
+        }
+
+        public override DateTime? ArchivedTime
+        {
+            get => null;
+            set => throw new NotImplementedException();
+        }
+
+        public override bool? IsDirectory
+        {
+            get => null;
+            set => throw new NotImplementedException();
+        }
+
+        public override bool? IsCompressed
+        {
+            get => null;
+            set => throw new NotImplementedException();
+        }
+
+        public override bool? IsEncrypted
+        {
+            get => null;
+            set => throw new NotImplementedException();
+        }
+
+        public override long? CrcChecksum
+        {
+            get => null;
+            set => throw new NotImplementedException();
+        }
+
+        #endregion
     }
 }

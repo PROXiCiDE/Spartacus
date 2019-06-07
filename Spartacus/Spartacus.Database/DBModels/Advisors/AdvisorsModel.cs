@@ -2,7 +2,8 @@
 {
     public class AdvisorsModel
     {
-        public AdvisorsModel(string name, long civid, long age, string icon, long rarirty, long rollverTextId, long displayDescriptionId, long displayNameId, long minLevel, long itemLevel, string techId)
+        public AdvisorsModel(string name, long civid, long age, string icon, long rarirty, long rollverTextId,
+            long displayDescriptionId, long displayNameId, long minLevel, long itemLevel, string techId)
         {
             Name = name;
             Civid = civid;
@@ -31,8 +32,8 @@
 
         public override string ToString()
         {
-            return $"{nameof(Name)}: {Name}, {nameof(Civid)}: {Civid}, {nameof(Age)}: {Age}, {nameof(Icon)}: {Icon}, {nameof(Rarirty)}: {Rarirty}, {nameof(RollverTextId)}: {RollverTextId}, {nameof(DisplayDescriptionId)}: {DisplayDescriptionId}, {nameof(DisplayNameId)}: {DisplayNameId}, {nameof(MinLevel)}: {MinLevel}, {nameof(ItemLevel)}: {ItemLevel}, {nameof(TechId)}: {TechId}";
+            return
+                $"{nameof(Name)}: {Name}, {nameof(Civid)}: {Civid}, {nameof(Age)}: {Age}, {nameof(Icon)}: {Icon}, {nameof(Rarirty)}: {Rarirty}, {nameof(RollverTextId)}: {RollverTextId}, {nameof(DisplayDescriptionId)}: {DisplayDescriptionId}, {nameof(DisplayNameId)}: {DisplayNameId}, {nameof(MinLevel)}: {MinLevel}, {nameof(ItemLevel)}: {ItemLevel}, {nameof(TechId)}: {TechId}";
         }
     }
-
 }

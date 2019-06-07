@@ -33,7 +33,8 @@
                                     Orientation="Vertical"
                                     TextBlock.Foreground="{DynamicResource MaterialDesignBody}">
 
-                                    <TextBlock Text="This the developer tool option which doesn't work with offline-play" />
+                                    <TextBlock
+                                        Text="This the developer tool option which doesn't work with offline-play" />
                                 </StackPanel>
                             </Expander>
                         </StackPanel>

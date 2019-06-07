@@ -28,7 +28,8 @@
                 BasedOn="{StaticResource MaterialDesignFloatingHintComboBox}"
                 TargetType="ComboBox">
                 <Setter Property="Margin" Value="0,8" />
-                <Setter Property="MinWidth" Value="{Binding ActualWidth, RelativeSource={RelativeSource Self}, Converter={StaticResource ResizeControlConverter}}" />
+                <Setter Property="MinWidth"
+                        Value="{Binding ActualWidth, RelativeSource={RelativeSource Self}, Converter={StaticResource ResizeControlConverter}}" />
             </Style>
 
             <Style TargetType="{x:Type materialDesign:Card}">

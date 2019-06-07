@@ -1,18 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Caliburn.Micro;
+﻿using Caliburn.Micro;
 using SpartacusUtils.ConfigManager;
 
 namespace Spartacus.Common
 {
     public class BasicViewModel : Screen, IWikiDocumentation
     {
-        internal readonly IWindowManager _windowManager;
-        internal readonly IEventAggregator _eventAggregator;
         internal readonly IConfigInfo _configInfo;
+        internal readonly IEventAggregator _eventAggregator;
+        internal readonly IWindowManager _windowManager;
 
         public BasicViewModel(IWindowManager windowManager, IEventAggregator eventAggregator)
         {
@@ -27,6 +22,8 @@ namespace Spartacus.Common
             _configInfo = IoC.Get<IConfigInfo>();
         }
 
+        public string WikiUrl { get; set; } = "https://github.com/PROXiCiDE/Spartacus/wiki";
+
         protected override void OnActivate()
         {
             _eventAggregator.Subscribe(this);
@@ -38,7 +35,5 @@ namespace Spartacus.Common
             _eventAggregator.Unsubscribe(this);
             base.OnDeactivate(close);
         }
-
-        public string WikiUrl { get; set; } = "https://github.com/PROXiCiDE/Spartacus/wiki";
     }
 }

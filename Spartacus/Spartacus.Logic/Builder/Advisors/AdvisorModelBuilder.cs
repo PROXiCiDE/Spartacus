@@ -1,14 +1,9 @@
-﻿using ProjectCeleste.GameFiles.XMLParser;
+﻿using System;
+using System.Collections.Generic;
+using ProjectCeleste.GameFiles.XMLParser;
 using Spartacus.Database.DBModels.Advisors;
 using SpartacusUtils.Bar;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Spartacus.Database.DBModels.StringTableLocations;
 using SpartacusUtils.Helpers;
-using SpartacusUtils.Utilities;
 
 namespace Spartacus.Logic.Builder.Advisors
 {
@@ -19,7 +14,7 @@ namespace Spartacus.Logic.Builder.Advisors
             var models = new List<AdvisorsModel>();
 
             var entry = barFileReader.GetEntry(StringResource.XmlFile_Advisors);
-            if(entry != null)
+            if (entry != null)
             {
                 var xmlClass = barFileReader.ReadEntry<EconAdvisorsXml>(entry);
 
@@ -30,14 +25,15 @@ namespace Spartacus.Logic.Builder.Advisors
                         rolloverTextId = rolloverTemp;
 
                     models.Add(new AdvisorsModel(
-                        x.Name,(long) x.Civilization,x.Age,
-                        x.Icon,(long) x.Rarity, rolloverTextId,
+                        x.Name, (long) x.Civilization, x.Age,
+                        x.Icon, (long) x.Rarity, rolloverTextId,
                         x.DisplayDescriptionId,
-                        x.DisplayNameId,x.Minlevel,x.ItemLevel,
+                        x.DisplayNameId, x.Minlevel, x.ItemLevel,
                         x.Techs.Tech
                     ));
                 });
             }
+
             return models;
         }
 

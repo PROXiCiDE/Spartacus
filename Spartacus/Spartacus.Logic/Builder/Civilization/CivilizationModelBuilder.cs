@@ -2,12 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using ProjectCeleste.GameFiles.XMLParser;
-using ProjectCeleste.GameFiles.XMLParser.Helpers;
 using Spartacus.Database.DBModels.Civilizations;
 using SpartacusUtils.Bar;
 using SpartacusUtils.Helpers;
-using SpartacusUtils.Utilities;
-using SpartacusUtils.Xml.Helpers;
 
 namespace Spartacus.Logic.Builder.Civilization
 {
@@ -23,7 +20,6 @@ namespace Spartacus.Logic.Builder.Civilization
             {
                 var xmlClass = barFileReader.ReadEntry<CivilizationXml>(findEntry);
                 if (xmlClass != null)
-                {
                     if (int.TryParse(xmlClass.Displaynameid, out var displayNameId) &&
                         int.TryParse(xmlClass.Rollovernameid, out var rollOverId))
                         if (int.TryParse(xmlClass.Ui.Storehousetechid, out var storageTechId))
@@ -43,7 +39,7 @@ namespace Spartacus.Logic.Builder.Civilization
 
                             models.Add(
                                 new CivilizationsModel(
-                                    (long)xmlClass.Civid,
+                                    (long) xmlClass.Civid,
                                     displayNameId,
                                     rollOverId,
                                     xmlClass.Ui.Shieldtexture,
@@ -55,7 +51,6 @@ namespace Spartacus.Logic.Builder.Civilization
                             throw new Exception(
                                 "CivilizationXml : Element 'DisplayName' in-explicit conversion of Integer");
                         }
-                }
             });
 
             return models;

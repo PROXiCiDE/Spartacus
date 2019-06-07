@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
+using ProjectCeleste.GameFiles.Tools.Bar;
 using ProjectCeleste.GameFiles.XMLParser.Helpers;
 using SpartacusUtils.AbstractFileSystem;
 using SpartacusUtils.Helpers;
@@ -11,12 +12,8 @@ using SpartacusUtils.Xml.Helpers;
 
 namespace SpartacusUtils.Bar
 {
-    public class BarFileSystem : AbstractFileSystem<BarFileReader, BarFileEntry>
+    public class BarFileSystem : AbstractFileSystem<BarFileEntry>
     {
-        public BarFileSystem(BarFileReader archiveReader) : base(archiveReader)
-        {
-        }
-
         public BarFileSystem(string sourceFile) : this()
         {
             Open(sourceFile);
@@ -26,72 +23,96 @@ namespace SpartacusUtils.Bar
         {
         }
 
+        public bool UsePhysicalFileFirst { get; set; } = false;
+
+        public BarFile ArchiveReader { get; set; }
+
+        public string Root { get; set; }
+
+        public uint NumberOfFiles { get; set; }
+
+        public string FileName { get; set; }
+
         public new bool Open(string sourceFile)
         {
             if (!File.Exists(sourceFile))
                 return false;
 
-            ArchiveReader = new BarFileReader(sourceFile);
-            ArchiveEntries = ArchiveReader.BarFileEntries;
+            if (string.IsNullOrEmpty(sourceFile))
+                throw new ArgumentException("Value cannot be null or empty.", nameof(sourceFile));
+            if (!File.Exists(sourceFile))
+                throw new FileNotFoundException($"File '{sourceFile}' does not exist.", sourceFile);
+
+            using (var stream = File.Open(sourceFile, FileMode.Open, FileAccess.Read, FileShare.Read))
+            {
+                using (var reader = new BinaryReader(stream))
+                {
+                    ArchiveEntries = new List<BarFileEntry>();
+
+                    reader.BaseStream.Seek(0, SeekOrigin.Begin);
+                    var barFileHeader = new BarFileHeader(reader);
+                    reader.BaseStream.Seek(barFileHeader.FilesTableOffset, SeekOrigin.Begin);
+                    ArchiveReader = new BarFile(reader);
+
+                    ArchiveReader.BarFileEntrys.ForEach(x => { ArchiveEntries.Add(new BarFileEntry(x)); });
+
+                    FileName = sourceFile;
+                    Root = ArchiveReader.RootPath;
+                    NumberOfFiles = ArchiveReader.NumberOfRootFiles;
+                }
+            }
+
             return ArchiveReader != null;
         }
 
         /// <summary>
-        ///     Single file search doesn't support wildcard patterns
         /// </summary>
-        /// <param name="sourceFile">
-        ///     Case insensitive, If sourceFile == file.xml then it will also search for file.xml.xmb the first result isn't found.
-        ///     Must be full path as it is in the entry table
-        /// </param>
-        /// <returns>BarFileEntry</returns>
+        /// <param name="sourceFile"></param>
+        /// <returns></returns>
         public new BarFileEntry GetEntry(string sourceFile)
         {
             var entries = ArchiveEntries;
+
+            //Prevent multiple enumerations
             var barFileEntries = entries as BarFileEntry[] ?? entries.ToArray();
 
             var result = barFileEntries.FirstOrDefault(x =>
-                x.FullName.Equals(sourceFile, StringComparison.OrdinalIgnoreCase));
+                CompareFileNames(sourceFile, x));
 
             //User may have checked for a valid XML file, Non XMB Format
             //Recheck to see if XMB format exists
             if (IsValidXmlExtension(sourceFile) && result == null)
                 return barFileEntries.FirstOrDefault(x =>
-                    x.FullName.Equals($"{sourceFile}.xmb", StringComparison.OrdinalIgnoreCase));
+                    CompareFileNames($"{sourceFile}.xmb", x));
 
             return result;
         }
 
         /// <summary>
-        ///     Read an bar entry contents into an object of a T
         /// </summary>
-        /// <typeparam name="T">Object Type to Create</typeparam>
-        /// <param name="entry">BarEntry</param>
-        /// <returns>Object Type of T</returns>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="entry"></param>
+        /// <returns></returns>
         public new T ReadEntry<T>(BarFileEntry entry) where T : class
         {
             if (entry == null) throw new ArgumentNullException(nameof(entry));
 
             var fileExt = PathUtils.GetExtensionWithoutDot(entry.FullName).ToLower();
-            if (string.IsNullOrEmpty(fileExt))
-                return null;
 
+            if (string.IsNullOrEmpty(fileExt)) return default;
             if (IsValidXmlExtension(fileExt))
             {
-                var contents = ArchiveReader.EntryToBytes(entry)?.EncodeXmlToString();
+                var contents = this.EntryToBytes(entry)?.EncodeXmlToString();
                 if (contents != null) return XmlUtils.DeserializeFromXml<T>(contents);
             }
-            else if (fileExt == "ddt")
-            {
-            }
 
-            return default;
+            return this.EntryToBytes(entry) as T;
         }
 
         /// <summary>
-        ///     Find Many entries of a given pattern
         /// </summary>
-        /// <param name="pattern">Wildcard patterns are acceptable ? and *</param>
-        /// <returns>IEnumeration of BarFileEntry</returns>
+        /// <param name="searchPattern"></param>
+        /// <returns></returns>
         public new IEnumerable<BarFileEntry> FindEntries(string searchPattern)
         {
             if (string.IsNullOrEmpty(searchPattern))
@@ -99,6 +120,28 @@ namespace SpartacusUtils.Bar
             return ArchiveEntries.Where(x => Regex.IsMatch(x.FullName, searchPattern.ToWildCard()));
         }
 
+
+        #region Private Methods
+
+        
+      
+        private static bool CompareFileNames(string sourceFile, BarFileEntry entry)
+        {
+            return entry.FullName.Equals(sourceFile, StringComparison.OrdinalIgnoreCase);
+        }
+
+        private bool IsValidImageExtension(string fileExtension)
+        {
+            var extList = new List<string>
+            {
+                "tga",
+                "jpeg",
+                "jpg",
+                "png",
+                "ddt"
+            };
+            return PathUtils.ContainsExtension(fileExtension, extList);
+        }
 
         private bool IsValidXmlExtension(string fileExtension)
         {
@@ -119,9 +162,10 @@ namespace SpartacusUtils.Bar
                 "cpn",
                 "dtd"
             };
-            if (fileExtension.StartsWith("."))
-                fileExtension = fileExtension.Replace(".", "");
-            return extList.Contains(fileExtension.ToLower());
+
+            return PathUtils.ContainsExtension(fileExtension, extList);
         }
+
+        #endregion
     }
 }

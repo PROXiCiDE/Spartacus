@@ -6,17 +6,14 @@ namespace SpartacusUtils.Helpers
     public static class MiscExtensions
     {
         /// <summary>
-        /// ForEach for IEnumerable
+        ///     ForEach for IEnumerable
         /// </summary>
         /// <param name="enumerable"></param>
         /// <param name="action"></param>
         /// <typeparam name="T"></typeparam>
         public static void ForEach<T>(this IEnumerable<T> enumerable, Action<T> action)
         {
-            foreach (T item in enumerable)
-            {
-                action(item);
-            }
+            foreach (var item in enumerable) action(item);
         }
     }
 }

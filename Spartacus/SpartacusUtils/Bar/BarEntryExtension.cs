@@ -6,49 +6,76 @@ namespace SpartacusUtils.Bar
 {
     public static class BarEntryExtension
     {
-        public static byte[] EntryToBytes(this BarFileReader barFileReader, BarFileEntry barEntry)
+        public static DateTime GetDateTime(this BarEntryLastWriteTime lastWriteTime)
         {
-            if (string.IsNullOrEmpty(barFileReader.Filename))
-                throw new ArgumentException("Value cannot be null or empty.", nameof(barFileReader.Filename));
+            return new DateTime(lastWriteTime.Year,
+                lastWriteTime.Month,
+                lastWriteTime.Day,
+                lastWriteTime.Hour,
+                lastWriteTime.Minute,
+                lastWriteTime.Second,
+                lastWriteTime.Milliseconds);
+        }
+
+        public static byte[] EntryToBytes(this BarFileSystem barFileReader, BarFileEntry barEntry, bool useLocalFile = true)
+        {
+            if (string.IsNullOrEmpty(barFileReader.FileName))
+                throw new ArgumentException("Value cannot be null or empty.", nameof(barFileReader.FileName));
             if (barEntry == null)
                 throw new ArgumentNullException(nameof(barEntry));
 
-            using (var fileStream = File.Open(barFileReader.Filename, FileMode.Open, FileAccess.Read, FileShare.Read))
-            {
-                using (var binReader = new BinaryReader(fileStream))
+            if (barEntry.IsArchivedFile && useLocalFile)
+                using (var fileStream = File.Open(barFileReader.FileName, FileMode.Open, FileAccess.Read, FileShare.Read))
                 {
+                    return barEntry.StreamToBytes(fileStream);
+                }
+            else
+            {
+                using (var fileStream = File.Open(barEntry.FullName, FileMode.Open, FileAccess.Read, FileShare.Read))
+                {
+                    return barEntry.StreamToBytes(fileStream);
+                }
+            }
+        }
+
+        private static byte[] StreamToBytes(this BarFileEntry barEntry, Stream stream, bool useLocalFile = true)
+        {
+            using (var binReader = new BinaryReader(stream))
+            {
+
+                //Determine if we'll be using the bar file or a physical file
+                if (barEntry.IsArchivedFile && useLocalFile)
                     binReader.BaseStream.Seek(barEntry.Offset, SeekOrigin.Begin);
 
-                    using (var final = new MemoryStream())
+                using (var memoryStream = new MemoryStream())
+                {
+                    var buffer = new byte[4096];
+                    int read;
+                    var totalRead = 0L;
+                    while ((read = binReader.Read(buffer, 0, buffer.Length)) > 0)
                     {
-                        var buffer = new byte[4096];
-                        int read;
-                        var totalread = 0L;
-                        while ((read = binReader.Read(buffer, 0, buffer.Length)) > 0)
+                        if (read > barEntry.FileSize)
                         {
-                            if (read > barEntry.FileSize)
-                            {
-                                totalread = barEntry.FileSize;
-                                final.Write(buffer, 0, (int) barEntry.FileSize);
-                            }
-                            else if (totalread + read <= barEntry.FileSize)
-                            {
-                                totalread += read;
-                                final.Write(buffer, 0, read);
-                            }
-                            else if (totalread + read > barEntry.FileSize)
-                            {
-                                var leftToRead = barEntry.FileSize - totalread;
-                                totalread = barEntry.FileSize;
-                                final.Write(buffer, 0, Convert.ToInt32(leftToRead));
-                            }
-
-                            if (totalread >= barEntry.FileSize)
-                                break;
+                            totalRead = barEntry.FileSize;
+                            memoryStream.Write(buffer, 0, (int)barEntry.FileSize);
+                        }
+                        else if (totalRead + read <= barEntry.FileSize)
+                        {
+                            totalRead += read;
+                            memoryStream.Write(buffer, 0, read);
+                        }
+                        else if (totalRead + read > barEntry.FileSize)
+                        {
+                            var leftToRead = barEntry.FileSize - totalRead;
+                            totalRead = barEntry.FileSize;
+                            memoryStream.Write(buffer, 0, Convert.ToInt32(leftToRead));
                         }
 
-                        return final.ToArray();
+                        if (totalRead >= barEntry.FileSize)
+                            break;
                     }
+
+                    return memoryStream.ToArray();
                 }
             }
         }

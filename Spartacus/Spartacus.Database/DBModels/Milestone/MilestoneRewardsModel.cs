@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Spartacus.Database.DBModels.Milestone
+﻿namespace Spartacus.Database.DBModels.Milestone
 {
     public class MilestoneRewardsModel
     {

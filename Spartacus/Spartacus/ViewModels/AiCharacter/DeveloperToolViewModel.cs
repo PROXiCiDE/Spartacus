@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.Composition;
-using System.Diagnostics;
 using Caliburn.Micro;
 using ProjectCeleste.GameFiles.XMLParser;
 using Spartacus.Common;
@@ -26,6 +25,7 @@ namespace Spartacus.ViewModels.AiCharacter
                 NotifyOfPropertyChange(nameof(AiCharacter));
             }
         }
+
         public void Handle(CharacterMessageQueue message)
         {
             AiCharacter = message.AiCharacterXml;

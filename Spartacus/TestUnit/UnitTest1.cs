@@ -1,11 +1,8 @@
-using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
 using System.Linq;
 using NUnit.Framework;
 using ProjectCeleste.GameFiles.XMLParser;
-using ProjectCeleste.GameFiles.XMLParser.Enum;
 using SpartacusUtils.Bar;
 using SpartacusUtils.ConfigManager;
 using SpartacusUtils.Utilities;
@@ -16,6 +13,7 @@ namespace TestUnit
     public class Tests
     {
         private ConfigInfo _configInfo;
+
         [SetUp]
         public void Setup()
         {
@@ -28,7 +26,7 @@ namespace TestUnit
         [TestCase("eee")]
         public void CheckExt(string ext)
         {
-            var extList = new List<string>()
+            var extList = new List<string>
             {
                 "region",
                 "xml",
@@ -42,7 +40,7 @@ namespace TestUnit
                 "quest",
                 "xsd",
                 "cpn",
-                "dtd",
+                "dtd"
             };
             Debug.WriteLine(extList.Contains(ext));
         }
@@ -50,22 +48,19 @@ namespace TestUnit
         [Test]
         public void TestPathSplit()
         {
-            var path = @"\thisisareallylongname.xml.xmb";
-            //var path = @"d:\data\data2\data3\data5\thisisareallylongname.xml.xmb";
+            //var path = @"\thisisareallylongname.xml.xmb";
+            var path = @"d:\data\data2\data3\data5\thisisareallylongname.xml.xmb";
             //Debug.WriteLine(GetLastParts(path, Path.DirectorySeparatorChar.ToString(), 2));
-            Debug.WriteLine(PathUtils.GetPathOnly(path));
+            Debug.WriteLine(PathUtils.CleanPath(path));
         }
 
-      
+
         [Test]
         public void ShowStringXmbs()
         {
             var databar = _configInfo.BarFileReaders[BarFileEnum.Data];
             var entries = databar.FindEntries("*strings*.xmb");
-            foreach (var entry in entries)
-            {
-                Debug.WriteLine(entry.FileName);
-            }
+            foreach (var entry in entries) Debug.WriteLine(entry.FileName);
         }
 
         [Test]
@@ -80,37 +75,26 @@ namespace TestUnit
 
                 var langTable = stringTableXml.Language["English"];
                 foreach (var keyValuePair in langTable.LanguageString.Take(5))
-                {
                     Debug.WriteLine($"{keyValuePair.Key}, {keyValuePair.Value.LocId}, {keyValuePair.Value.Text}");
-                }
             }
 
             Debug.WriteLine(languages["stringtablex"].Language["English"].LanguageString[11723].Text);
 
-            foreach (var languageReaderError in errors.Take(5))
-            {
-                Debug.WriteLine(languageReaderError.Exception);
-            }
+            foreach (var languageReaderError in errors.Take(5)) Debug.WriteLine(languageReaderError.Exception);
         }
 
         [Test]
         public void LoadLanguagesXml_NonBar()
         {
             var languages = LanguagesXml.LanguagesFromXmlFiles(@"G:\Age of Empires Online\Data");
-            foreach (var stringTableXml in languages.Gets())
-            {
-                Debug.WriteLine(stringTableXml.Id);
-            }
+            foreach (var stringTableXml in languages.Gets()) Debug.WriteLine(stringTableXml.Id);
         }
 
         [Test]
         public void TestProtoUnit()
         {
             Debug.WriteLine("Test");
-            foreach (var stringTableXml in _configInfo.Languages.Gets())
-            {
-                Debug.WriteLine(stringTableXml);
-            }
+            foreach (var stringTableXml in _configInfo.Languages.Gets()) Debug.WriteLine(stringTableXml);
         }
     }
 }

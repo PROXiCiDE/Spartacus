@@ -1,24 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
 using NUnit.Framework;
-using ProjectCeleste.GameFiles.XMLParser;
-using ProjectCeleste.GameFiles.XMLParser.Enum;
-using ProjectCeleste.GameFiles.XMLParser.Helpers;
 using Spartacus.Database.DBModels.Civilizations;
 using Spartacus.Database.DBModels.FileChecksum;
 using Spartacus.Logic.Builder.Civilization;
 using SpartacusUtils.Bar;
-using SpartacusUtils.Xml.Helpers;
 
 namespace TestUnit
 {
-    class UnitTestDapper
+    internal class UnitTestDapper
     {
-        private string _dataFile = @"G:\MS Age Of Empires Online\DATA\data.bar";
+        private readonly string _dataFile = @"G:\MS Age Of Empires Online\DATA\data.bar";
         public string ConnString { get; set; }
 
         [SetUp]
@@ -30,34 +22,29 @@ namespace TestUnit
         [Test]
         public void InsertChecksum()
         {
-            FileChecksumRepository fileChecksum = new FileChecksumRepository(ConnString);
+            var fileChecksum = new FileChecksumRepository(ConnString);
             var time = DateTime.Now;
 
-            var newChecksum = new FileChecksumModel("TestFile2.xml", @"\Data\TestFile2.xml", "ABC", time.AddMinutes(-15).ToFileTimeUtc());
+            var newChecksum = new FileChecksumModel("TestFile2.xml", @"\Data\TestFile2.xml", "ABC",
+                time.AddMinutes(-15).ToFileTimeUtc());
             fileChecksum.InsertFileChecksum(newChecksum);
         }
 
         [Test]
         public void SelectChecksun()
         {
-            FileChecksumRepository fileChecksum = new FileChecksumRepository(ConnString);
+            var fileChecksum = new FileChecksumRepository(ConnString);
             var checksums = fileChecksum.SelectFileChecksum();
-            foreach (var checksum in checksums)
-            {
-                Debug.WriteLine(checksum);
-            }
+            foreach (var checksum in checksums) Debug.WriteLine(checksum);
         }
 
         [Test]
         public void InsertCivilization()
         {
-            CivilizationsRepository civilizations = new CivilizationsRepository(ConnString);
+            var civilizations = new CivilizationsRepository(ConnString);
             var civs = new CivilizationModelBuilder().FromBar(new BarFileSystem(_dataFile));
 
-            foreach (var civ in civs)
-            {
-                Debug.WriteLine(civ);
-            }
+            foreach (var civ in civs) Debug.WriteLine(civ);
         }
     }
 }

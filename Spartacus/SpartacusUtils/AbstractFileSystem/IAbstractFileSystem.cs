@@ -1,12 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 
 namespace SpartacusUtils.AbstractFileSystem
 {
-    public interface IAbstractFileSystem<TArchiveReader, TEntry>
+    public interface IAbstractFileSystem<TEntry>
     {
-        TArchiveReader ArchiveReader { get; set; }
-        IEnumerable<TEntry> ArchiveEntries { get; set; }
-        IEnumerable<TEntry> LocalEntries { get; set; }
+        IList<TEntry> ArchiveEntries { get; set; }
+        IList<TEntry> LocalEntries { get; set; }
 
         TEntry GetEntry(string sourceFile);
         T ReadEntry<T>(TEntry entry);

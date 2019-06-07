@@ -1,6 +1,6 @@
 ﻿namespace Spartacus.Common
 {
-    interface IWikiDocumentation
+    internal interface IWikiDocumentation
     {
         string WikiUrl { get; set; }
     }

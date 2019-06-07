@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using ProjectCeleste.GameFiles.Tools.Bar;
 using ProjectCeleste.GameFiles.Tools.Ddt;
 using SpartacusUtils.Bar;
 using SpartacusUtils.Helpers;

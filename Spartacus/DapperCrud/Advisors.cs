@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace DapperCrud
+﻿namespace DapperCrud
 {
     public class Advisors
     {
@@ -18,5 +14,4 @@ namespace DapperCrud
         public long ItemLevel { get; set; }
         public string TechId { get; set; }
     }
-
 }

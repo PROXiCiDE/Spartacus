@@ -1,16 +1,15 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Data;
 using BarExplorer.Properties;
 using Microsoft.Win32;
-using ProjectCeleste.GameFiles.Tools.Bar;
 using SpartacusUtils.Bar;
 using SpartacusUtils.Helpers;
-using SpartacusUtils.Utilities;
 
 namespace BarExplorer
 {
@@ -75,11 +74,13 @@ namespace BarExplorer
             }
         }
 
+        public event PropertyChangedEventHandler PropertyChanged;
+
         public static ObservableCollection<BarFileEntry> GetBarFileEntities(string filename)
         {
             var collection = new ObservableCollection<BarFileEntry>();
-            var barFile = new BarFileReader(filename);
-            barFile.GetEntries().ForEach(x => { collection.Add(new BarFileEntry(x)); });
+            var barFile = new BarFileSystem(filename);
+            barFile.ArchiveEntries.ForEach(x => { collection.Add(new BarFileEntry(x)); });
             return collection;
         }
 
@@ -89,22 +90,24 @@ namespace BarExplorer
             if (BarFileContents != null && BarFileContents.Any())
             {
                 BarCollectionView = CollectionViewSource.GetDefaultView(BarFileContents);
-                BarCollectionView.Filter = (obj) =>
+                BarCollectionView.Filter = obj =>
                 {
                     if (string.IsNullOrEmpty(TextSearchFilter))
                         return true;
-                    return TextSearchFilter != null &&
-                           obj is BarFileEntry entity &&
-                           (bool)entity.FileName?.ToLower()?.Contains(TextSearchFilter.ToLower());
+                    if (TextSearchFilter != null &&
+                        obj is BarFileEntry entity)
+                    {
+                        if (Regex.IsMatch(entity.FullName.ToLower(), TextSearchFilter.ToLower().ToWildCard()))
+                            return true;
+                    }
+                    return false;
                 };
             }
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
         private void MenuItemFileOpen_OnClick(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog fileDialog = new OpenFileDialog()
+            var fileDialog = new OpenFileDialog
             {
                 Filter = "(*.bar)|*.bar"
             };

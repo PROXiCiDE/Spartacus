@@ -3,9 +3,7 @@ using System.IO;
 using System.Linq;
 using Newtonsoft.Json;
 using ProjectCeleste.GameFiles.XMLParser;
-using ProjectCeleste.GameFiles.XMLParser.Helpers;
 using SpartacusUtils.Bar;
-using SpartacusUtils.Xml.Helpers;
 
 namespace SpartacusUtils.Xml.Language
 {

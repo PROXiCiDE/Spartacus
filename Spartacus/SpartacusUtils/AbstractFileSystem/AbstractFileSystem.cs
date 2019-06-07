@@ -4,24 +4,16 @@ using System.IO;
 
 namespace SpartacusUtils.AbstractFileSystem
 {
-    public abstract class AbstractFileSystem<TArchive, TEntry> : IAbstractFileSystem<TArchive, TEntry>
+    public abstract class AbstractFileSystem<TEntry> : IAbstractFileSystem<TEntry>
     {
-        public AbstractFileSystem(TArchive archiveReader)
-        {
-            ArchiveReader = archiveReader;
-
-            SetupPaths();
-        }
-
         public AbstractFileSystem()
         {
         }
 
         public string HomePath { get; set; }
         public string CurrentResourceFile { get; set; }
-        public TArchive ArchiveReader { get; set; }
-        public IEnumerable<TEntry> ArchiveEntries { get; set; }
-        public IEnumerable<TEntry> LocalEntries { get; set; }
+        public IList<TEntry> ArchiveEntries { get; set; }
+        public IList<TEntry> LocalEntries { get; set; }
 
         public TEntry GetEntry(string sourceFile)
         {

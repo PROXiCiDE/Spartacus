@@ -1,22 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Linq;
-using System.Text;
 using NUnit.Framework;
-using ProjectCeleste.GameFiles.XMLParser;
 using ProjectCeleste.GameFiles.XMLParser.Enum;
 using Spartacus.Logic.Builder.Advisors;
 using SpartacusUtils.Bar;
 
 namespace TestUnit
 {
-    class AdvisorTest : TestBarBase
+    internal class AdvisorTest : TestBarBase
     {
         [SetUp]
         public void Setup()
         {
-
         }
 
         [Test]
@@ -24,12 +19,10 @@ namespace TestUnit
         {
             var dataBar = new BarFileSystem(@"G:\Age of Empires Online\Data2\data.bar");
 
-            AdvisorModelBuilder modelBuilder = new AdvisorModelBuilder();
+            var modelBuilder = new AdvisorModelBuilder();
             var models = modelBuilder.FromBar(dataBar);
-            foreach (var advisor in models.Where(x=>x.Civid == (long) CivilizationEnum.Norse))
-            {
+            foreach (var advisor in models.Where(x => x.Civid == (long) CivilizationEnum.Norse))
                 Debug.WriteLine(advisor);
-            }
         }
     }
 }

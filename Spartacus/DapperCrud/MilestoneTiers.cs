@@ -1,11 +1,9 @@
-﻿using System;
-
-namespace DapperCrud
+﻿namespace DapperCrud
 {
     public class MilestoneTiers
     {
-        public Int64 Id { get; set; }
-        public Int64 CivId { get; set; }
-        public String TechName { get; set; }
+        public long Id { get; set; }
+        public long CivId { get; set; }
+        public string TechName { get; set; }
     }
 }

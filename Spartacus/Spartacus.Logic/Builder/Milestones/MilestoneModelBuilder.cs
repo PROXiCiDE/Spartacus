@@ -1,11 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Remoting.Messaging;
-using System.Text;
-using System.Threading.Tasks;
 using ProjectCeleste.GameFiles.XMLParser;
-using ProjectCeleste.GameFiles.XMLParser.Helpers;
 using Spartacus.Database.DBModels.Milestone;
 using SpartacusUtils.Bar;
 using MilestoneRewardsModel = Spartacus.Database.Models.Milestone.MilestoneRewardsModel;
@@ -44,6 +39,7 @@ namespace Spartacus.Logic.Builder.Milestones
                     models.Add(model);
                 });
             }
+
             return models;
         }
 

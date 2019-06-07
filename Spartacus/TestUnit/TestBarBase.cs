@@ -4,13 +4,6 @@ namespace TestUnit
 {
     public class TestBarBase
     {
-        /// <summary>
-        /// Default is local path hard-coded, override if necessary
-        /// </summary>
-        public string GamePath { get; set; } = @"G:\MS Age Of Empires Online";
-        public string DataBar { get; set; }
-        public string ArtUIBar { get; set; }
-
         public TestBarBase()
         {
             SyncFields();
@@ -22,6 +15,14 @@ namespace TestUnit
                 GamePath = path;
             SyncFields();
         }
+
+        /// <summary>
+        ///     Default is local path hard-coded, override if necessary
+        /// </summary>
+        public string GamePath { get; set; } = @"G:\MS Age Of Empires Online";
+
+        public string DataBar { get; set; }
+        public string ArtUIBar { get; set; }
 
         private void SyncFields()
         {
