@@ -17,6 +17,8 @@ An Age of Empires Online all-in-one editor for quests, character sheets and more
 > Project will be in 'Work in Progress' state for awhile.
 > I do apologoize
 
+**I am currently working on the WIP Branch, when its ready ill be pushing it over to the Master Branch**
+
 ### Used Libraries
 
 | GitHub Sites | Comments |
