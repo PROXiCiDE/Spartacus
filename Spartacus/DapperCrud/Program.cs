@@ -1,18 +1,47 @@
-﻿using System.Collections.Generic;
-using System.Data;
+﻿using System.ComponentModel.DataAnnotations;
 using System.Data.SQLite;
 using System.Diagnostics;
-using System.Linq;
 using Dapper;
 using SpartacusUtils.Helpers;
+using SpartacusUtils.SQLite;
 
 namespace DapperCrud
 {
+    public class TestMemoryModel
+    {
+        [AutoIncrement, UniqueKey, NotNull, SpartacusUtils.SQLite.Key]
+        public int Id { get; set; }
+        public int Int { get; set; }
+        public long Long { get; set; }
+    }
+
     internal class Program
     {
+
         private static void Main(string[] args)
         {
             SimpleCRUD.SetDialect(SimpleCRUD.Dialect.SQLite);
+
+            using (SQLiteConnection conn = new SQLiteConnection("Data Source=.\\Test.db"))
+            {
+                conn.DropTableIfExists<TestMemoryModel>();
+                var sqlSchema = CreateTableReflection.GetTableSchema(typeof(TestMemoryModel));
+
+                Debug.WriteLine(sqlSchema);
+                Debug.WriteLine(conn.Execute(sqlSchema));
+
+                var test = new TestMemoryModel();
+                test.Int = 100;
+                test.Long = 0xff00ff;
+
+                conn.Insert(test);
+
+                var all = conn.GetList<TestMemoryModel>();
+                all.ForEach(model =>
+                {
+                    Debug.WriteLine($"{model.Id}, {model.Int}, {model.Long.ToString("X")}");
+                });
+            }
         }
 
      
