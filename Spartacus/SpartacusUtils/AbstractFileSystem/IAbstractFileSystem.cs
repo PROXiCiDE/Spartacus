@@ -9,6 +9,7 @@ namespace SpartacusUtils.AbstractFileSystem
         IList<TEntry> LocalEntries { get; set; }
 
         TEntry GetEntry(string sourceFile);
+
         T ReadEntry<T>(TEntry entry);
         IEnumerable<TEntry> FindEntries(string searchPattern);
     }

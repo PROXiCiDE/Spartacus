@@ -10,57 +10,92 @@
     mc:Ignorable="d">
     <Grid>
         <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="280" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
 
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="280" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <!--  Basic Information  -->
+                <GroupBox
+                    Grid.Column="0"
+                    Margin="16"
+                    materialDesign:ColorZoneAssist.Mode="Accent"
+                    Header="Information"
+                    Style="{DynamicResource MaterialDesignGroupBox}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="100*" />
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Grid.Column="0" Margin="8,0,0,0">
+
+                            <!--  Civilization  -->
+                            <StackPanel Orientation="Horizontal">
+                                <ComboBox
+                                    materialDesign:HintAssist.Hint="Civilization"
+                                    IsEditable="True"
+                                    ItemsSource="{Binding Source={StaticResource CivilizationEnum}}"
+                                    SelectedValue="{Binding AiCharacter.CivId}"
+                                    Style="{StaticResource ComboBoxResizeControlStyle}" />
+                            </StackPanel>
+
+                            <!--  Xp  -->
+                            <TextBox
+                                VerticalAlignment="Bottom"
+                                materialDesign:HintAssist.Hint="Experience Points"
+                                Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                Text="{Binding AiCharacter.Xp}" />
+
+                            <!--  Current Age  -->
+                            <TextBox
+                                VerticalAlignment="Bottom"
+                                materialDesign:HintAssist.Hint="Current Age"
+                                Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                Text="{Binding AiCharacter.CurrentAge}" />
+
+                        </StackPanel>
+                        <StackPanel Grid.Column="1" />
+                    </Grid>
+                </GroupBox>
+
+                <!--  Proto Units  -->
+                <GroupBox
+                    Grid.Column="1"
+                    Margin="16"
+                    materialDesign:ColorZoneAssist.Mode="Accent"
+                    Header="Information"
+                    Style="{DynamicResource MaterialDesignGroupBox}">
+                    <StackPanel>
+                        <ComboBox ItemsSource="{Binding ProtoUnits}" Style="{StaticResource ComboBoxResizeControlStyle}" />
+                        <ListBox
+                            Width="300"
+                            Height="300"
+                            HorizontalContentAlignment="Left"
+                            ItemsSource="{Binding ProtoUnits}" />
+                    </StackPanel>
+                </GroupBox>
+            </Grid>
+
+            <!--  Traits  -->
             <GroupBox
+                Grid.Row="1"
                 Grid.Column="0"
                 Margin="16"
                 materialDesign:ColorZoneAssist.Mode="Accent"
                 Header="Information"
                 Style="{DynamicResource MaterialDesignGroupBox}">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="100*" />
-                    </Grid.ColumnDefinitions>
-
-                    <StackPanel Grid.Column="0" Margin="8,0,0,0">
-
-                        <!--  Civilization  -->
-                        <StackPanel Orientation="Horizontal">
-                            <ComboBox
-                                materialDesign:HintAssist.Hint="Civilization"
-                                IsEditable="True"
-                                ItemsSource="{Binding Source={StaticResource CivilizationEnum}}"
-                                SelectedValue="{Binding AiCharacter.CivId}"
-                                Style="{StaticResource ComboBoxResizeControlStyle}" />
-                        </StackPanel>
-
-                        <!--  Xp  -->
-                        <TextBox
-                            VerticalAlignment="Bottom"
-                            materialDesign:HintAssist.Hint="Experience Points"
-                            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                            Text="{Binding AiCharacter.Xp}" />
-
-                        <!--  Current Age  -->
-                        <TextBox
-                            VerticalAlignment="Bottom"
-                            materialDesign:HintAssist.Hint="Current Age"
-                            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                            Text="{Binding AiCharacter.CurrentAge}" />
-
-                    </StackPanel>
-                    <StackPanel Grid.Column="1" />
-                </Grid>
+                <StackPanel>
+                    <ComboBox />
+                    <ListBox />
+                </StackPanel>
             </GroupBox>
-
-            <Grid Grid.Column="1">
-                <TextBox>Test</TextBox>
-            </Grid>
         </Grid>
     </Grid>
 </UserControl>

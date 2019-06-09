@@ -28,6 +28,13 @@ namespace SpartacusUtils.Utilities
         }
 
 
+        /// <summary>
+        /// Split Root and Pathing information
+        /// </summary>
+        /// <param name="fullPath"></param>
+        /// <param name="rootPath"></param>
+        /// <param name="pathName"></param>
+        /// <returns></returns>
         public static bool MakePathInformation(string fullPath, out string rootPath, out string pathName)
         {
             rootPath = null;
@@ -55,6 +62,11 @@ namespace SpartacusUtils.Utilities
             return true;
         }
 
+        /// <summary>
+        /// Remove Drive / UNC from path
+        /// </summary>
+        /// <param name="fullPath"></param>
+        /// <returns></returns>
         public static string DropPathRoot(string fullPath)
         {
             var result = fullPath;
@@ -88,6 +100,12 @@ namespace SpartacusUtils.Utilities
             return result;
         }
 
+        /// <summary>
+        /// Iterate over a List of file extensions to see if they match
+        /// </summary>
+        /// <param name="fileExtension"></param>
+        /// <param name="extensionList"></param>
+        /// <returns></returns>
         public static bool ContainsExtension(string fileExtension, List<string> extensionList)
         {
             if (fileExtension.StartsWith("."))

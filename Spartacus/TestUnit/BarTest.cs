@@ -69,12 +69,6 @@ namespace TestUnit
                 PathUtils.MakePathInformation(dir, out var dirPath, out var filePath);
                 Debug.WriteLine($"RootPath: {dirPath},\tFileName: {filePath}");
             });
-
-            //var trimFile = sourcePath.Substring(trimOffset);
-            //var file = trimFile.StartsWith(@"\") ? trimFile.ReplaceFirst(@"\", "") : trimFile;
-            //file = file.Replace(@"\", "/");
-
-            //Debug.WriteLine(file);
         }
 
         [Test]

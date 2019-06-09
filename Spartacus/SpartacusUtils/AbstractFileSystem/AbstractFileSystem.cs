@@ -15,11 +15,23 @@ namespace SpartacusUtils.AbstractFileSystem
         public IList<TEntry> ArchiveEntries { get; set; }
         public IList<TEntry> LocalEntries { get; set; }
 
+
+        /// <summary>
+        /// Get a file entry inside the archive
+        /// </summary>
+        /// <param name="sourceFile"></param>
+        /// <returns>Archive Entry information</returns>
         public TEntry GetEntry(string sourceFile)
         {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Read the contents of the file entry into an Object type of T
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="entry"></param>
+        /// <returns>Object Template</returns>
         public T ReadEntry<T>(TEntry entry)
         {
             throw new NotImplementedException();

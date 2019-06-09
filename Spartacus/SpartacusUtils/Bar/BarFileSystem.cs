@@ -66,9 +66,10 @@ namespace SpartacusUtils.Bar
         }
 
         /// <summary>
+        /// Get an file entry inside of the Archive
         /// </summary>
         /// <param name="sourceFile"></param>
-        /// <returns></returns>
+        /// <returns>BarFileEntry</returns>
         public new BarFileEntry GetEntry(string sourceFile)
         {
             var entries = ArchiveEntries;
@@ -88,11 +89,13 @@ namespace SpartacusUtils.Bar
             return result;
         }
 
+
         /// <summary>
+        /// Read the file contents into an object of T
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="entry"></param>
-        /// <returns></returns>
+        /// <returns>Object</returns>
         public new T ReadEntry<T>(BarFileEntry entry) where T : class
         {
             if (entry == null) throw new ArgumentNullException(nameof(entry));
@@ -110,7 +113,9 @@ namespace SpartacusUtils.Bar
         }
 
         /// <summary>
+        /// Find many entries that resides in the archive from a given search pattern
         /// </summary>
+        /// <remarks>Wildcard supported (*?)</remarks>
         /// <param name="searchPattern"></param>
         /// <returns></returns>
         public new IEnumerable<BarFileEntry> FindEntries(string searchPattern)

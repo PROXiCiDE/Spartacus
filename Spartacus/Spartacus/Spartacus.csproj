@@ -90,6 +90,7 @@
     <Compile Include="Common\BasicViewModel.cs" />
     <Compile Include="Common\MessageQueue\MessageQueue.cs" />
     <Compile Include="Common\ProgressBarStatus.cs" />
+    <Compile Include="Converter\EnumToIntConverter.cs" />
     <Compile Include="Converter\ResizeControlConverter.cs" />
     <Compile Include="IShell.cs" />
     <Compile Include="Common\MessageQueue\CharacterMessageQueue.cs" />

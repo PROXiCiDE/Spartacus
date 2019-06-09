@@ -60,16 +60,20 @@
     <Compile Include="DBModels\Language\ILanguagesRepository.cs" />
     <Compile Include="DBModels\Language\LanguagesModel.cs" />
     <Compile Include="DBModels\Language\LanguagesRepository.cs" />
-    <Compile Include="DBModels\Milestone\IMilestoneRewardsRepository.cs" />
-    <Compile Include="DBModels\Milestone\MilestoneRewardsModel.cs" />
-    <Compile Include="DBModels\Milestone\MilestoneRewardsRepository.cs" />
+    <Compile Include="DBModels\ProtoAge\ProtoAge.cs" />
+    <Compile Include="DBModels\ProtoAge\ProtoAgeReader.cs" />
+    <Compile Include="DBModels\ProtoAge\ProtoAgeResourceCost.cs" />
+    <Compile Include="DBModels\ProtoAge\ProtoAgeUnitFlag.cs" />
+    <Compile Include="DBModels\ProtoAge\ProtoAgeUnitType.cs" />
     <Compile Include="DBModels\StringTableLocations\IStringTableLocationsRepository.cs" />
     <Compile Include="DBModels\StringTableLocations\StringTableLocations.cs" />
     <Compile Include="DBModels\StringTableLocations\StringTableLocationsRepository.cs" />
     <Compile Include="Models\Milestone\MilestoneRewardsModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="DBModels\Milestone\" />
+  </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
