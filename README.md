@@ -30,13 +30,16 @@ An Age of Empires Online all-in-one editor for quests, character sheets and more
 | [MaterialDesignExtensionsDemo][MaterialDesignExtXML] | Used NuGet Package |
 | [Caliburn-Micro][CaliburnMicro] | Used NuGet Package |
 | [Dapper][Dapper] | Used NuGet Package |
-| [Dapper.SimpleCRUD][DapperSimpleCRUD]| Used NuGet Package|
+| [DapperSimpleCRUD][DapperSimpleCRUD]| Used NuGet Package|
 
 
 License
 ----
 
 MIT
+-
+
+
 [DapperSimpleCRUD]: https://github.com/ericdc1/Dapper.SimpleCRUD
 [Dapper]: https://github.com/StackExchange/Dapper
 [ProjectCXML]: https://github.com/ProjectCeleste/ProjectCeleste.GameFiles.XMLParser
