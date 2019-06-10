@@ -75,7 +75,14 @@
     <Compile Include="ErrorReporting\IErrorReport.cs" />
     <Compile Include="Helpers\BinaryReaderExtension.cs" />
     <Compile Include="Helpers\MiscExtensions.cs" />
+    <Compile Include="SQLite\Annotations\TableNameAttribute.cs" />
+    <Compile Include="SQLite\Annotations\AutoIncrementAttribute.cs" />
     <Compile Include="SQLite\CreateTableReflection.cs" />
+    <Compile Include="SQLite\CreateTableReflectionHelpers.cs" />
+    <Compile Include="SQLite\Annotations\KeyAttribute.cs" />
+    <Compile Include="SQLite\Annotations\NotNullAttribute.cs" />
+    <Compile Include="SQLite\Annotations\PrimaryKeyAttribute.cs" />
+    <Compile Include="SQLite\Annotations\UniqueKeyAttribute.cs" />
     <Compile Include="Utilities\PathUtils.cs" />
     <Compile Include="Helpers\SafeHBitmapHandle.cs" />
     <Compile Include="Utilities\FileUtils.cs" />

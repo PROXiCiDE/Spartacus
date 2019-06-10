@@ -25,7 +25,7 @@ namespace DapperCrud
             using (SQLiteConnection conn = new SQLiteConnection("Data Source=.\\Test.db"))
             {
                 conn.DropTableIfExists<TestMemoryModel>();
-                var sqlSchema = CreateTableReflection.GetTableSchema(typeof(TestMemoryModel));
+                var sqlSchema = CreateTableReflection.CreateTableSchema(typeof(TestMemoryModel));
 
                 Debug.WriteLine(sqlSchema);
                 Debug.WriteLine(conn.Execute(sqlSchema));
