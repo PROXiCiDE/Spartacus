@@ -2,38 +2,31 @@
 {
     public class AdvisorsModel
     {
-        public AdvisorsModel(string name, long civid, long age, string icon, long rarirty, long rollverTextId,
-            long displayDescriptionId, long displayNameId, long minLevel, long itemLevel, string techId)
-        {
-            Name = name;
-            Civid = civid;
-            Age = age;
-            Icon = icon;
-            Rarirty = rarirty;
-            RollverTextId = rollverTextId;
-            DisplayDescriptionId = displayDescriptionId;
-            DisplayNameId = displayNameId;
-            MinLevel = minLevel;
-            ItemLevel = itemLevel;
-            TechId = techId;
-        }
+        private string name;
+        private long civilization;
+        private int age;
+        private string icon;
+        private long rarity;
+        private int rolloverTextId;
+        private int displayDescriptionId;
+        private int displayNameId;
+        private int minlevel;
+        private int itemLevel;
+        private string tech;
 
-        public string Name { get; set; }
-        public long Civid { get; set; }
-        public long Age { get; set; }
-        public string Icon { get; set; }
-        public long Rarirty { get; set; }
-        public long RollverTextId { get; set; }
-        public long DisplayDescriptionId { get; set; }
-        public long DisplayNameId { get; set; }
-        public long MinLevel { get; set; }
-        public long ItemLevel { get; set; }
-        public string TechId { get; set; }
-
-        public override string ToString()
+        public AdvisorsModel(string name, long civilization, int age, string icon, long rarity, int rolloverTextId, int displayDescriptionId, int displayNameId, int minlevel, int itemLevel, string tech)
         {
-            return
-                $"{nameof(Name)}: {Name}, {nameof(Civid)}: {Civid}, {nameof(Age)}: {Age}, {nameof(Icon)}: {Icon}, {nameof(Rarirty)}: {Rarirty}, {nameof(RollverTextId)}: {RollverTextId}, {nameof(DisplayDescriptionId)}: {DisplayDescriptionId}, {nameof(DisplayNameId)}: {DisplayNameId}, {nameof(MinLevel)}: {MinLevel}, {nameof(ItemLevel)}: {ItemLevel}, {nameof(TechId)}: {TechId}";
+            this.name = name;
+            this.civilization = civilization;
+            this.age = age;
+            this.icon = icon;
+            this.rarity = rarity;
+            this.rolloverTextId = rolloverTextId;
+            this.displayDescriptionId = displayDescriptionId;
+            this.displayNameId = displayNameId;
+            this.minlevel = minlevel;
+            this.itemLevel = itemLevel;
+            this.tech = tech;
         }
     }
 }

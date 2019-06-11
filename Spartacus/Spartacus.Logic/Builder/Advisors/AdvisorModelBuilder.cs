@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using ProjectCeleste.GameFiles.XMLParser;
 using Spartacus.Database.DBModels.Advisors;
 using SpartacusUtils.Bar;
@@ -7,7 +8,7 @@ using SpartacusUtils.Helpers;
 
 namespace Spartacus.Logic.Builder.Advisors
 {
-    public class AdvisorModelBuilder : IModelBuilder<AdvisorsModel, AdvisorsRepository>
+    public class AdvisorModelBuilder : IModelBuilder<AdvisorsModel>
     {
         public List<AdvisorsModel> FromBar(BarFileSystem barFileReader)
         {
@@ -37,7 +38,7 @@ namespace Spartacus.Logic.Builder.Advisors
             return models;
         }
 
-        public List<AdvisorsModel> FromRepository(AdvisorsRepository repository)
+        public List<AdvisorsModel> FromRepository(IDbConnection connection)
         {
             throw new NotImplementedException();
         }

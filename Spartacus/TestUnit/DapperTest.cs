@@ -24,8 +24,7 @@ namespace TestUnit
             {
                 //conn.Drop
 
-                var sqlSchema = CreateTableReflection.CreateTableSchema(typeof(TestMemoryModel));
-                conn.Execute(sqlSchema);
+                var sqlSchema = conn.CreateTable<TestMemoryModel>();
 
                 var test = new TestMemoryModel();
                 test.Int = 100;
@@ -58,8 +57,6 @@ namespace TestUnit
             //    //}
             //    Debug.WriteLine($"{prop.DeclaringType.Name} {prop.Name} {idProps.Contains(prop)}");
             //}
-
-            Debug.WriteLine(CreateTableReflection.CreateTableSchema(typeof(TestMemoryModel)));
         }
     }
 }

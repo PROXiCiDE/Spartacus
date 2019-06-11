@@ -2,36 +2,29 @@
 {
     public class CivilizationsModel
     {
-        public CivilizationsModel(long civilizationId, long displayNameId, long rolloverNameId, string shieldTexture,
-            string shieldGreyTexture, string age0, string age1, string age2, string age3, long storehouseTechId)
-        {
-            CivilizationId = civilizationId;
-            DisplayNameId = displayNameId;
-            RolloverNameId = rolloverNameId;
-            ShieldTexture = shieldTexture;
-            ShieldGreyTexture = shieldGreyTexture;
-            Age0 = age0;
-            Age1 = age1;
-            Age2 = age2;
-            Age3 = age3;
-            StorehouseTechId = storehouseTechId;
-        }
+        private long civid;
+        private int displayNameId;
+        private int rollOverId;
+        private string shieldtexture;
+        private string shieldgreytexture;
+        private string age0;
+        private string age1;
+        private string age2;
+        private string age3;
+        private int storageTechId;
 
-        public long CivilizationId { get; set; }
-        public long DisplayNameId { get; set; }
-        public long RolloverNameId { get; set; }
-        public string ShieldTexture { get; set; }
-        public string ShieldGreyTexture { get; set; }
-        public string Age0 { get; set; }
-        public string Age1 { get; set; }
-        public string Age2 { get; set; }
-        public string Age3 { get; set; }
-        public long StorehouseTechId { get; set; }
-
-        public override string ToString()
+        public CivilizationsModel(long civid, int displayNameId, int rollOverId, string shieldtexture, string shieldgreytexture, string age0, string age1, string age2, string age3, int storageTechId)
         {
-            return
-                $"{nameof(CivilizationId)}: {CivilizationId}, {nameof(DisplayNameId)}: {DisplayNameId}, {nameof(RolloverNameId)}: {RolloverNameId}, {nameof(ShieldTexture)}: {ShieldTexture}, {nameof(ShieldGreyTexture)}: {ShieldGreyTexture}, {nameof(Age0)}: {Age0}, {nameof(Age1)}: {Age1}, {nameof(Age2)}: {Age2}, {nameof(Age3)}: {Age3}, {nameof(StorehouseTechId)}: {StorehouseTechId}";
+            this.civid = civid;
+            this.displayNameId = displayNameId;
+            this.rollOverId = rollOverId;
+            this.shieldtexture = shieldtexture;
+            this.shieldgreytexture = shieldgreytexture;
+            this.age0 = age0;
+            this.age1 = age1;
+            this.age2 = age2;
+            this.age3 = age3;
+            this.storageTechId = storageTechId;
         }
     }
 }

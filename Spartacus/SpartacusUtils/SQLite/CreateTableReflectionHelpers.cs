@@ -76,7 +76,7 @@ namespace SpartacusUtils.SQLite
                 typeof(Double),
             };
 
-            if (typeof(Object) == propType)
+            if (typeof(byte[]) == propType)
                 return "BLOB";
             if (integerTypes.Contains(propType))
                 return "INTEGER";

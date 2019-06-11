@@ -1,4 +1,4 @@
-﻿namespace Spartacus.Database.Models.Milestone
+﻿    namespace Spartacus.Database.Models.Milestone
 {
     public class MilestoneRewardsModel
     {

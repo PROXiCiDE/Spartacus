@@ -25,10 +25,9 @@ namespace DapperCrud
             using (SQLiteConnection conn = new SQLiteConnection("Data Source=.\\Test.db"))
             {
                 conn.DropTableIfExists<TestMemoryModel>();
-                var sqlSchema = CreateTableReflection.CreateTableSchema(typeof(TestMemoryModel));
+                var sqlSchema = conn.CreateTable<TestMemoryModel>();
 
                 Debug.WriteLine(sqlSchema);
-                Debug.WriteLine(conn.Execute(sqlSchema));
 
                 var test = new TestMemoryModel();
                 test.Int = 100;
@@ -39,7 +38,7 @@ namespace DapperCrud
                 var all = conn.GetList<TestMemoryModel>();
                 all.ForEach(model =>
                 {
-                    Debug.WriteLine($"{model.Id}, {model.Int}, {model.Long.ToString("X")}");
+                    Debug.WriteLine($"{model.Id}, {model.Int}, {model.Long:X}");
                 });
             }
         }

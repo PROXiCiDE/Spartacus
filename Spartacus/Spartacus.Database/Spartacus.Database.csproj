@@ -49,33 +49,34 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DBModels\Advisors\AdvisorsModel.cs" />
-    <Compile Include="DBModels\Advisors\AdvisorsRepository.cs" />
-    <Compile Include="DBModels\Advisors\IAdvisorsRepository.cs" />
     <Compile Include="DBModels\Civilizations\CivilizationsModel.cs" />
-    <Compile Include="DBModels\Civilizations\CivilizationsRepository.cs" />
-    <Compile Include="DBModels\Civilizations\ICivilizationsRepository.cs" />
-    <Compile Include="DBModels\FileChecksum\FileChecksumModel.cs" />
-    <Compile Include="DBModels\FileChecksum\FileChecksumRepository.cs" />
-    <Compile Include="DBModels\FileChecksum\IFileChecksumRepository.cs" />
-    <Compile Include="DBModels\Language\ILanguagesRepository.cs" />
-    <Compile Include="DBModels\Language\LanguagesModel.cs" />
-    <Compile Include="DBModels\Language\LanguagesRepository.cs" />
+    <Compile Include="DBModels\Milestone\Milestone.cs" />
+    <Compile Include="DBModels\Milestone\MilestoneTier.cs" />
     <Compile Include="DBModels\ProtoAge\ProtoAge.cs" />
     <Compile Include="DBModels\ProtoAge\ProtoAgeReader.cs" />
     <Compile Include="DBModels\ProtoAge\ProtoAgeResourceCost.cs" />
     <Compile Include="DBModels\ProtoAge\ProtoAgeUnitFlag.cs" />
     <Compile Include="DBModels\ProtoAge\ProtoAgeUnitType.cs" />
-    <Compile Include="DBModels\StringTableLocations\IStringTableLocationsRepository.cs" />
-    <Compile Include="DBModels\StringTableLocations\StringTableLocations.cs" />
-    <Compile Include="DBModels\StringTableLocations\StringTableLocationsRepository.cs" />
+    <Compile Include="DBModels\TechTree\TechTree.cs" />
+    <Compile Include="DBModels\TechTree\TechTreeEffects.cs" />
+    <Compile Include="DBModels\TechTree\TechTreeFlag.cs" />
+    <Compile Include="DBModels\TechTree\TechTreeResource.cs" />
     <Compile Include="Models\Milestone\MilestoneRewardsModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="DBModels\Milestone\" />
+    <Folder Include="DBModels\FileChecksum\" />
+    <Folder Include="DBModels\Language\" />
+    <Folder Include="DBModels\StringTableLocations\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SpartacusUtils\Spartacus.Utils.csproj">
+      <Project>{DA4548C4-CD9B-46A7-BDDB-5D5BB7E21B8C}</Project>
+      <Name>Spartacus.Utils</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\System.Data.SQLite.Core.1.0.110.0\build\net46\System.Data.SQLite.Core.targets" Condition="Exists('..\packages\System.Data.SQLite.Core.1.0.110.0\build\net46\System.Data.SQLite.Core.targets')" />

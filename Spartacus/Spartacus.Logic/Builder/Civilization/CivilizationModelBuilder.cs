@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using ProjectCeleste.GameFiles.XMLParser;
 using Spartacus.Database.DBModels.Civilizations;
@@ -8,7 +9,7 @@ using SpartacusUtils.Helpers;
 
 namespace Spartacus.Logic.Builder.Civilization
 {
-    public class CivilizationModelBuilder : IModelBuilder<CivilizationsModel, CivilizationsRepository>
+    public class CivilizationModelBuilder : IModelBuilder<CivilizationsModel>
     {
         public List<CivilizationsModel> FromBar(BarFileSystem barFileReader)
         {
@@ -56,7 +57,7 @@ namespace Spartacus.Logic.Builder.Civilization
             return models;
         }
 
-        public List<CivilizationsModel> FromRepository(CivilizationsRepository repository)
+        public List<CivilizationsModel> FromRepository(IDbConnection connection)
         {
             throw new NotImplementedException();
         }

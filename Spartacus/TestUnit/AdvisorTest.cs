@@ -21,8 +21,8 @@ namespace TestUnit
 
             var modelBuilder = new AdvisorModelBuilder();
             var models = modelBuilder.FromBar(dataBar);
-            foreach (var advisor in models.Where(x => x.Civid == (long) CivilizationEnum.Norse))
-                Debug.WriteLine(advisor);
+            //foreach (var advisor in models.Where(x => x.Civid == (long) CivilizationEnum.Norse))
+                //Debug.WriteLine(advisor);
         }
     }
 }
