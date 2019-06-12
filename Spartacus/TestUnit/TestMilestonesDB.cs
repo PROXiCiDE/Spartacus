@@ -31,7 +31,7 @@ namespace TestUnit
         [Test]
         public void BuildMilestoneData()
         {
-            string MilestoneFilename = "milestonerewards.xml.xmb";
+            string MilestoneFilename = "milestonerewards.xml";
 
             var dataBar = new BarFileSystem(@"G:\Age of Empires Online\Data2\data.bar");
             var entry = dataBar.GetEntry(MilestoneFilename);
@@ -45,7 +45,8 @@ namespace TestUnit
                 foreach (var id in tier.RewardIds.Id)
                 {
                     var reward = xmlFile.Rewards[id];
-                    dataTiers.Add(new Milestone((long) tier.CivId, reward.Tech, tier.Level, reward.LargeIcon));
+                    if (reward != null)
+                        dataTiers.Add(new Milestone((long) tier.CivId, reward.Tech, tier.Level, reward.LargeIcon));
                 }
             });
 

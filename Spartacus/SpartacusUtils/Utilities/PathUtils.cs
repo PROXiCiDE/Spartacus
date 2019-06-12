@@ -106,11 +106,9 @@ namespace SpartacusUtils.Utilities
         /// <param name="fileExtension"></param>
         /// <param name="extensionList"></param>
         /// <returns></returns>
-        public static bool ContainsExtension(string fileExtension, List<string> extensionList)
+        public static bool ContainsExtension(string sourcePath, List<string> extensionList)
         {
-            if (fileExtension.StartsWith("."))
-                fileExtension = fileExtension.Replace(".", "");
-            return extensionList.Contains(fileExtension.ToLower());
+            return extensionList.Contains(sourcePath?.ToLower());
         }
 
         /// <summary>

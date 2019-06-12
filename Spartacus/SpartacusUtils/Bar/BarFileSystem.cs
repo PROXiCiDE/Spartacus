@@ -82,11 +82,11 @@ namespace SpartacusUtils.Bar
 
             //User may have checked for a valid XML file, Non XMB Format
             //Recheck to see if XMB format exists
-            if (IsValidXmlExtension(sourceFile) && result == null)
-                return barFileEntries.FirstOrDefault(x =>
-                    CompareFileNames($"{sourceFile}.xmb", x));
-
-            return result;
+            var extension = PathUtils.GetExtensionWithoutDot(sourceFile);
+            return IsValidXmlExtension(extension) && result == null
+                ? barFileEntries.FirstOrDefault(x =>
+                    CompareFileNames($"{sourceFile}.xmb", x))
+                : result;
         }
 
 
@@ -100,7 +100,7 @@ namespace SpartacusUtils.Bar
         {
             if (entry == null) throw new ArgumentNullException(nameof(entry));
 
-            var fileExt = PathUtils.GetExtensionWithoutDot(entry.FullName).ToLower();
+            var fileExt = PathUtils.GetExtensionWithoutDot(entry.FullName);
 
             if (string.IsNullOrEmpty(fileExt)) return default;
             if (IsValidXmlExtension(fileExt))
