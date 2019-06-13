@@ -2,7 +2,7 @@
 {
     public enum ShieldTextureType
     {
-        Default,
+        Enabled,
         Disabled
     }
 }

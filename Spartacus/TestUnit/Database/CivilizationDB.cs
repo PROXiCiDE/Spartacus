@@ -39,7 +39,7 @@ namespace TestUnit.Database
                 civRep.ForEach(civ =>
                 {
                     Debug.WriteLine(civ);
-                    Debug.WriteLine($"Shield: {civ.GetShieldTexture(ShieldTextureType.Default, CivilizationAgeTech.Age4)}, {civ.GetShieldTexture(ShieldTextureType.Disabled)}");
+                    Debug.WriteLine($"Shield: {civ.GetShieldTexture(ShieldTextureType.Enabled, CivilizationAgeTech.Age4)}, {civ.GetShieldTexture(ShieldTextureType.Disabled)}");
                 });
             }
         }

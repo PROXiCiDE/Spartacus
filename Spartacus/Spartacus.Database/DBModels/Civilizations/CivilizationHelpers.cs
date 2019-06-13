@@ -14,7 +14,7 @@ namespace Spartacus.Database.DBModels.Civilizations
         /// <returns></returns>
         public static string GetShieldTexture(this Civilization civilization, ShieldTextureType shieldTextureType, CivilizationAgeTech ageTech = CivilizationAgeTech.Age1)
         {
-            if (shieldTextureType == ShieldTextureType.Default)
+            if (shieldTextureType == ShieldTextureType.Enabled)
             {
                 var shield = $"{civilization.ShieldTexture}_ua.ddt";
                 if (ageTech > CivilizationAgeTech.Age1 && ageTech <= CivilizationAgeTech.Age4)
