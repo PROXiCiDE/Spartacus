@@ -15,11 +15,11 @@ namespace Spartacus.Database.DBModels.Civilizations
             StartingResource = null;
         }
 
-        public Civilization(long civilizationId, long displayNameId, long rolloverNameId, string shieldTexture,
+        public Civilization(long civId, long displayNameId, long rolloverNameId, string shieldTexture,
             string shieldGreyTexture, string townCenter, string age0, string age1, string age2, string age3,
             long storeHouseTechId, CivilizationStartingResource startingResource)
         {
-            CivilizationId = civilizationId;
+            CivId = civId;
             DisplayNameId = displayNameId;
             RolloverNameId = rolloverNameId;
             ShieldTexture = shieldTexture;
@@ -33,11 +33,11 @@ namespace Spartacus.Database.DBModels.Civilizations
             StartingResource = startingResource;
         }
 
-        public Civilization(long civilizationId, long displayNameId, long rolloverNameId, string shieldTexture,
+        public Civilization(long civId, long displayNameId, long rolloverNameId, string shieldTexture,
             string shieldGreyTexture, string townCenter, string age0, string age1, string age2, string age3,
             long storeHouseTechId)
         {
-            CivilizationId = civilizationId;
+            CivId = civId;
             DisplayNameId = displayNameId;
             RolloverNameId = rolloverNameId;
             ShieldTexture = shieldTexture;
@@ -72,7 +72,7 @@ namespace Spartacus.Database.DBModels.Civilizations
             if (int.TryParse(civilizationXml.Ui.Storehousetechid, out var storageTechId))
                 StoreHouseTechId = storageTechId;
 
-            CivilizationId = (long)civilizationXml.Civid;
+            CivId = (long)civilizationXml.Civid;
             ShieldGreyTexture = civilizationXml.Ui?.Shieldgreytexture;
             ShieldTexture = civilizationXml.Ui?.Shieldtexture;
             TownCenter = civilizationXml.Towncenter;
@@ -80,7 +80,7 @@ namespace Spartacus.Database.DBModels.Civilizations
             StartingResource = new CivilizationStartingResource(civilizationXml);
         }
 
-        [ExplicitKey] public long CivilizationId { get; set; }
+        [ExplicitKey] public long CivId { get; set; }
 
         public long DisplayNameId { get; set; }
         public long RolloverNameId { get; set; }
@@ -101,7 +101,7 @@ namespace Spartacus.Database.DBModels.Civilizations
         public override string ToString()
         {
             return
-                $"{nameof(CivilizationId)}: {CivilizationId}, {nameof(DisplayNameId)}: {DisplayNameId}, {nameof(RolloverNameId)}: {RolloverNameId}, {nameof(ShieldTexture)}: {ShieldTexture}, {nameof(ShieldGreyTexture)}: {ShieldGreyTexture}, {nameof(TownCenter)}: {TownCenter}, {nameof(Age0)}: {Age0}, {nameof(Age1)}: {Age1}, {nameof(Age2)}: {Age2}, {nameof(Age3)}: {Age3}, {nameof(StoreHouseTechId)}: {StoreHouseTechId}, {nameof(StartingResource)}: {StartingResource}";
+                $"{nameof(CivId)}: {CivId}, {nameof(DisplayNameId)}: {DisplayNameId}, {nameof(RolloverNameId)}: {RolloverNameId}, {nameof(ShieldTexture)}: {ShieldTexture}, {nameof(ShieldGreyTexture)}: {ShieldGreyTexture}, {nameof(TownCenter)}: {TownCenter}, {nameof(Age0)}: {Age0}, {nameof(Age1)}: {Age1}, {nameof(Age2)}: {Age2}, {nameof(Age3)}: {Age3}, {nameof(StoreHouseTechId)}: {StoreHouseTechId}, {nameof(StartingResource)}: {StartingResource}";
         }
     }
 }

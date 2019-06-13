@@ -70,6 +70,11 @@ namespace SpartacusUtils.SQLite
         {
             var propType = propertyInfo.PropertyType;
 
+            if (propType.IsEnum)
+                propType = Enum.GetUnderlyingType(propType);
+            if (propType.IsGenericType && propType.GetGenericTypeDefinition() == typeof(Nullable<>))
+                propType = Nullable.GetUnderlyingType(propType);
+
             //INTEGER
             var integerTypes = new List<Type>()
             {

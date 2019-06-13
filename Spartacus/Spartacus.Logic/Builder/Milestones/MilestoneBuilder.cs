@@ -8,6 +8,7 @@ using ProjectCeleste.GameFiles.XMLParser;
 using Spartacus.Database.DBModels.Milestone;
 using SpartacusUtils.Bar;
 using SpartacusUtils.Helpers;
+using SpartacusUtils.SQLite;
 
 namespace Spartacus.Logic.Builder.Milestones
 {
@@ -45,7 +46,7 @@ namespace Spartacus.Logic.Builder.Milestones
             long writtenCount = 0;
             using (var trans = connection.BeginTransaction())
             {
-                writtenCount += connection.Insert(milestones);
+                writtenCount = connection.Insert(milestones);
                 trans.Commit();
             }
             connection.Close();
@@ -54,12 +55,12 @@ namespace Spartacus.Logic.Builder.Milestones
 
         public void DropTables(IDbConnection connection)
         {
-            throw new NotImplementedException();
+            connection.DropTableIfExists<Milestone>();
         }
 
         public void CreateTables(IDbConnection connection)
         {
-            throw new NotImplementedException();
+            connection.CreateTable<Milestone>();
         }
     }
 }

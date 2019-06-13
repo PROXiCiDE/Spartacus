@@ -48,10 +48,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Builder\Advisors\AdvisorModelBuilder.cs" />
+    <Compile Include="Builder\Advisors\AdvisorBuilder.cs" />
     <Compile Include="Builder\IModelBuilder.cs" />
-    <Compile Include="Builder\Civilizations\CivilizationModelBuilder.cs" />
-    <Compile Include="Builder\Milestones\MilestoneModelBuilder.cs" />
+    <Compile Include="Builder\Civilizations\CivilizationBuilder.cs" />
+    <Compile Include="Builder\Milestones\MilestoneBuilder.cs" />
     <Compile Include="Builder\IRepositoryBuilder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StringResource.Designer.cs">

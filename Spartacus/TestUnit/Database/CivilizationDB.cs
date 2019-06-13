@@ -25,7 +25,7 @@ namespace TestUnit.Database
         {
             using (var conn = new SQLiteConnection(ConnectionString))
             {
-                var civModel = new CivilizationModelBuilder();
+                var civModel = new CivilizationBuilder();
 
                 Debug.WriteLine(conn.CreateTableSchema<Civilization>());
 
@@ -35,7 +35,7 @@ namespace TestUnit.Database
                 var civs = civModel.FromBar(new BarFileSystem(DataBar));
                 Debug.WriteLine(civModel.InsertRepository(conn, civs));
 
-                var civRep = civModel.FromRepository(conn).OrderBy( x=>x.CivilizationId);
+                var civRep = civModel.FromRepository(conn).OrderBy( x=>x.CivId);
                 civRep.ForEach(civ =>
                 {
                     Debug.WriteLine(civ);

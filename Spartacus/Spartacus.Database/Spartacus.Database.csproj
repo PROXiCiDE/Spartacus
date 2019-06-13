@@ -52,7 +52,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DBModels\Advisors\AdvisorsModel.cs" />
+    <Compile Include="DBModels\Advisors\Advisor.cs" />
     <Compile Include="DBModels\Civilizations\Civilization.cs" />
     <Compile Include="DBModels\Civilizations\CivilizationAgeTech.cs" />
     <Compile Include="DBModels\Civilizations\CivilizationHelpers.cs" />

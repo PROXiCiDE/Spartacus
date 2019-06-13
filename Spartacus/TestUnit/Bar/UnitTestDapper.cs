@@ -36,7 +36,7 @@ namespace TestUnit.Bar
         public void InsertCivilization()
         {
             //var civilizations = new CivilizationsRepository(ConnString);
-            //var civs = new CivilizationModelBuilder().FromBar(new BarFileSystem(_dataFile));
+            //var civs = new CivilizationBuilder().FromBar(new BarFileSystem(_dataFile));
 
             //foreach (var civ in civs) Debug.WriteLine(civ);
         }

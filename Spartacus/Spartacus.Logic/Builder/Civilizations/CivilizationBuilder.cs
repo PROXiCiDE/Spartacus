@@ -12,7 +12,7 @@ using SpartacusUtils.SQLite;
 
 namespace Spartacus.Logic.Builder.Civilizations
 {
-    public class CivilizationModelBuilder : IRepositoryBuilder<Civilization>
+    public class CivilizationBuilder : IRepositoryBuilder<Civilization>
     {
         /// <inheritdoc />
         public IEnumerable<Civilization> FromBar(BarFileSystem barFileReader)
@@ -36,7 +36,7 @@ namespace Spartacus.Logic.Builder.Civilizations
         {
             var sqlCommand = "SELECT * FROM Civilization AS civilization " +
                              "INNER JOIN CivilizationStartingResource AS resource " +
-                             "ON civilization.CivilizationId = resource.CivId;";
+                             "ON civilization.CivId = resource.CivId;";
             return connection.Query<Civilization, CivilizationStartingResource, Civilization>(sqlCommand,
                 (civilization, resource) =>
                 {
