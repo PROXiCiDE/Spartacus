@@ -1,5 +1,7 @@
-﻿using ProjectCeleste.GameFiles.XMLParser;
+﻿using Dapper.Contrib.Extensions;
+using ProjectCeleste.GameFiles.XMLParser;
 using SpartacusUtils.SQLite;
+using SpartacusUtils.SQLite.Annotations;
 
 namespace Spartacus.Database.DBModels.Civilizations
 {
@@ -33,7 +35,7 @@ namespace Spartacus.Database.DBModels.Civilizations
         {
         }
 
-        [Key]
+        [ExplicitKey]
         public long CivId { get; set; }
         public long Food { get; set; }
         public long Wood { get; set; }

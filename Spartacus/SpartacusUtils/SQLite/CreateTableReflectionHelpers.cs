@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using Dapper.Contrib.Extensions;
+using SpartacusUtils.SQLite.Annotations;
 
 namespace SpartacusUtils.SQLite
 {
@@ -11,12 +13,12 @@ namespace SpartacusUtils.SQLite
     {
         private static string GetColumnName(PropertyInfo propertyInfo)
         {
-            var sb = new StringBuilder();
-            sb.Append($"\"{propertyInfo.Name}\"\t{GetColumnDeclaringType(propertyInfo)} ");
-
             //Skip non-writable properties
             if (!propertyInfo.IsWriteAttribute())
                 return null;
+
+            var sb = new StringBuilder();
+            sb.Append($"\"{propertyInfo.Name}\"\t{GetColumnDeclaringType(propertyInfo)} ");
 
             //Order of
             //INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE
@@ -41,11 +43,11 @@ namespace SpartacusUtils.SQLite
 
         private static bool IsWriteAttribute(this PropertyInfo propertyInfo)
         {
-            var attributes = propertyInfo.GetCustomAttributes(typeof(WriteAttribute), false);
-            if (attributes.Length == 0)
-                return true;
+            var attributes = propertyInfo.GetCustomAttributes(typeof(WriteAttribute), false).ToList();
+            if (attributes.Count != 1) return true;
 
-            return attributes[0] is WriteAttribute result && result.Writable;
+            var writeAttribute = (WriteAttribute)attributes[0];
+            return writeAttribute.Write;
         }
 
         private static bool IsUniqueKeyAttribute(this PropertyInfo propertyInfo)

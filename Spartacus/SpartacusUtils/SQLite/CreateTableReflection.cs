@@ -47,7 +47,7 @@ namespace SpartacusUtils.SQLite
             propertyInfos.ForEach(propertyInfo =>
             {
                 var name = GetColumnName(propertyInfo);
-                if (name != null)
+                if (!string.IsNullOrEmpty(name))
                     sb.AppendLine($"{name.TrimEnd()}{(propertyInfos.LastOrDefault() == propertyInfo ? "" : ",")}");
             });
 

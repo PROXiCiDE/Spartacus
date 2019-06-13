@@ -1,15 +1,15 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.Data.SQLite;
+﻿using System.Data.SQLite;
 using System.Diagnostics;
 using Dapper;
 using SpartacusUtils.Helpers;
 using SpartacusUtils.SQLite;
+using SpartacusUtils.SQLite.Annotations;
 
 namespace DapperCrud
 {
     public class TestMemoryModel
     {
-        [AutoIncrement, UniqueKey, NotNull, SpartacusUtils.SQLite.Key]
+        [AutoIncrement, UniqueKey, NotNull, System.ComponentModel.DataAnnotations.Key]
         public int Id { get; set; }
         public int Int { get; set; }
         public long Long { get; set; }

@@ -2,6 +2,7 @@
 using System.Reflection;
 using NUnit.Framework;
 using SpartacusUtils.SQLite;
+using SpartacusUtils.SQLite.Annotations;
 
 namespace TestUnit.Database
 {

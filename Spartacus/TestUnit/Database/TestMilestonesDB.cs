@@ -10,9 +10,8 @@ using Spartacus.Database.DBModels.Milestone;
 using SpartacusUtils.Bar;
 using SpartacusUtils.Helpers;
 using SpartacusUtils.SQLite;
-using TestUnit.Database;
 
-namespace TestUnit.Bar
+namespace TestUnit.Database
 {
     public class TestMilestonesDb : SqliteTestBase
     {

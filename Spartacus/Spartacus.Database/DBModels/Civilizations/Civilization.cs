@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Linq;
+using System.Reflection.Emit;
 using Dapper.Contrib.Extensions;
 using ProjectCeleste.GameFiles.XMLParser;
+using ProjectCeleste.GameFiles.XMLParser.Enum;
 
 namespace Spartacus.Database.DBModels.Civilizations
 {
-    [SpartacusUtils.SQLite.Table("Civilization")]
+    [Table("Civilization")]
     public class Civilization
     {
         public Civilization() : this(0, 0, 0, null, null, null, null, null, null, null, 0)
@@ -70,20 +72,23 @@ namespace Spartacus.Database.DBModels.Civilizations
             if (int.TryParse(civilizationXml.Ui.Storehousetechid, out var storageTechId))
                 StoreHouseTechId = storageTechId;
 
-            CivilizationId = (long) civilizationXml.Civid;
-            ShieldGreyTexture = civilizationXml.Ui?.Shieldtexture;
+            CivilizationId = (long)civilizationXml.Civid;
+            ShieldGreyTexture = civilizationXml.Ui?.Shieldgreytexture;
             ShieldTexture = civilizationXml.Ui?.Shieldtexture;
             TownCenter = civilizationXml.Towncenter;
 
             StartingResource = new CivilizationStartingResource(civilizationXml);
         }
 
-        [SpartacusUtils.SQLite.Key] public long CivilizationId { get; set; }
+        [ExplicitKey] public long CivilizationId { get; set; }
 
         public long DisplayNameId { get; set; }
         public long RolloverNameId { get; set; }
+
         public string ShieldTexture { get; set; }
+
         public string ShieldGreyTexture { get; set; }
+
         public string TownCenter { get; set; }
         public string Age0 { get; set; }
         public string Age1 { get; set; }
@@ -91,8 +96,7 @@ namespace Spartacus.Database.DBModels.Civilizations
         public string Age3 { get; set; }
         public long StoreHouseTechId { get; set; }
 
-        [Write(false), Computed]
-        public CivilizationStartingResource StartingResource { get; set; }
+        [Write(false)] [Computed] public CivilizationStartingResource StartingResource { get; set; }
 
         public override string ToString()
         {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SpartacusUtils.SQLite
+namespace SpartacusUtils.SQLite.Annotations
 {
     /// <summary>
     /// Specifies a property that is unique

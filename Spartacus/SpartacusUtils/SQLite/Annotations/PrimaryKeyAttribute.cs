@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SpartacusUtils.SQLite
+namespace SpartacusUtils.SQLite.Annotations
 {
     /// <summary>
     /// Specifies a property is a primary key <see cref="PrimaryKeyAttribute"/> && <see cref="KeyAttribute"/> are the same

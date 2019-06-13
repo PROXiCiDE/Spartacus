@@ -42,7 +42,7 @@ namespace Spartacus.Logic.Builder.Civilizations
                 {
                     civilization.StartingResource = resource;
                     return civilization;
-                }, splitOn: "CivId").ToList();
+                }, splitOn: "CivId");
         }
 
         /// <inheritdoc />

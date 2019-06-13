@@ -36,6 +36,9 @@
     <Reference Include="Dapper, Version=1.60.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Dapper.1.60.6\lib\net451\Dapper.dll</HintPath>
     </Reference>
+    <Reference Include="Dapper.Contrib, Version=1.60.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapper.Contrib.1.60.1\lib\net451\Dapper.Contrib.dll</HintPath>
+    </Reference>
     <Reference Include="Ionic.Zip, Version=1.9.1.8, Culture=neutral, PublicKeyToken=edbe51ad942a3f5c, processorArchitecture=MSIL">
       <HintPath>..\packages\Unofficial.Ionic.Zip.1.9.1.8\lib\Ionic.Zip.dll</HintPath>
     </Reference>
@@ -46,6 +49,7 @@
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Data.SQLite, Version=1.0.110.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Data.SQLite.Core.1.0.110.0\lib\net46\System.Data.SQLite.dll</HintPath>
     </Reference>
@@ -75,12 +79,9 @@
     <Compile Include="ErrorReporting\IErrorReport.cs" />
     <Compile Include="Helpers\BinaryReaderExtension.cs" />
     <Compile Include="Helpers\MiscExtensions.cs" />
-    <Compile Include="SQLite\Annotations\TableAttribute.cs" />
     <Compile Include="SQLite\Annotations\AutoIncrementAttribute.cs" />
-    <Compile Include="SQLite\Annotations\WriteAttribute.cs" />
     <Compile Include="SQLite\CreateTableReflection.cs" />
     <Compile Include="SQLite\CreateTableReflectionHelpers.cs" />
-    <Compile Include="SQLite\Annotations\KeyAttribute.cs" />
     <Compile Include="SQLite\Annotations\NotNullAttribute.cs" />
     <Compile Include="SQLite\Annotations\PrimaryKeyAttribute.cs" />
     <Compile Include="SQLite\Annotations\UniqueKeyAttribute.cs" />

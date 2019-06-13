@@ -1,5 +1,7 @@
 ﻿using System;
+using Dapper.Contrib.Extensions;
 using SpartacusUtils.SQLite;
+using SpartacusUtils.SQLite.Annotations;
 
 namespace Spartacus.Database.DBModels.Milestone
 {
