@@ -3,6 +3,7 @@ using SpartacusUtils.SQLite;
 
 namespace Spartacus.Database.DBModels.Civilizations
 {
+    [Table("CivilizationStartingResource")]
     public class CivilizationStartingResource
     {
         public CivilizationStartingResource(long civId, long food, long wood, long gold, long stone)
@@ -14,7 +15,7 @@ namespace Spartacus.Database.DBModels.Civilizations
             Stone = stone;
         }
 
-        public CivilizationStartingResource(CivilizationXml civilizationXml) : this(0, 0, 0, 0, 0)
+        public CivilizationStartingResource(CivilizationXml civilizationXml) : this()
         {
             CivId = (long)civilizationXml.Civid;
             var resource = civilizationXml.Startingresources;
@@ -26,6 +27,10 @@ namespace Spartacus.Database.DBModels.Civilizations
                 Gold = gold;
             if (int.TryParse(resource.Stone, out var stone))
                 Stone = stone;
+        }
+
+        public CivilizationStartingResource() : this(0, 0,0,0,0)
+        {
         }
 
         [Key]

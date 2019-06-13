@@ -1,14 +1,21 @@
 ﻿using System;
 using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
+using Dapper.Contrib.Extensions;
 using ProjectCeleste.GameFiles.XMLParser;
-using SpartacusUtils.SQLite;
 
 namespace Spartacus.Database.DBModels.Civilizations
 {
+    [SpartacusUtils.SQLite.Table("Civilization")]
     public class Civilization
     {
-        public Civilization(long civilizationId, long displayNameId, long rolloverNameId, string shieldTexture, string shieldGreyTexture, string townCenter, string age0, string age1, string age2, string age3, long storeHouseTechId, CivilizationStartingResource startingResource)
+        public Civilization() : this(0, 0, 0, null, null, null, null, null, null, null, 0)
+        {
+            StartingResource = null;
+        }
+
+        public Civilization(long civilizationId, long displayNameId, long rolloverNameId, string shieldTexture,
+            string shieldGreyTexture, string townCenter, string age0, string age1, string age2, string age3,
+            long storeHouseTechId, CivilizationStartingResource startingResource)
         {
             CivilizationId = civilizationId;
             DisplayNameId = displayNameId;
@@ -24,7 +31,9 @@ namespace Spartacus.Database.DBModels.Civilizations
             StartingResource = startingResource;
         }
 
-        public Civilization(long civilizationId, long displayNameId, long rolloverNameId, string shieldTexture, string shieldGreyTexture, string townCenter, string age0, string age1, string age2, string age3, long storeHouseTechId)
+        public Civilization(long civilizationId, long displayNameId, long rolloverNameId, string shieldTexture,
+            string shieldGreyTexture, string townCenter, string age0, string age1, string age2, string age3,
+            long storeHouseTechId)
         {
             CivilizationId = civilizationId;
             DisplayNameId = displayNameId;
@@ -39,7 +48,7 @@ namespace Spartacus.Database.DBModels.Civilizations
             StoreHouseTechId = storeHouseTechId;
         }
 
-        public Civilization(CivilizationXml civilizationXml) : this(0, 0,0,null,null,null,null,null,null,null,0)
+        public Civilization(CivilizationXml civilizationXml) : this()
         {
             //Little hack to prevent repetitive typing
             string GetAgeTech(string ageName)
@@ -69,8 +78,8 @@ namespace Spartacus.Database.DBModels.Civilizations
             StartingResource = new CivilizationStartingResource(civilizationXml);
         }
 
-        [Key]
-        public long CivilizationId { get; set; }
+        [SpartacusUtils.SQLite.Key] public long CivilizationId { get; set; }
+
         public long DisplayNameId { get; set; }
         public long RolloverNameId { get; set; }
         public string ShieldTexture { get; set; }
@@ -82,12 +91,13 @@ namespace Spartacus.Database.DBModels.Civilizations
         public string Age3 { get; set; }
         public long StoreHouseTechId { get; set; }
 
-        [Write(false)]
+        [Write(false), Computed]
         public CivilizationStartingResource StartingResource { get; set; }
 
         public override string ToString()
         {
-            return $"{nameof(CivilizationId)}: {CivilizationId}, {nameof(DisplayNameId)}: {DisplayNameId}, {nameof(RolloverNameId)}: {RolloverNameId}, {nameof(ShieldTexture)}: {ShieldTexture}, {nameof(ShieldGreyTexture)}: {ShieldGreyTexture}, {nameof(TownCenter)}: {TownCenter}, {nameof(Age0)}: {Age0}, {nameof(Age1)}: {Age1}, {nameof(Age2)}: {Age2}, {nameof(Age3)}: {Age3}, {nameof(StoreHouseTechId)}: {StoreHouseTechId}, {nameof(StartingResource)}: {StartingResource}";
+            return
+                $"{nameof(CivilizationId)}: {CivilizationId}, {nameof(DisplayNameId)}: {DisplayNameId}, {nameof(RolloverNameId)}: {RolloverNameId}, {nameof(ShieldTexture)}: {ShieldTexture}, {nameof(ShieldGreyTexture)}: {ShieldGreyTexture}, {nameof(TownCenter)}: {TownCenter}, {nameof(Age0)}: {Age0}, {nameof(Age1)}: {Age1}, {nameof(Age2)}: {Age2}, {nameof(Age3)}: {Age3}, {nameof(StoreHouseTechId)}: {StoreHouseTechId}, {nameof(StartingResource)}: {StartingResource}";
         }
     }
 }

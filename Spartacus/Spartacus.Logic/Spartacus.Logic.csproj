@@ -50,7 +50,7 @@
   <ItemGroup>
     <Compile Include="Builder\Advisors\AdvisorModelBuilder.cs" />
     <Compile Include="Builder\IModelBuilder.cs" />
-    <Compile Include="Builder\Civilization\CivilizationModelBuilder.cs" />
+    <Compile Include="Builder\Civilizations\CivilizationModelBuilder.cs" />
     <Compile Include="Builder\Milestones\MilestoneModelBuilder.cs" />
     <Compile Include="Builder\IRepositoryBuilder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

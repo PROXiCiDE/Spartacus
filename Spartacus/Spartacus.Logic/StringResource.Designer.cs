@@ -61,6 +61,15 @@ namespace Spartacus.Logic {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error reading XmlDocument {0}.
+        /// </summary>
+        internal static string Exception_XmlFileRead {
+            get {
+                return ResourceManager.GetString("Exception_XmlFileRead", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to advisors.xml.
         /// </summary>
         internal static string XmlFile_Advisors {

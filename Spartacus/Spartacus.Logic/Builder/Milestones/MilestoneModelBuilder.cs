@@ -14,38 +14,52 @@ namespace Spartacus.Logic.Builder.Milestones
 
     public class MilestoneBuilder : IRepositoryBuilder<Milestone>
     {
-        public IEnumerable<Milestone> FromRepository(IDbConnection connection)
-        {
-            return connection.GetAll<Milestone>();
-        }
-
-        public IEnumerable<Milestone> FromXml(BarFileSystem barFile, IDbConnection connection)
+        public IEnumerable<Milestone> FromBar(BarFileSystem barFile)
         {
             var entry = barFile.GetEntry(StringResource.XmlFile_MilestoneRewards);
             if (entry == null) return null;
 
             var xmlFile = barFile.ReadEntry<MilestoneRewardDataXml>(entry);
 
-            var toInsert = new List<Milestone>();
+            var milestones = new List<Milestone>();
             xmlFile.Tiers.Tier.ForEach(tier =>
             {
                 foreach (var id in tier.RewardIds.Id)
                 {
                     var reward = xmlFile.Rewards[id];
                     if (reward != null)
-                        toInsert.Add(new Milestone((long)tier.CivId, reward.Tech, tier.Level, reward.LargeIcon));
+                        milestones.Add(new Milestone((long)tier.CivId, reward.Tech, tier.Level, reward.LargeIcon));
                 }
             });
+            return milestones;
+        }
 
+        public IEnumerable<Milestone> FromRepository(IDbConnection connection)
+        {
+            return connection.GetAll<Milestone>();
+        }
+
+        public long InsertRepository(IDbConnection connection, IEnumerable<Milestone> milestones)
+        {
             connection.Open();
+            long writtenCount = 0;
             using (var trans = connection.BeginTransaction())
             {
-                connection.Insert(toInsert);
+                writtenCount += connection.Insert(milestones);
                 trans.Commit();
             }
             connection.Close();
+            return writtenCount;
+        }
 
-            return toInsert;
+        public void DropTables(IDbConnection connection)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void CreateTables(IDbConnection connection)
+        {
+            throw new NotImplementedException();
         }
     }
 }

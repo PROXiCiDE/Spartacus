@@ -8,6 +8,7 @@ using NUnit.Framework;
 using ProjectCeleste.GameFiles.XMLParser;
 using Spartacus.Database.DBModels.Civilizations;
 using Spartacus.Logic;
+using Spartacus.Logic.Builder.Civilizations;
 using SpartacusUtils.Bar;
 using SpartacusUtils.Helpers;
 using SpartacusUtils.SQLite;
@@ -21,39 +22,23 @@ namespace TestUnit.Database
         {
             using (var conn = new SQLiteConnection(ConnectionString))
             {
-                conn.DropTableIfExists<Civilization>();
-                //Debug.WriteLine(conn.CreateTableSchema<Civilization>());
-                conn.CreateTable<Civilization>();
-                var civs = FromBar(new BarFileSystem(DataBar));
-                civs.ForEach(civ =>
+                var civModel = new CivilizationModelBuilder();
+
+                civModel.DropTables(conn);
+                civModel.CreateTables(conn);
+
+                var civs = civModel.FromBar(new BarFileSystem(DataBar));
+                Debug.WriteLine(civModel.InsertRepository(conn, civs));
+
+                var civRep = civModel.FromRepository(conn);
+                civRep.ForEach(civ =>
                 {
                     Debug.WriteLine(civ);
                 });
             }
         }
 
-        public List<Civilization> FromBar(BarFileSystem barFileReader)
-        {
-            var findEntries = barFileReader.FindEntries(@"civilizations\*.xmb");
 
-            var civilizations = new List<Civilization>();
-            findEntries.ForEach(findEntry =>
-            {
-                var xmlClass = barFileReader.ReadEntry<CivilizationXml>(findEntry);
-                if (xmlClass != null)
-                {
-                    Debug.WriteLine(xmlClass.Name);
-                    civilizations.Add(new Civilization(xmlClass));
-                }
-                else
-                {
-                    throw new Exception(
-                        "CivilizationXml : Element 'DisplayName' in-explicit conversion of Integer");
-                }
-            });
-
-            return civilizations;
-        }
 
     }
 }
