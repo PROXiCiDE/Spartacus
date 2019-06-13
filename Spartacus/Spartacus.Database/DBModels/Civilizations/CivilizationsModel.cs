@@ -1,4 +1,6 @@
-﻿namespace Spartacus.Database.DBModels.Civilizations
+﻿using System;
+
+namespace Spartacus.Database.DBModels.Civilizations
 {
     public class CivilizationsModel
     {

@@ -1,10 +1,6 @@
-﻿using System;
-using System.Diagnostics;
-using NUnit.Framework;
-using Spartacus.Logic.Builder.Civilization;
-using SpartacusUtils.Bar;
+﻿using NUnit.Framework;
 
-namespace TestUnit
+namespace TestUnit.Bar
 {
     internal class UnitTestDapper
     {

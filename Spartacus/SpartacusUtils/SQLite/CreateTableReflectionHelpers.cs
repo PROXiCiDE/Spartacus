@@ -14,10 +14,15 @@ namespace SpartacusUtils.SQLite
             var sb = new StringBuilder();
             sb.Append($"\"{propertyInfo.Name}\"\t{GetColumnDeclaringType(propertyInfo)} ");
 
+            //Skip non-writable properties
+            if (!propertyInfo.IsWriteAttribute())
+                return null;
+
             //Order of
             //INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE
             if (propertyInfo.IsNotNullAttribute())
                 sb.Append("NOT NULL ");
+
             //Check for our PrimaryKey Attribute or normal Key attribute which can be found in Dapper, System.ComponentModel.DataAnnotations, SQLite.Core
             if (propertyInfo.IsPrimaryKeyAttribute())
                 sb.Append("PRIMARY KEY ");
@@ -25,12 +30,22 @@ namespace SpartacusUtils.SQLite
                 sb.Append("AUTOINCREMENT ");
             if (propertyInfo.IsUniqueKeyAttribute())
                 sb.Append("UNIQUE ");
+
             return sb.ToString();
         }
 
         private static bool IsNotNullAttribute(this PropertyInfo propertyInfo)
         {
             return propertyInfo.ContainsAttribute(typeof(NotNullAttribute));
+        }
+
+        private static bool IsWriteAttribute(this PropertyInfo propertyInfo)
+        {
+            var attributes = propertyInfo.GetCustomAttributes(typeof(WriteAttribute), false);
+            if (attributes.Length == 0)
+                return true;
+
+            return attributes[0] is WriteAttribute result && result.Writable;
         }
 
         private static bool IsUniqueKeyAttribute(this PropertyInfo propertyInfo)
@@ -93,7 +108,8 @@ namespace SpartacusUtils.SQLite
 
         private static IEnumerable<PropertyInfo> GetAllProperties(Type type)
         {
-            return type?.GetProperties();
+            //Filter out non-writable properties
+            return type?.GetProperties().Where( p => p.IsWriteAttribute());
         }
 
         private static IEnumerable<PropertyInfo> GetIdProperties(Type type)
@@ -114,8 +130,8 @@ namespace SpartacusUtils.SQLite
 
         private static string GetTableNameAttribute(Type type)
         {
-            var tableAttributes = type.GetCustomAttributes(typeof(TableNameAttribute), true);
-            var tableName = tableAttributes.Any() ? (tableAttributes[0] as TableNameAttribute)?.Name : type.Name;
+            var tableAttributes = type.GetCustomAttributes(typeof(TableAttribute), true);
+            var tableName = tableAttributes.Any() ? (tableAttributes[0] as TableAttribute)?.Name : type.Name;
             return tableName;
         }
     }

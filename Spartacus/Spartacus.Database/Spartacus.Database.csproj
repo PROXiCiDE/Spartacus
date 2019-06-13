@@ -49,9 +49,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DBModels\Advisors\AdvisorsModel.cs" />
+    <Compile Include="DBModels\Civilizations\Civilization.cs" />
     <Compile Include="DBModels\Civilizations\CivilizationsModel.cs" />
+    <Compile Include="DBModels\Civilizations\CivilizationStartingResource.cs" />
     <Compile Include="DBModels\Milestone\Milestone.cs" />
-    <Compile Include="DBModels\Milestone\MilestoneTier.cs" />
     <Compile Include="DBModels\ProtoAge\ProtoAge.cs" />
     <Compile Include="DBModels\ProtoAge\ProtoAgeReader.cs" />
     <Compile Include="DBModels\ProtoAge\ProtoAgeResourceCost.cs" />
@@ -73,6 +74,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ProjectCeleste.GameFiles.XMLParser\src\ProjectCeleste.GameFiles.XMLParser.csproj">
+      <Project>{C909E1B3-217A-49F0-8367-64F57B2CA9E7}</Project>
+      <Name>ProjectCeleste.GameFiles.XMLParser</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SpartacusUtils\Spartacus.Utils.csproj">
       <Project>{DA4548C4-CD9B-46A7-BDDB-5D5BB7E21B8C}</Project>
       <Name>Spartacus.Utils</Name>

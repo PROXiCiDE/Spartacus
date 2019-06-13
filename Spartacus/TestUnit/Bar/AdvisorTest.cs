@@ -1,11 +1,8 @@
-﻿using System.Diagnostics;
-using System.Linq;
-using NUnit.Framework;
-using ProjectCeleste.GameFiles.XMLParser.Enum;
+﻿using NUnit.Framework;
 using Spartacus.Logic.Builder.Advisors;
 using SpartacusUtils.Bar;
 
-namespace TestUnit
+namespace TestUnit.Bar
 {
     internal class AdvisorTest : TestBarBase
     {

@@ -8,13 +8,10 @@
 
   <ItemGroup>
     <PackageReference Include="Dapper" Version="1.60.6" />
-    <PackageReference Include="Dapper.Bulk" Version="1.4.2" />
-    <PackageReference Include="Dapper.Contrib" Version="1.60.1" />
-    <PackageReference Include="nunit" Version="3.10.1" />
-    <PackageReference Include="NUnit3TestAdapter" Version="3.10.0" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.8.0" />
-    <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.5.0" />
-    <PackageReference Include="System.Data.SQLite.Core" Version="1.0.110" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.9.0" />
+    <PackageReference Include="System.Data.SQLite" Version="1.0.111" />
+    <PackageReference Include="xunit" Version="2.4.0" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -23,12 +20,7 @@
     <ProjectReference Include="..\Spartacus.Database\Spartacus.Database.csproj" />
     <ProjectReference Include="..\Spartacus.Logic\Spartacus.Logic.csproj" />
     <ProjectReference Include="..\SpartacusUtils\Spartacus.Utils.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Update="App.config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    <ProjectReference Include="..\Spartacus\Spartacus.csproj" />
   </ItemGroup>
 
 </Project>

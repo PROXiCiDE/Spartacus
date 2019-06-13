@@ -1,50 +1,51 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Diagnostics;
+using System.Linq;
+using Dapper.Contrib.Extensions;
 using ProjectCeleste.GameFiles.XMLParser;
+using Spartacus.Database.DBModels.Milestone;
 using SpartacusUtils.Bar;
-using MilestoneRewardsModel = Spartacus.Database.Models.Milestone.MilestoneRewardsModel;
+using SpartacusUtils.Helpers;
 
 namespace Spartacus.Logic.Builder.Milestones
 {
-    //public class MilestoneModelBuilder : IModelBuilder<MilestoneRewardsModel, MilestoneRewardsRepository>
-    //{
-    //    public List<MilestoneRewardsModel> FromBar(BarFileSystem barFileReader)
-    //    {
-    //        var models = new List<MilestoneRewardsModel>();
 
-    //        var entry = barFileReader.GetEntry(StringResource.XmlFile_MilestoneRewards);
-    //        if (entry != null)
-    //        {
-    //            var xmlClass = barFileReader.ReadEntry<MilestoneRewardDataXml>(entry);
+    public class MilestoneBuilder : IRepositoryBuilder<Milestone>
+    {
+        public IEnumerable<Milestone> FromRepository(IDbConnection connection)
+        {
+            return connection.GetAll<Milestone>();
+        }
 
-    //            xmlClass?.Tiers?.Tier.ForEach(tier =>
-    //            {
-    //                var model = new MilestoneRewardsModel();
+        public IEnumerable<Milestone> FromXml(BarFileSystem barFile, IDbConnection connection)
+        {
+            var entry = barFile.GetEntry(StringResource.XmlFile_MilestoneRewards);
+            if (entry == null) return null;
 
-    //                //foreach (var rewardId in tier.RewardIds.Id)
-    //                //{
-    //                //    var reward = xmlClass.Rewards[rewardId];
+            var xmlFile = barFile.ReadEntry<MilestoneRewardDataXml>(entry);
 
-    //                //    var tech = _configInfo.TechTree.TechArray
-    //                //        .FirstOrDefault(x => string.Equals(x.Name, rewardId));
+            var toInsert = new List<Milestone>();
+            xmlFile.Tiers.Tier.ForEach(tier =>
+            {
+                foreach (var id in tier.RewardIds.Id)
+                {
+                    var reward = xmlFile.Rewards[id];
+                    if (reward != null)
+                        toInsert.Add(new Milestone((long)tier.CivId, reward.Tech, tier.Level, reward.LargeIcon));
+                }
+            });
 
-    //                //    if (tech != null)
-    //                //    {
-    //                //        rewardData.Id = tech.DisplayNameId;
-    //                //        rewardData.RolloverTextId = tech.RolloverTextId;
-    //                //    }
-    //                //}
+            connection.Open();
+            using (var trans = connection.BeginTransaction())
+            {
+                connection.Insert(toInsert);
+                trans.Commit();
+            }
+            connection.Close();
 
-    //                models.Add(model);
-    //            });
-    //        }
-
-    //        return models;
-    //    }
-
-    //    public List<MilestoneRewardsModel> FromRepository(MilestoneRewardsRepository repository)
-    //    {
-    //        throw new NotImplementedException();
-    //    }
-    //}
+            return toInsert;
+        }
+    }
 }

@@ -1,11 +1,9 @@
 ﻿using System.Data.SQLite;
-using System.Diagnostics;
 using System.Reflection;
-using Dapper;
 using NUnit.Framework;
 using SpartacusUtils.SQLite;
 
-namespace TestUnit
+namespace TestUnit.Database
 {
     public class TestMemoryModel
     {

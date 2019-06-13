@@ -1,6 +1,6 @@
 ﻿using System.IO;
 
-namespace TestUnit
+namespace TestUnit.Bar
 {
     public class TestBarBase
     {

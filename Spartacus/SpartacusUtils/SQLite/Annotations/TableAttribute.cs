@@ -6,12 +6,15 @@ using System.Threading.Tasks;
 
 namespace SpartacusUtils.SQLite
 {
+    /// <summary>
+    /// Specifies a Class / Interface with a table name
+    /// </summary>
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Interface)]
-    public class TableNameAttribute : Attribute
+    public class TableAttribute : Attribute
     {
         public string Name { get; }
 
-        public TableNameAttribute(string name)
+        public TableAttribute(string name)
         {
             Name = name;
         }

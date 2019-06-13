@@ -11,6 +11,7 @@ namespace Spartacus.Logic.Builder.Civilization
 {
     public class CivilizationModelBuilder : IModelBuilder<CivilizationsModel>
     {
+        /// <inheritdoc />
         public List<CivilizationsModel> FromBar(BarFileSystem barFileReader)
         {
             var findEntries = barFileReader.FindEntries(StringResource.XmlFile_CivilizationPattern);
@@ -59,7 +60,7 @@ namespace Spartacus.Logic.Builder.Civilization
 
         public List<CivilizationsModel> FromRepository(IDbConnection connection)
         {
-            throw new NotImplementedException();
+            return null;
         }
     }
 }

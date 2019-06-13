@@ -8,7 +8,7 @@ using SpartacusUtils.ConfigManager;
 using SpartacusUtils.Utilities;
 using SpartacusUtils.Xml.Language;
 
-namespace TestUnit
+namespace TestUnit.Bar
 {
     public class Tests
     {

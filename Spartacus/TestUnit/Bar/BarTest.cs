@@ -10,7 +10,7 @@ using SpartacusUtils.Bar;
 using SpartacusUtils.Helpers;
 using SpartacusUtils.Utilities;
 
-namespace TestUnit
+namespace TestUnit.Bar
 {
     internal class BarTest
     {

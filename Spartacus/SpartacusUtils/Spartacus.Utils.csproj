@@ -75,8 +75,9 @@
     <Compile Include="ErrorReporting\IErrorReport.cs" />
     <Compile Include="Helpers\BinaryReaderExtension.cs" />
     <Compile Include="Helpers\MiscExtensions.cs" />
-    <Compile Include="SQLite\Annotations\TableNameAttribute.cs" />
+    <Compile Include="SQLite\Annotations\TableAttribute.cs" />
     <Compile Include="SQLite\Annotations\AutoIncrementAttribute.cs" />
+    <Compile Include="SQLite\Annotations\WriteAttribute.cs" />
     <Compile Include="SQLite\CreateTableReflection.cs" />
     <Compile Include="SQLite\CreateTableReflectionHelpers.cs" />
     <Compile Include="SQLite\Annotations\KeyAttribute.cs" />
