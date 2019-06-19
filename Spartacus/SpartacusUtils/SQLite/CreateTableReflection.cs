@@ -1,10 +1,8 @@
-﻿using System;
-using System.Data;
+﻿using System.Data;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
 using Dapper;
 using SpartacusUtils.Helpers;
 
@@ -12,8 +10,20 @@ namespace SpartacusUtils.SQLite
 {
     public static partial class CreateTableReflection
     {
+        public static void DropAllTablesIfExists(this IDbConnection conn)
+        {
+            var sqlCommand = "SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_sequence'";
+            var tables = conn.Query<string>(sqlCommand);
+            tables.ForEach(table =>
+            {
+                conn.Execute($"DROP TABLE IF EXISTS \"{table}\""); 
+            });
+
+            conn.Execute("VACUUM");
+        }
+
         /// <summary>
-        /// Drops a table if it exists
+        ///     Drops a table if it exists
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="conn"></param>
@@ -22,12 +32,12 @@ namespace SpartacusUtils.SQLite
         {
             var type = typeof(T);
             var tableName = GetTableNameAttribute(type);
-            return conn.Execute($"DROP TABLE IF EXISTS \"{tableName}\"");
+            return conn.Execute($"DROP TABLE IF EXISTS '{tableName}'");
         }
 
 
         /// <summary>
-        /// Creates a SQLite table schema from a class.
+        ///     Creates a SQLite table schema from a class.
         /// </summary>
         /// <param name="type"></param>
         /// <returns></returns>
@@ -42,7 +52,7 @@ namespace SpartacusUtils.SQLite
             var tableName = GetTableNameAttribute(type);
 
             var sb = new StringBuilder();
-            sb.AppendLine($"CREATE TABLE IF NOT EXISTS \"{tableName}\" (");
+            sb.AppendLine($"CREATE TABLE IF NOT EXISTS '{tableName}' (");
 
             propertyInfos.ForEach(propertyInfo =>
             {
@@ -56,7 +66,7 @@ namespace SpartacusUtils.SQLite
         }
 
         /// <summary>
-        /// Create a table from a class object
+        ///     Create a table from a class object
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="conn"></param>
@@ -65,7 +75,6 @@ namespace SpartacusUtils.SQLite
         {
             var sqlQuery = conn.CreateTableSchema<T>();
             return conn.Execute(sqlQuery);
-        } 
+        }
     }
 }
- 

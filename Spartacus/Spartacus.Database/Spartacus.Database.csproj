@@ -59,6 +59,15 @@
     <Compile Include="DBModels\Civilizations\CivilizationStartingResource.cs" />
     <Compile Include="DBModels\Civilizations\ShieldTextureType.cs" />
     <Compile Include="DBModels\Milestone\Milestone.cs" />
+    <Compile Include="DBModels\ProtoAgeUnit\ProtoUnit.cs" />
+    <Compile Include="DBModels\ProtoAgeUnit\ProtoUnitArmor.cs" />
+    <Compile Include="DBModels\ProtoAgeUnit\ProtoUnitProtoAction.cs" />
+    <Compile Include="DBModels\ProtoAgeUnit\ProtoUnitProtoActionAccuracy.cs" />
+    <Compile Include="DBModels\ProtoAgeUnit\ProtoUnitProtoActionDamageBonus.cs" />
+    <Compile Include="DBModels\ProtoAgeUnit\ProtoUnitProtoActionImpactEffect.cs" />
+    <Compile Include="DBModels\ProtoAgeUnit\ProtoUnitProtoActionMaxRange.cs" />
+    <Compile Include="DBModels\ProtoAgeUnit\ProtoUnitProtoActionRate.cs" />
+    <Compile Include="DBModels\ProtoAgeUnit\ProtoUnitProtoActionType.cs" />
     <Compile Include="DBModels\ProtoAge\ProtoAge.cs" />
     <Compile Include="DBModels\ProtoAge\ProtoAgeReader.cs" />
     <Compile Include="DBModels\ProtoAge\ProtoAgeResourceCost.cs" />

@@ -110,7 +110,7 @@ namespace SpartacusUtils.SQLite
 
         private static bool ContainsAttribute(this PropertyInfo propertyInfo, Type type)
         {
-            return propertyInfo.GetCustomAttributes(true).Any(attr => attr.GetType().Name == type.Name);
+            return propertyInfo.GetCustomAttributes(true).Any(attr => attr.GetType() == type);
         }
 
         private static IEnumerable<PropertyInfo> GetAllProperties(Type type)
