@@ -43,24 +43,25 @@ namespace TestUnit.Reflection.Mapper
                 var propType = propertyInfo.PropertyType;
                 var attribute = GetColumnKeyAttribute(propertyInfo);
                 var columnType = GetColumnType(propType);
+                var keyOptions = GetColumnKeyOptions(propertyInfo);
+
+                if ((propType.IsGenericType && keyOptions.HasOption(ColumKeyOptions.Enumerable)))
+                    propType = propType.GenericTypeArguments.FirstOrDefault();
 
                 yield return
                     new PropertyColumnMap(
                         propertyInfo.Name,
+                        parentType,
                         columnType,
                         attribute,
-                        parentType,
-                        GetColumns(propType, propType.GetProperties()));
+                        keyOptions,
+                        GetColumns(propType, propType?.GetProperties()));
             }
         }
 
-        private ColumnKeyAttrib GetColumnKeyAttribute(PropertyInfo propertyInfo)
+        public ColumKeyOptions GetColumnKeyOptions(PropertyInfo propertyInfo)
         {
-            ColumnKeyAttrib keyAttrib = 0;
-            var attributes = propertyInfo.GetCustomAttributes(true).ToArray();
-            foreach (var (key, value) in KeyAttributes)
-                if (attributes.Any(attr => key != null && attr.GetType() == key))
-                    keyAttrib |= value;
+            ColumKeyOptions keyOptions = ColumKeyOptions.None;
 
             var typeHashSet = new List<Type>()
             {
@@ -73,25 +74,36 @@ namespace TestUnit.Reflection.Mapper
             if (propType.IsGenericType && propType.GetGenericTypeDefinition() == typeof(Nullable<>))
             {
                 propType = Nullable.GetUnderlyingType(propType);
-                keyAttrib |= ColumnKeyAttrib.Nullable;
+                keyOptions |= ColumKeyOptions.Nullable;
             }
 
             if (propType.GetInterface(nameof(IEnumerable)) != null)
-                keyAttrib |= ColumnKeyAttrib.Enumerable;
+                keyOptions |= ColumKeyOptions.Enumerable;
             else
-            {
                 foreach (var hashType in typeHashSet)
-                {
                     if (IsGenericTypeOf(propType, hashType))
                     {
-                        keyAttrib |= ColumnKeyAttrib.Enumerable;
+                        keyOptions |= ColumKeyOptions.Enumerable;
                         break;
                     }
-                }
-            }
+
+            if (propType.IsClass)
+                keyOptions |= ColumKeyOptions.Class;
 
             if (propType.IsEnum)
-                keyAttrib |= ColumnKeyAttrib.Enum;
+                keyOptions |= ColumKeyOptions.Enum;
+
+            return keyOptions;
+        }
+
+        public ColumnKeyAttrib GetColumnKeyAttribute(PropertyInfo propertyInfo)
+        {
+            ColumnKeyAttrib keyAttrib = 0;
+            var attributes = propertyInfo.GetCustomAttributes(true).ToArray();
+            foreach (var (key, value) in KeyAttributes)
+                if (attributes.Any(attr => key != null && attr.GetType() == key))
+                    keyAttrib |= value;
+
 
             return keyAttrib;
         }

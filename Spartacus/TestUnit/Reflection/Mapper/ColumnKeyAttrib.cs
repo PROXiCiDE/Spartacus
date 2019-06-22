@@ -3,6 +3,17 @@
 namespace TestUnit.Reflection.Mapper
 {
     [Flags]
+    public enum ColumKeyOptions : ushort
+    {
+        None = 0,
+        Enumerable = 1 << 0,
+        Enum = 1 << 1,
+        Array = 1 << 2,
+        Class = 1 << 3,
+        Nullable = 1 << 4,
+    }
+
+    [Flags]
     public enum ColumnKeyAttrib : ushort
     {
         None = 0,
@@ -14,8 +25,5 @@ namespace TestUnit.Reflection.Mapper
         Table = 1 << 5,
         Foreign = 1 << 6,
         Write = 1 << 7,
-        Enumerable = 1 << 8,
-        Enum = 1 << 9,
-        Nullable = 1 << 10,
     }
 }

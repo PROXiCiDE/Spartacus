@@ -6,11 +6,17 @@ namespace TestUnit.Reflection.Mapper
 {
     public class PropertyColumnMap
     {
-        public PropertyColumnMap(string columnName, ColumnType columnType, ColumnKeyAttrib keyAttrib,
-            Type parentType, IEnumerable<PropertyColumnMap> childrenInfos)
+        public PropertyColumnMap()
+        {
+        }
+
+        public PropertyColumnMap(string columnName,
+            Type parentType, ColumnType columnType, ColumnKeyAttrib keyAttrib,
+            ColumKeyOptions columKeyOptions, IEnumerable<PropertyColumnMap> childrenInfos)
         {
             ParentType = parentType;
             ChildrenInfos = childrenInfos;
+            ColumKeyOptions = columKeyOptions;
             ColumnName = columnName;
             ColumnType = columnType;
             KeyAttrib = keyAttrib;
@@ -18,6 +24,7 @@ namespace TestUnit.Reflection.Mapper
 
         public Type ParentType { get; }
         public string ColumnName { get; }
+        public ColumKeyOptions ColumKeyOptions { get; }
         public ColumnType ColumnType { get; }
         public ColumnKeyAttrib KeyAttrib { get; }
         public IEnumerable<PropertyColumnMap> ChildrenInfos { get; }

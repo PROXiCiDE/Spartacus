@@ -2,7 +2,7 @@
 {
     public static class ColumnKeyAttribExtensions
     {
-        public static bool HasFlag(this ColumnKeyAttrib value, ColumnKeyAttrib flag)
+        public static bool HasKey(this ColumnKeyAttrib value, ColumnKeyAttrib flag)
         {
             return (value & flag) != 0;
         }
