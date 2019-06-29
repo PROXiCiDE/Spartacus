@@ -45,13 +45,17 @@ namespace TestUnit.Reflection.Mapper
                 var columnType = GetColumnType(propType);
                 var keyOptions = GetColumnKeyOptions(propertyInfo);
 
-                if ((propType.IsGenericType && keyOptions.HasOption(ColumKeyOptions.Enumerable)))
+                if ((propType.IsGenericType && keyOptions.HasOption(ColumnKeyOptions.Enumerable)))
                     propType = propType.GenericTypeArguments.FirstOrDefault();
+
+                if (propType.IsArray)
+                    propType = propType.GetElementType();
 
                 yield return
                     new PropertyColumnMap(
                         propertyInfo.Name,
                         parentType,
+                        propType,
                         columnType,
                         attribute,
                         keyOptions,
@@ -59,9 +63,9 @@ namespace TestUnit.Reflection.Mapper
             }
         }
 
-        public ColumKeyOptions GetColumnKeyOptions(PropertyInfo propertyInfo)
+        public ColumnKeyOptions GetColumnKeyOptions(PropertyInfo propertyInfo)
         {
-            ColumKeyOptions keyOptions = ColumKeyOptions.None;
+            ColumnKeyOptions keyOptions = ColumnKeyOptions.None;
 
             var typeHashSet = new List<Type>()
             {
@@ -74,24 +78,27 @@ namespace TestUnit.Reflection.Mapper
             if (propType.IsGenericType && propType.GetGenericTypeDefinition() == typeof(Nullable<>))
             {
                 propType = Nullable.GetUnderlyingType(propType);
-                keyOptions |= ColumKeyOptions.Nullable;
+                keyOptions |= ColumnKeyOptions.Nullable;
             }
 
             if (propType.GetInterface(nameof(IEnumerable)) != null)
-                keyOptions |= ColumKeyOptions.Enumerable;
+                keyOptions |= ColumnKeyOptions.Enumerable;
             else
                 foreach (var hashType in typeHashSet)
                     if (IsGenericTypeOf(propType, hashType))
                     {
-                        keyOptions |= ColumKeyOptions.Enumerable;
+                        keyOptions |= ColumnKeyOptions.Enumerable;
                         break;
                     }
 
             if (propType.IsClass)
-                keyOptions |= ColumKeyOptions.Class;
+                keyOptions |= ColumnKeyOptions.Class;
 
             if (propType.IsEnum)
-                keyOptions |= ColumKeyOptions.Enum;
+                keyOptions |= ColumnKeyOptions.Enum;
+
+            if (propType.IsPrimitive)
+                keyOptions |= ColumnKeyOptions.Primitive;
 
             return keyOptions;
         }
