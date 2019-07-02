@@ -81,15 +81,18 @@ namespace TestUnit.Reflection.Mapper
                 keyOptions |= ColumnKeyOptions.Nullable;
             }
 
-            if (propType.GetInterface(nameof(IEnumerable)) != null)
-                keyOptions |= ColumnKeyOptions.Enumerable;
-            else
-                foreach (var hashType in typeHashSet)
-                    if (IsGenericTypeOf(propType, hashType))
-                    {
-                        keyOptions |= ColumnKeyOptions.Enumerable;
-                        break;
-                    }
+            if (propType.IsInterface)
+            {
+                if (propType.GetInterface(nameof(IEnumerable)) != null)
+                    keyOptions |= ColumnKeyOptions.Enumerable;
+                else
+                    foreach (var hashType in typeHashSet)
+                        if (IsGenericTypeOf(propType, hashType))
+                        {
+                            keyOptions |= ColumnKeyOptions.Enumerable;
+                            break;
+                        }
+            }
 
             if (propType.IsClass)
                 keyOptions |= ColumnKeyOptions.Class;
